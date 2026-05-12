@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Features from '../components/Features.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Layout title="MOJO Platform — Metify" description="A powerful data center management solution with OEM agnostic discovery, firmware management, and provisioning.">
+  <section class="py-24 bg-brand-darker">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl font-bold text-white mb-6">MOJO <span class="text-brand-green">Platform</span></h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+        A powerful data center management solution with everything you need to automate your bare metal infrastructure.
+      </p>
+    </div>
+  </section>
+  <Features />
+  <CTA />
+</Layout>

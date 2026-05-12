@@ -1,0 +1,36 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Download Free Trial — Metify" description="Get started with MOJO Platform today.">
+  <section class="py-24 bg-brand-darker">
+    <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl font-bold text-white mb-4">Download <span class="text-brand-green">Free Trial</span></h1>
+        <p class="text-gray-400 text-lg">Get started with MOJO Platform in minutes.</p>
+      </div>
+
+      <div class="bg-brand-card border border-white/10 rounded-xl p-8">
+        <form class="space-y-5" action="https://formspree.io/f/your-form-id" method="POST">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
+            <input type="text" id="name" name="name" required
+              class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+              placeholder="Your full name" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
+            <input type="email" id="email" name="email" required
+              class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+              placeholder="name@yourcompany.com" />
+          </div>
+          <p class="text-xs text-gray-500">MOJO is for business use. Please sign up with your work email.</p>
+          <button type="submit"
+            class="w-full px-6 py-4 bg-brand-green text-brand-darker font-bold text-lg rounded-lg hover:bg-brand-green-dark transition-colors">
+            Request Free Trial
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>

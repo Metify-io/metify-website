@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Layout title="Resources — Metify" description="Whitepapers, FAQ, and resources for MOJO Platform.">
+  <section class="py-24 bg-brand-darker">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-5xl font-bold text-white mb-16"><span class="text-brand-green">Resources</span></h1>
+
+      <div id="whitepapers" class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-8">Whitepapers</h2>
+        <div class="bg-brand-card border border-white/10 rounded-xl p-8 text-center">
+          <svg class="w-12 h-12 text-brand-green/40 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          <p class="text-gray-400">Whitepapers coming soon. <a href="/contact" class="text-brand-green hover:underline">Contact us</a> to learn more.</p>
+        </div>
+      </div>
+
+      <div id="faq" class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-8">FAQ</h2>
+        <div class="space-y-4">
+          {[
+            { q: 'What is MOJO Platform?', a: 'MOJO is the first AI-Native Data Center Automation Platform. It provides OEM-agnostic server discovery, firmware management, OS provisioning, and RBAC governance — all from a single interface.' },
+            { q: 'Which hardware vendors does MOJO support?', a: 'MOJO supports all major OEMs including Dell, HPE, Supermicro, ASRock Rack, and Open Compute OpenBMC platforms via Redfish, IPMI, Intel vPro, and AMD-PRO protocols.' },
+            { q: 'What operating systems can MOJO provision?', a: 'MOJO provisions Ubuntu, Debian, Red Hat Enterprise Linux, Arch Linux, SUSE, FreeBSD, and Windows Server. You can also import custom OS images and kickstarts.' },
+            { q: 'Can MOJO work in air-gapped environments?', a: 'Yes. MOJO is designed to work in fully air-gapped environments with offline installer artifacts and no external network dependencies.' },
+            { q: 'How do I get started?', a: 'Download a free trial from our website, or book a demo with our team. MOJO can be deployed in minutes.' },
+          ].map((item) => (
+            <details class="group bg-brand-card border border-white/10 rounded-lg overflow-hidden">
+              <summary class="px-6 py-4 cursor-pointer text-white font-medium flex items-center justify-between hover:bg-white/5 transition-colors">
+                {item.q}
+                <svg class="w-5 h-5 text-brand-green shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+              </summary>
+              <div class="px-6 pb-4 text-gray-400 leading-relaxed">{item.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Layout>

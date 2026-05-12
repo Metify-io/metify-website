@@ -1,0 +1,57 @@
+---
+const navItems = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'MOJO Platform', href: '/platform' },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Blog', href: '/blog' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-brand-darker/95 backdrop-blur-sm border-b border-white/10">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-20">
+    <a href="/" class="flex items-center gap-3">
+      <img src="/logo.svg" alt="Metify" class="h-10" />
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden lg:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a href={item.href} class="text-sm font-medium text-gray-300 hover:text-brand-green transition-colors tracking-wide uppercase">
+          {item.label}
+        </a>
+      ))}
+      <a href="/trial" class="ml-4 px-5 py-2.5 bg-brand-green text-brand-darker text-sm font-bold rounded hover:bg-brand-green-dark transition-colors tracking-wide uppercase">
+        Download Free Trial
+      </a>
+    </div>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-btn" class="lg:hidden text-gray-300 hover:text-white" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile nav -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark border-t border-white/10">
+    <div class="px-4 py-4 space-y-3">
+      {navItems.map((item) => (
+        <a href={item.href} class="block text-sm font-medium text-gray-300 hover:text-brand-green transition-colors tracking-wide uppercase py-2">
+          {item.label}
+        </a>
+      ))}
+      <a href="/trial" class="block mt-4 px-5 py-2.5 bg-brand-green text-brand-darker text-sm font-bold rounded hover:bg-brand-green-dark transition-colors tracking-wide uppercase text-center">
+        Download Free Trial
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+</script>

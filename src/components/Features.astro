@@ -1,0 +1,93 @@
+---
+const features = [
+  {
+    id: 'discovery',
+    title: 'OEM Agnostic Discovery',
+    description: "MOJO's AI-powered agents give operators the flexibility to handle any servers from any OEM. This eliminates the dependence on vendor-specific tools or navigating through multiple management suites.",
+    details: 'Importing Redfish, IPMI, vPro, AMD-PRO infrastructure has never been easier! Connect your power, plug in your network, scan for assets, authenticate, and start provisioning your favorite O/S footprints and stacks.',
+    icon: 'search',
+  },
+  {
+    id: 'bios',
+    title: 'BIOS Configuration',
+    description: "MOJO's AI-native ability to update BIOS settings as part of a provisioning workflow is a valuable feature for efficiently managing server configurations at scale.",
+    details: 'Update BIOS settings across multiple servers at once from the UI, CLI or through our API. Supports all major OEM platforms.',
+    icon: 'chip',
+  },
+  {
+    id: 'firmware',
+    title: 'Firmware Management',
+    description: "MOJO's AI-powered firmware management provides a comprehensive solution for enterprises, offering capabilities for updating BIOS, BMC, and add-on card firmware.",
+    details: 'We support Dell, HPE, Supermicro, ASRock Rack and Open Compute OpenBMC platforms. MOJO also protects firmware in a secure object store with SHA-256 hash verification.',
+    icon: 'download',
+  },
+  {
+    id: 'provisioning',
+    title: 'Provisioning',
+    description: "MOJO Platform's provisioning features provide a robust and user-friendly solution for server provisioning in data center or edge environments.",
+    details: 'Automatically provision all major operating systems including: Ubuntu, Debian, Red Hat Enterprise Linux, Arch Linux, SUSE, FreeBSD and Windows Server. Built-in DHCP/iPXE Server included.',
+    icon: 'terminal',
+  },
+  {
+    id: 'rbac',
+    title: 'RBAC & BMC Governance',
+    description: 'MOJO allows management of your hardware through role-based access controls. An approval hierarchy prevents destructive actions on a server from taking place without approval.',
+    details: 'Download compliance reports for your hardware that includes a full breakdown of actions taken over time. Assign specific policies like Superuser, read-only, provision only, and more.',
+    icon: 'lock',
+  },
+];
+---
+
+<section class="py-24 bg-brand-darker">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white">
+        Platform <span class="text-brand-green">Features</span>
+      </h2>
+      <p class="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
+        Everything you need to automate, secure, and manage your bare metal infrastructure.
+      </p>
+    </div>
+
+    <div class="space-y-16">
+      {features.map((feature, i) => (
+        <div id={feature.id} class={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}>
+          <div class="flex-1">
+            <div class="w-14 h-14 bg-brand-green/10 rounded-lg flex items-center justify-center mb-6">
+              {feature.icon === 'search' && (
+                <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+              )}
+              {feature.icon === 'chip' && (
+                <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg>
+              )}
+              {feature.icon === 'download' && (
+                <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+              )}
+              {feature.icon === 'terminal' && (
+                <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+              )}
+              {feature.icon === 'lock' && (
+                <svg class="w-7 h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+              )}
+            </div>
+            <h3 class="text-3xl font-bold text-white mb-4">{feature.title}</h3>
+            <p class="text-gray-300 text-lg leading-relaxed mb-3">{feature.description}</p>
+            <p class="text-gray-400 leading-relaxed">{feature.details}</p>
+            <a href="/platform" class="inline-flex items-center mt-6 text-brand-green font-semibold hover:underline">
+              Learn More
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </a>
+          </div>
+          <div class="flex-1 w-full">
+            <div class="bg-brand-card border border-white/10 rounded-xl p-6 aspect-video flex items-center justify-center">
+              <div class="text-center text-gray-500">
+                <svg class="w-16 h-16 mx-auto mb-3 text-brand-green/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                <span class="text-sm">MOJO Platform Screenshot</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

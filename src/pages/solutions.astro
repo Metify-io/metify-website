@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Layout title="Solutions — Metify" description="Data Center, Edge, and Cloud solutions powered by MOJO Platform.">
+  <section class="py-24 bg-brand-darker">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-5xl font-bold text-white mb-16">Our <span class="text-brand-green">Solutions</span></h1>
+
+      <!-- Data Centers -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-6">Data Centers</h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          MOJO Platform significantly enhances automation in the datacenter by streamlining and automating the process of deploying, configuring, and managing physical servers.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          {[
+            { title: 'Rapid Deployment', desc: 'Automates the process of deploying servers, reducing the time required to bring new hardware online.' },
+            { title: 'Standardized Configurations', desc: 'Define templates that specify desired server configurations, ensuring consistency across the datacenter.' },
+            { title: 'OS Installation Automation', desc: 'Automates installation of operating systems with pre-defined configurations, eliminating manual steps.' },
+            { title: 'Compliance & Security', desc: 'Enforces compliance and security policies consistently, reducing vulnerabilities across all servers.' },
+            { title: 'Hardware Discovery', desc: 'Automated hardware detection and cataloging ensures accurate and up-to-date inventory management.' },
+            { title: 'Lifecycle Management', desc: 'Automates decommissioning, re-imaging, and repurposing servers throughout their lifecycle.' },
+          ].map((item) => (
+            <div class="bg-brand-card border border-white/10 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Edge -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-6">Edge Computing</h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          Metify MOJO placed at the edge represents a significant advancement in automation, offering streamlined and efficient management of physical servers in decentralized environments.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          {[
+            { title: 'Quick Remote Deployment', desc: 'Deploy infrastructure in remote or distributed locations with LTE/5G, Fixed Wireless or Fiber connectivity.' },
+            { title: 'Centralized Management', desc: 'Remotely provision, configure, and monitor bare metal servers across multiple edge locations from a single console.' },
+            { title: 'Resource Optimization', desc: 'Automate server allocation and de-allocation based on demand without manual intervention.' },
+            { title: 'Edge Device Diversity', desc: 'Accommodate diverse hardware architectures and configurations commonly found at the edge.' },
+          ].map((item) => (
+            <div class="bg-brand-card border border-white/10 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cloud Providers -->
+      <div class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-6">Cloud Providers</h2>
+        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+          MOJO Platform plays a crucial role in cloud server automation by streamlining the process of deploying and managing physical servers in cloud environments.
+        </p>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          {[
+            { title: 'Hybrid Cloud Deployments', desc: 'Automate both virtualized and bare metal servers, leveraging the benefits of cloud and dedicated hardware.' },
+            { title: 'Performance-Optimized Workloads', desc: 'Direct access to dedicated hardware for HPC, databases, and performance-critical applications.' },
+            { title: 'Multi-Cloud Integration', desc: 'Seamlessly integrate with various cloud service providers for flexible deployment options.' },
+            { title: 'Fast Deployment & Scaling', desc: 'Rapidly provision additional servers to meet increased workloads with consistent automation.' },
+          ].map((item) => (
+            <div class="bg-brand-card border border-white/10 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div>
+        <h2 class="text-3xl font-bold text-white mb-6">Enterprise</h2>
+        <p class="text-gray-300 text-lg leading-relaxed">
+          Designed with enterprise environments in focus, MOJO by Metify allows you to securely catalog and delegate access to all your server assets through role-based access controls and policies. Built for scale, security, and compliance.
+        </p>
+      </div>
+    </div>
+  </section>
+  <CTA />
+</Layout>
