@@ -50,9 +50,8 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    const data = await resp.json();
-
     if (!resp.ok) {
+      const data = await resp.json().catch(() => null);
       return new Response(JSON.stringify({ error: 'License server error', details: data }), {
         status: resp.status,
         headers: { 'Content-Type': 'application/json' },
