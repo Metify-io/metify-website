@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="relative overflow-hidden bg-brand-darker">
+<section class="relative overflow-hidden bg-brand-darker min-h-[80vh] flex items-center">
   <!-- Gradient overlay -->
   <div class="absolute inset-0 bg-gradient-to-br from-brand-darker via-brand-dark to-brand-darker"></div>
   <div class="absolute top-0 right-0 w-1/2 h-full opacity-10">
@@ -9,14 +9,14 @@
     <div class="absolute bottom-20 right-40 w-64 h-64 bg-brand-green/50 rounded-full blur-2xl"></div>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36">
-    <div class="grid lg:grid-cols-2 gap-12 items-center">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
       <div>
-        <h1 class="text-5xl lg:text-7xl font-black leading-tight">
+        <h1 class="text-6xl lg:text-8xl font-black leading-[0.9] tracking-tight">
           <span class="text-brand-green">MOJO</span><br />
           <span class="text-white">Platform</span>
         </h1>
-        <p class="mt-6 text-xl lg:text-2xl text-gray-300 leading-relaxed">
+        <p class="mt-8 text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-xl">
           The first <span class="text-brand-green font-semibold">AI-Native</span> Data Center Automation Platform
         </p>
         <div class="mt-10 flex flex-col sm:flex-row gap-4">
@@ -30,39 +30,84 @@
       </div>
 
       <div class="hidden lg:flex justify-center">
-        <div class="relative">
-          <!-- Server illustration (SVG) -->
-          <svg viewBox="0 0 400 400" class="w-full max-w-md" xmlns="http://www.w3.org/2000/svg">
+        <div class="relative w-full max-w-lg">
+          <!-- Larger, more detailed server illustration -->
+          <svg viewBox="0 0 500 500" class="w-full" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background glow -->
+            <defs>
+              <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+                <stop offset="0%" stop-color="#a3cc3a" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#a3cc3a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <ellipse cx="250" cy="240" rx="200" ry="200" fill="url(#glow)"/>
+            
             <!-- Cloud -->
-            <ellipse cx="200" cy="60" rx="80" ry="40" fill="#a3cc3a" opacity="0.8"/>
-            <rect x="170" y="55" width="60" height="8" rx="4" fill="white" opacity="0.6"/>
+            <ellipse cx="250" cy="70" rx="90" ry="45" fill="#a3cc3a" opacity="0.85"/>
+            <ellipse cx="250" cy="68" rx="75" ry="35" fill="#a3cc3a" opacity="0.95"/>
+            <rect x="215" y="62" width="70" height="10" rx="5" fill="white" opacity="0.5"/>
             <!-- Upload arrow -->
-            <polygon points="200,30 215,50 205,50 205,70 195,70 195,50 185,50" fill="white" opacity="0.8"/>
+            <polygon points="250,30 268,55 258,55 258,80 242,80 242,55 232,55" fill="white" opacity="0.9"/>
+            
+            <!-- Connection lines from cloud to racks -->
+            <line x1="180" y1="105" x2="140" y2="170" stroke="#a3cc3a" stroke-width="2" opacity="0.5" stroke-dasharray="4,4"/>
+            <line x1="320" y1="105" x2="360" y2="170" stroke="#a3cc3a" stroke-width="2" opacity="0.5" stroke-dasharray="4,4"/>
+            <line x1="250" y1="115" x2="250" y2="170" stroke="#a3cc3a" stroke-width="2" opacity="0.5" stroke-dasharray="4,4"/>
+
             <!-- Server rack left -->
-            <rect x="80" y="140" width="100" height="180" rx="8" fill="#1e1e32" stroke="#a3cc3a" stroke-width="1.5"/>
-            <rect x="90" y="155" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="155" cy="165" r="4" fill="#a3cc3a"/>
-            <rect x="90" y="185" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="155" cy="195" r="4" fill="#a3cc3a"/>
-            <rect x="90" y="215" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="155" cy="225" r="4" fill="#a3cc3a" opacity="0.5"/>
-            <rect x="90" y="245" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="155" cy="255" r="4" fill="#a3cc3a" opacity="0.3"/>
+            <rect x="80" y="170" width="120" height="200" rx="10" fill="#1e1e32" stroke="#a3cc3a" stroke-width="2"/>
+            <rect x="95" y="190" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="168" cy="202" r="5" fill="#a3cc3a"/>
+            <rect x="100" y="196" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="95" y="224" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="168" cy="236" r="5" fill="#a3cc3a"/>
+            <rect x="100" y="230" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="95" y="258" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="168" cy="270" r="5" fill="#a3cc3a" opacity="0.6"/>
+            <rect x="100" y="264" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="95" y="292" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="168" cy="304" r="5" fill="#a3cc3a" opacity="0.3"/>
+            <rect x="100" y="298" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="95" y="326" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="168" cy="338" r="5" fill="#a3cc3a" opacity="0.15"/>
+
+            <!-- Server rack center -->
+            <rect x="215" y="170" width="70" height="200" rx="10" fill="#1e1e32" stroke="#a3cc3a" stroke-width="1.5" opacity="0.5"/>
+            <rect x="225" y="190" width="50" height="18" rx="3" fill="#2a2a40" opacity="0.7"/>
+            <rect x="225" y="216" width="50" height="18" rx="3" fill="#2a2a40" opacity="0.7"/>
+            <rect x="225" y="242" width="50" height="18" rx="3" fill="#2a2a40" opacity="0.7"/>
+
             <!-- Server rack right -->
-            <rect x="220" y="140" width="100" height="180" rx="8" fill="#1e1e32" stroke="#a3cc3a" stroke-width="1.5"/>
-            <rect x="230" y="155" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="295" cy="165" r="4" fill="#a3cc3a"/>
-            <rect x="230" y="185" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="295" cy="195" r="4" fill="#a3cc3a"/>
-            <rect x="230" y="215" width="80" height="20" rx="3" fill="#2a2a40"/>
-            <circle cx="295" cy="225" r="4" fill="#a3cc3a" opacity="0.5"/>
-            <!-- Connection lines -->
-            <line x1="130" y1="140" x2="180" y2="100" stroke="#a3cc3a" stroke-width="1.5" opacity="0.6"/>
-            <line x1="270" y1="140" x2="220" y2="100" stroke="#a3cc3a" stroke-width="1.5" opacity="0.6"/>
-            <!-- Laptop -->
-            <rect x="140" y="340" width="120" height="30" rx="4" fill="#2a2a40" stroke="#a3cc3a" stroke-width="1"/>
-            <rect x="155" y="345" width="90" height="15" rx="2" fill="#1a1a2e"/>
-            <rect x="120" y="370" width="160" height="5" rx="2" fill="#2a2a40"/>
+            <rect x="300" y="170" width="120" height="200" rx="10" fill="#1e1e32" stroke="#a3cc3a" stroke-width="2"/>
+            <rect x="315" y="190" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="388" cy="202" r="5" fill="#a3cc3a"/>
+            <rect x="320" y="196" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="315" y="224" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="388" cy="236" r="5" fill="#a3cc3a"/>
+            <rect x="320" y="230" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="315" y="258" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="388" cy="270" r="5" fill="#a3cc3a" opacity="0.6"/>
+            <rect x="320" y="264" width="40" height="3" rx="1.5" fill="#3a3a55"/>
+            <rect x="315" y="292" width="90" height="24" rx="4" fill="#2a2a40"/>
+            <circle cx="388" cy="304" r="5" fill="#a3cc3a" opacity="0.3"/>
+
+            <!-- Laptop at bottom -->
+            <rect x="170" y="400" width="160" height="40" rx="6" fill="#2a2a40" stroke="#a3cc3a" stroke-width="1.5"/>
+            <rect x="185" y="407" width="130" height="22" rx="3" fill="#1a1a2e"/>
+            <!-- Metify logo on screen -->
+            <text x="250" y="422" text-anchor="middle" fill="#a3cc3a" font-size="8" font-weight="bold" font-family="Inter, sans-serif">METIFY</text>
+            <rect x="150" y="440" width="200" height="8" rx="4" fill="#2a2a40"/>
+
+            <!-- Connection lines from racks to laptop -->
+            <line x1="140" y1="370" x2="210" y2="400" stroke="#a3cc3a" stroke-width="1.5" opacity="0.4"/>
+            <line x1="360" y1="370" x2="290" y2="400" stroke="#a3cc3a" stroke-width="1.5" opacity="0.4"/>
+            <line x1="250" y1="370" x2="250" y2="400" stroke="#a3cc3a" stroke-width="1.5" opacity="0.4"/>
+
+            <!-- Floating data particles -->
+            <circle cx="170" cy="150" r="3" fill="#a3cc3a" opacity="0.6"/>
+            <circle cx="330" cy="145" r="3" fill="#a3cc3a" opacity="0.6"/>
+            <circle cx="120" cy="390" r="2" fill="#a3cc3a" opacity="0.4"/>
+            <circle cx="380" cy="385" r="2" fill="#a3cc3a" opacity="0.4"/>
           </svg>
         </div>
       </div>

@@ -2,12 +2,15 @@
 const partners = [
   'Dell Technologies',
   'Hewlett Packard Enterprise',
+  'Major League Baseball',
+  'Open Compute Project',
+  'CBTS',
+  'JPL',
   'Supermicro',
   'Red Hat',
   'Intel',
   'Nutanix',
   'Linux Foundation',
-  'Open Compute Project',
 ];
 
 const testimonial = {
@@ -20,30 +23,33 @@ const testimonial = {
 <section class="py-24 bg-brand-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Testimonial -->
-    <div class="bg-gradient-to-r from-brand-darker to-brand-card border border-white/10 rounded-2xl p-12 mb-20">
+    <div class="bg-gradient-to-r from-brand-darker to-brand-card border border-white/10 rounded-2xl p-12 lg:p-16 mb-20">
       <div class="max-w-3xl mx-auto text-center">
         <svg class="w-12 h-12 text-brand-green/40 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
         </svg>
-        <blockquote class="text-2xl lg:text-3xl font-bold text-white italic leading-relaxed">
-          "{testimonial.quote}"
+        <blockquote class="text-2xl lg:text-4xl font-bold text-white italic leading-relaxed">
+          &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
-        <div class="mt-6">
-          <p class="text-brand-green font-semibold text-lg">{testimonial.source}</p>
-          <p class="text-gray-400 text-sm">{testimonial.role}</p>
+        <div class="mt-8">
+          <p class="text-brand-green font-bold text-xl">{testimonial.source}</p>
+          <p class="text-gray-400 mt-1">{testimonial.role}</p>
         </div>
       </div>
     </div>
 
     <!-- Partners -->
     <div class="text-center">
-      <h2 class="text-3xl font-bold text-white mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
         Trusted <span class="text-brand-green">Technology Partners</span> and Customers
       </h2>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Industry leaders trust Metify's MOJO Platform to manage their data center infrastructure.</p>
+      
+      <!-- Logo-style partner grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {partners.map((partner) => (
-          <div class="bg-brand-card/50 border border-white/5 rounded-lg px-6 py-8 flex items-center justify-center hover:border-brand-green/30 transition-colors">
-            <span class="text-gray-400 font-medium text-sm">{partner}</span>
+          <div class="bg-brand-card/50 border border-white/5 rounded-xl px-6 py-6 flex items-center justify-center hover:border-brand-green/30 hover:bg-brand-card/80 transition-all group">
+            <span class="text-gray-300 font-semibold text-sm group-hover:text-brand-green transition-colors">{partner}</span>
           </div>
         ))}
       </div>
