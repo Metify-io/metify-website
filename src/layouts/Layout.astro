@@ -20,7 +20,7 @@ const { title, description = 'Metify — The first AI-Native Data Center Automat
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://metify.ai" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, 'https://metify.ai').href} />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
