@@ -54,32 +54,40 @@ import Layout from '../layouts/Layout.astro';
         <div class="lg:col-span-3">
           <div class="bg-brand-card border border-white/10 rounded-xl p-8">
             <h2 class="text-2xl font-bold text-white mb-6">Send us a message</h2>
-            <div id="hubspot-contact-form"></div>
-            <!-- Native fallback form (shown if HubSpot embed fails) -->
-            <form id="contact-fallback-form" class="space-y-5">
-              <div>
-                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name *</label>
-                <input type="text" id="name" name="firstname" required
-                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-                  placeholder="Your full name" />
+            <form id="contact-form" class="space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="firstname" class="block text-sm font-medium text-gray-300 mb-1">First Name *</label>
+                  <input type="text" id="firstname" name="firstname" required
+                    class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                    placeholder="John" />
+                </div>
+                <div>
+                  <label for="lastname" class="block text-sm font-medium text-gray-300 mb-1">Last Name *</label>
+                  <input type="text" id="lastname" name="lastname" required
+                    class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                    placeholder="Smith" />
+                </div>
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email *</label>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
                 <input type="email" id="email" name="email" required
                   class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-                  placeholder="name@yourcompany.com" />
+                  placeholder="john@yourcompany.com" />
               </div>
-              <div>
-                <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone</label>
-                <input type="tel" id="phone" name="phone"
-                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-                  placeholder="+1 (555) 000-0000" />
-              </div>
-              <div>
-                <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject *</label>
-                <input type="text" id="subject" name="subject" required
-                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-                  placeholder="How can we help?" />
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                  <input type="tel" id="phone" name="phone"
+                    class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                    placeholder="+1 (555) 000-0000" />
+                </div>
+                <div>
+                  <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company</label>
+                  <input type="text" id="company" name="company"
+                    class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                    placeholder="Your company name" />
+                </div>
               </div>
               <div>
                 <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message *</label>
@@ -103,37 +111,14 @@ import Layout from '../layouts/Layout.astro';
 <script>
   const PORTAL_ID = '7609233';
   const FORM_ID = 'ba3c459f-c582-4f1f-b761-9a82da34ba18';
-  const fallbackForm = document.getElementById('contact-fallback-form');
+  const form = document.getElementById('contact-form');
 
-  // Try loading HubSpot embed
-  if (FORM_ID !== 'CONTACT_FORM_ID') {
-    const script = document.createElement('script');
-    script.src = 'https://js.hsforms.net/forms/v2.js';
-    script.defer = true;
-    script.onload = () => {
-      if (window.hbspt) {
-        window.hbspt.forms.create({
-          region: 'na1',
-          portalId: PORTAL_ID,
-          formId: FORM_ID,
-          target: '#hubspot-contact-form',
-          css: '',
-          onFormReady: () => {
-            if (fallbackForm) fallbackForm.style.display = 'none';
-          },
-        });
-      }
-    };
-    document.head.appendChild(script);
-  }
-
-  // Native form submission via HubSpot API
-  if (fallbackForm) {
-    fallbackForm.addEventListener('submit', async (e) => {
+  if (form) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('contact-form-status');
-      const btn = fallbackForm.querySelector('button[type="submit"]');
-      const formData = new FormData(fallbackForm);
+      const btn = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
 
       btn.disabled = true;
       btn.textContent = 'Sending...';
@@ -145,9 +130,10 @@ import Layout from '../layouts/Layout.astro';
           body: JSON.stringify({
             fields: [
               { name: 'firstname', value: formData.get('firstname') || '' },
+              { name: 'lastname', value: formData.get('lastname') || '' },
               { name: 'email', value: formData.get('email') || '' },
               { name: 'phone', value: formData.get('phone') || '' },
-              { name: 'subject', value: formData.get('subject') || '' },
+              { name: 'company', value: formData.get('company') || '' },
               { name: 'message', value: formData.get('message') || '' },
             ],
             context: {
@@ -163,20 +149,21 @@ import Layout from '../layouts/Layout.astro';
             status.textContent = 'Thank you! We\'ll get back to you shortly.';
             status.classList.remove('hidden');
           }
-          fallbackForm.reset();
+          form.reset();
           btn.textContent = 'Sent!';
+          setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 5000);
         } else {
           const name = formData.get('firstname');
           const email = formData.get('email');
           const msg = formData.get('message');
-          window.location.href = `mailto:hello@metify.ai?subject=${encodeURIComponent(formData.get('subject') || 'Contact Request')}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+          window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+          setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 3000);
         }
       } catch {
         const name = formData.get('firstname');
         const email = formData.get('email');
         const msg = formData.get('message');
-        window.location.href = `mailto:hello@metify.ai?subject=${encodeURIComponent(formData.get('subject') || 'Contact Request')}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
-      } finally {
+        window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
         setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 3000);
       }
     });

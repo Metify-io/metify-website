@@ -11,26 +11,38 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
       <div class="bg-brand-card border border-white/10 rounded-xl p-8 lg:p-10">
-        <div id="hubspot-trial-form"></div>
-        <!-- Native fallback form (shown if HubSpot embed fails) -->
-        <form id="trial-fallback-form" class="space-y-5">
-          <div>
-            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
-            <input type="text" id="name" name="firstname" required
-              class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-              placeholder="Your full name" />
+        <form id="trial-form" class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="firstname" class="block text-sm font-medium text-gray-300 mb-1">First Name *</label>
+              <input type="text" id="firstname" name="firstname" required
+                class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                placeholder="John" />
+            </div>
+            <div>
+              <label for="lastname" class="block text-sm font-medium text-gray-300 mb-1">Last Name *</label>
+              <input type="text" id="lastname" name="lastname" required
+                class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                placeholder="Smith" />
+            </div>
           </div>
           <div>
             <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Work Email *</label>
             <input type="email" id="email" name="email" required
               class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
-              placeholder="name@yourcompany.com" />
+              placeholder="john@yourcompany.com" />
           </div>
           <div>
-            <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company</label>
-            <input type="text" id="company" name="company"
+            <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company *</label>
+            <input type="text" id="company" name="company" required
               class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
               placeholder="Your company name" />
+          </div>
+          <div>
+            <label for="jobtitle" class="block text-sm font-medium text-gray-300 mb-1">Job Title</label>
+            <input type="text" id="jobtitle" name="jobtitle"
+              class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+              placeholder="Your role" />
           </div>
           <button type="submit"
             class="w-full px-6 py-4 bg-brand-green text-brand-darker font-bold text-lg rounded-lg hover:bg-brand-green-dark transition-colors">
@@ -47,39 +59,15 @@ import Layout from '../layouts/Layout.astro';
 <script>
   const PORTAL_ID = '7609233';
   const FORM_ID = '647d55a9-20bd-4978-a833-f5b1f9061843';
-  const fallbackForm = document.getElementById('trial-fallback-form');
-  const hsContainer = document.getElementById('hubspot-trial-form');
+  const form = document.getElementById('trial-form');
 
-  // Try loading HubSpot embed
-  if (FORM_ID !== 'TRIAL_FORM_ID') {
-    const script = document.createElement('script');
-    script.src = 'https://js.hsforms.net/forms/v2.js';
-    script.defer = true;
-    script.onload = () => {
-      if (window.hbspt) {
-        window.hbspt.forms.create({
-          region: 'na1',
-          portalId: PORTAL_ID,
-          formId: FORM_ID,
-          target: '#hubspot-trial-form',
-          css: '',
-          onFormReady: () => {
-            if (fallbackForm) fallbackForm.style.display = 'none';
-          },
-        });
-      }
-    };
-    document.head.appendChild(script);
-  }
-
-  // Native form submission via HubSpot API
-  if (fallbackForm) {
-    fallbackForm.addEventListener('submit', async (e) => {
+  if (form) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('trial-form-status');
-      const btn = fallbackForm.querySelector('button[type="submit"]');
-      const formData = new FormData(fallbackForm);
-      
+      const btn = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+
       btn.disabled = true;
       btn.textContent = 'Submitting...';
 
@@ -90,8 +78,10 @@ import Layout from '../layouts/Layout.astro';
           body: JSON.stringify({
             fields: [
               { name: 'firstname', value: formData.get('firstname') || '' },
+              { name: 'lastname', value: formData.get('lastname') || '' },
               { name: 'email', value: formData.get('email') || '' },
               { name: 'company', value: formData.get('company') || '' },
+              { name: 'jobtitle', value: formData.get('jobtitle') || '' },
             ],
             context: {
               pageUri: window.location.href,
@@ -106,24 +96,19 @@ import Layout from '../layouts/Layout.astro';
             status.textContent = 'Thank you! We\'ll be in touch shortly with your trial access.';
             status.classList.remove('hidden');
           }
-          fallbackForm.reset();
+          form.reset();
           btn.textContent = 'Submitted!';
+          setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 5000);
         } else {
-          // Fallback: open mailto
           const email = formData.get('email');
           const name = formData.get('firstname');
           window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
-          if (status) {
-            status.className = 'text-center text-gray-400 mt-4';
-            status.textContent = 'Opening your email client...';
-            status.classList.remove('hidden');
-          }
+          setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
         }
       } catch {
         const email = formData.get('email');
         const name = formData.get('firstname');
         window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
-      } finally {
         setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
       }
     });
