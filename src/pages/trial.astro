@@ -4,17 +4,19 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Download Free Trial — Metify" description="Get started with MOJO Platform today.">
   <section class="py-24 bg-brand-darker">
-    <div class="max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h1 class="text-5xl font-bold text-white mb-4">Download <span class="text-brand-green">Free Trial</span></h1>
-        <p class="text-gray-400 text-lg">Get started with MOJO Platform in minutes.</p>
+        <h1 class="text-5xl lg:text-6xl font-bold text-white mb-4">Download <span class="text-brand-green">Free Trial</span></h1>
+        <p class="text-gray-400 text-lg max-w-lg mx-auto">Get started with MOJO Platform in minutes. No credit card required.</p>
       </div>
 
-      <div class="bg-brand-card border border-white/10 rounded-xl p-8">
-        <form class="space-y-5" action="https://formspree.io/f/your-form-id" method="POST">
+      <div class="bg-brand-card border border-white/10 rounded-xl p-8 lg:p-10">
+        <div id="hubspot-trial-form"></div>
+        <!-- Native fallback form (shown if HubSpot embed fails) -->
+        <form id="trial-fallback-form" class="space-y-5">
           <div>
             <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
-            <input type="text" id="name" name="name" required
+            <input type="text" id="name" name="firstname" required
               class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
               placeholder="Your full name" />
           </div>
@@ -24,13 +26,106 @@ import Layout from '../layouts/Layout.astro';
               class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
               placeholder="name@yourcompany.com" />
           </div>
-          <p class="text-xs text-gray-500">MOJO is for business use. Please sign up with your work email.</p>
+          <div>
+            <label for="company" class="block text-sm font-medium text-gray-300 mb-1">Company</label>
+            <input type="text" id="company" name="company"
+              class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+              placeholder="Your company name" />
+          </div>
           <button type="submit"
             class="w-full px-6 py-4 bg-brand-green text-brand-darker font-bold text-lg rounded-lg hover:bg-brand-green-dark transition-colors">
             Request Free Trial
           </button>
+          <div id="trial-form-status" class="text-center hidden"></div>
         </form>
+        <p class="mt-6 text-xs text-gray-500 text-center">MOJO is for business use. Please sign up with your work email.</p>
       </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  const PORTAL_ID = '7609233';
+  const FORM_ID = '2c8468ce-668c-42a5-bec9-1be33e719da2';
+  const fallbackForm = document.getElementById('trial-fallback-form');
+  const hsContainer = document.getElementById('hubspot-trial-form');
+
+  // Try loading HubSpot embed
+  if (FORM_ID !== 'TRIAL_FORM_ID') {
+    const script = document.createElement('script');
+    script.src = 'https://js.hsforms.net/forms/v2.js';
+    script.defer = true;
+    script.onload = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          region: 'na1',
+          portalId: PORTAL_ID,
+          formId: FORM_ID,
+          target: '#hubspot-trial-form',
+          css: '',
+          onFormReady: () => {
+            if (fallbackForm) fallbackForm.style.display = 'none';
+          },
+        });
+      }
+    };
+    document.head.appendChild(script);
+  }
+
+  // Native form submission via HubSpot API
+  if (fallbackForm) {
+    fallbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('trial-form-status');
+      const btn = fallbackForm.querySelector('button[type="submit"]');
+      const formData = new FormData(fallbackForm);
+      
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      try {
+        const response = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fields: [
+              { name: 'firstname', value: formData.get('firstname') || '' },
+              { name: 'email', value: formData.get('email') || '' },
+              { name: 'company', value: formData.get('company') || '' },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: 'Download Free Trial',
+            },
+          }),
+        });
+
+        if (response.ok) {
+          if (status) {
+            status.className = 'text-center text-brand-green font-semibold mt-4';
+            status.textContent = 'Thank you! We\'ll be in touch shortly with your trial access.';
+            status.classList.remove('hidden');
+          }
+          fallbackForm.reset();
+          btn.textContent = 'Submitted!';
+        } else {
+          // Fallback: open mailto
+          const email = formData.get('email');
+          const name = formData.get('firstname');
+          window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
+          if (status) {
+            status.className = 'text-center text-gray-400 mt-4';
+            status.textContent = 'Opening your email client...';
+            status.classList.remove('hidden');
+          }
+        }
+      } catch {
+        const email = formData.get('email');
+        const name = formData.get('firstname');
+        window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
+      } finally {
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
+      }
+    });
+  }
+</script>
