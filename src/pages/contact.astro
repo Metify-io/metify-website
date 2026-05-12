@@ -50,14 +50,49 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
-        <!-- HubSpot Contact Form Embed -->
+        <!-- Contact Form -->
         <div class="lg:col-span-3">
           <div class="bg-brand-card border border-white/10 rounded-xl p-8">
             <h2 class="text-2xl font-bold text-white mb-6">Send us a message</h2>
             <div id="hubspot-contact-form"></div>
-            <noscript>
-              <p class="text-gray-400">Please enable JavaScript to use our contact form, or email us directly at <a href="mailto:hello@metify.ai" class="text-brand-green hover:underline">hello@metify.ai</a>.</p>
-            </noscript>
+            <!-- Native fallback form (shown if HubSpot embed fails) -->
+            <form id="contact-fallback-form" class="space-y-5">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name *</label>
+                <input type="text" id="name" name="firstname" required
+                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                  placeholder="Your full name" />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email *</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                  placeholder="name@yourcompany.com" />
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+                <input type="tel" id="phone" name="phone"
+                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                  placeholder="+1 (555) 000-0000" />
+              </div>
+              <div>
+                <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject *</label>
+                <input type="text" id="subject" name="subject" required
+                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors"
+                  placeholder="How can we help?" />
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message *</label>
+                <textarea id="message" name="message" rows="4" required
+                  class="w-full px-4 py-3 bg-brand-darker border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-brand-green transition-colors resize-none"
+                  placeholder="Tell us more about your requirements..."></textarea>
+              </div>
+              <button type="submit"
+                class="w-full px-6 py-3 bg-brand-green text-brand-darker font-bold rounded-lg hover:bg-brand-green-dark transition-colors">
+                Send Message
+              </button>
+              <div id="contact-form-status" class="text-center hidden"></div>
+            </form>
           </div>
         </div>
       </div>
@@ -66,20 +101,84 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-  // HubSpot Forms Embed — replace PORTAL_ID and FORM_ID with your actual values
-  const script = document.createElement('script');
-  script.src = 'https://js.hsforms.net/forms/v2.js';
-  script.defer = true;
-  script.onload = () => {
-    if (window.hbspt) {
-      window.hbspt.forms.create({
-        region: 'na1',
-        portalId: '7609233',
-        formId: 'CONTACT_FORM_ID',
-        target: '#hubspot-contact-form',
-        css: '',
-      });
-    }
-  };
-  document.head.appendChild(script);
+  const PORTAL_ID = '7609233';
+  const FORM_ID = '4cd86005-d02c-48a5-9ff0-92a56b272692';
+  const fallbackForm = document.getElementById('contact-fallback-form');
+
+  // Try loading HubSpot embed
+  if (FORM_ID !== 'CONTACT_FORM_ID') {
+    const script = document.createElement('script');
+    script.src = 'https://js.hsforms.net/forms/v2.js';
+    script.defer = true;
+    script.onload = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          region: 'na1',
+          portalId: PORTAL_ID,
+          formId: FORM_ID,
+          target: '#hubspot-contact-form',
+          css: '',
+          onFormReady: () => {
+            if (fallbackForm) fallbackForm.style.display = 'none';
+          },
+        });
+      }
+    };
+    document.head.appendChild(script);
+  }
+
+  // Native form submission via HubSpot API
+  if (fallbackForm) {
+    fallbackForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('contact-form-status');
+      const btn = fallbackForm.querySelector('button[type="submit"]');
+      const formData = new FormData(fallbackForm);
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_ID}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fields: [
+              { name: 'firstname', value: formData.get('firstname') || '' },
+              { name: 'email', value: formData.get('email') || '' },
+              { name: 'phone', value: formData.get('phone') || '' },
+              { name: 'subject', value: formData.get('subject') || '' },
+              { name: 'message', value: formData.get('message') || '' },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: 'Contact Us',
+            },
+          }),
+        });
+
+        if (response.ok) {
+          if (status) {
+            status.className = 'text-center text-brand-green font-semibold mt-4';
+            status.textContent = 'Thank you! We\'ll get back to you shortly.';
+            status.classList.remove('hidden');
+          }
+          fallbackForm.reset();
+          btn.textContent = 'Sent!';
+        } else {
+          const name = formData.get('firstname');
+          const email = formData.get('email');
+          const msg = formData.get('message');
+          window.location.href = `mailto:hello@metify.ai?subject=${encodeURIComponent(formData.get('subject') || 'Contact Request')}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+        }
+      } catch {
+        const name = formData.get('firstname');
+        const email = formData.get('email');
+        const msg = formData.get('message');
+        window.location.href = `mailto:hello@metify.ai?subject=${encodeURIComponent(formData.get('subject') || 'Contact Request')}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+      } finally {
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 3000);
+      }
+    });
+  }
 </script>
