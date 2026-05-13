@@ -14,7 +14,7 @@ const testimonials = [
     badge: '/images/testimonials/datacenterworld.svg',
   },
   {
-    type: 'quote',
+    type: 'award',
     quote: 'MOJO was an integral part of our Kubernetes ballpark rollout. Using MOJO we were able to streamline and SIMPLIFY our server provisioning process, cutting our deployment times in half.',
     source: 'Kevin Backman',
     role: 'Google Cloud Fellow and MLB Systems Architect',
@@ -50,10 +50,7 @@ const partners = [
                     <img
                       src={t.image}
                       alt={t.source}
-                      class:list={[
-                        'max-w-full max-h-full object-contain rounded-lg',
-                        t.type === 'award' ? '' : 'brightness-0 invert',
-                      ]}
+                      class="max-w-full max-h-full object-contain rounded-lg"
                       loading={i === 0 ? 'eager' : 'lazy'}
                     />
                   </div>
