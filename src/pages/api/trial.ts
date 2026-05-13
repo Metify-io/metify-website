@@ -3,8 +3,47 @@ export const prerender = false;
 import type { APIRoute } from 'astro';
 
 const LICENSE_SERVER_URL = 'https://licenses.metify.io/l/api/v1/webform/';
+const HUBSPOT_PORTAL_ID = '7609233';
+const HUBSPOT_TRIAL_FORM_ID = '647d55a9-20bd-4978-a833-f5b1f9061843';
 const PRODUCT = 'mojo-platform';
 const PRODUCT_VERSION = '3';
+
+type TrialLead = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  company: string;
+  jobtitle: string;
+  pageUri: string;
+};
+
+const submitTrialLeadToHubSpot = async (lead: TrialLead) => {
+  const response = await fetch(
+    `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_TRIAL_FORM_ID}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fields: [
+          { name: 'firstname', value: lead.firstname },
+          { name: 'lastname', value: lead.lastname },
+          { name: 'email', value: lead.email },
+          { name: 'company', value: lead.company },
+          { name: 'jobtitle', value: lead.jobtitle },
+        ],
+        context: {
+          pageUri: lead.pageUri,
+          pageName: 'Download Free Trial',
+        },
+      }),
+    },
+  );
+
+  if (!response.ok) {
+    const details = await response.text().catch(() => '');
+    console.error('HubSpot trial submission failed', response.status, details);
+  }
+};
 
 export const POST: APIRoute = async ({ request }) => {
   const token = import.meta.env.LICENSE_SERVER_API_TOKEN;
@@ -34,6 +73,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const name = [firstname, lastname].filter(Boolean).join(' ');
+  const pageUri = request.headers.get('referer') ?? 'https://metify.ai/trial';
 
   try {
     const resp = await fetch(LICENSE_SERVER_URL, {
@@ -57,6 +97,15 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    await submitTrialLeadToHubSpot({
+      firstname,
+      lastname,
+      email,
+      company,
+      jobtitle,
+      pageUri,
+    });
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

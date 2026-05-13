@@ -105,7 +105,7 @@ import Layout from '../layouts/Layout.astro';
         }
       } catch {
         const email = formData.get('email');
-        const name = formData.get('firstname');
+        const name = [formData.get('firstname'), formData.get('lastname')].filter(Boolean).join(' ');
         window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
         setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
       }
