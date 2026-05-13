@@ -10,10 +10,17 @@ import CTA from '../components/CTA.astro';
 
       <!-- Data Centers -->
       <div class="mb-20">
-        <h2 class="text-3xl font-bold text-white mb-6">Data Centers</h2>
-        <p class="text-gray-300 text-lg leading-relaxed mb-8">
-          MOJO Platform significantly enhances automation in the datacenter by streamlining and automating the process of deploying, configuring, and managing physical servers.
-        </p>
+        <div class="flex flex-col lg:flex-row gap-8 items-start mb-8">
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold text-white mb-6">Data Centers</h2>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              MOJO Platform significantly enhances automation in the datacenter by streamlining and automating the process of deploying, configuring, and managing physical servers.
+            </p>
+          </div>
+          <div class="lg:w-80 shrink-0">
+            <img src="/images/solutions/Data-center.jpg" alt="Data Center" class="w-full rounded-xl border border-white/10" loading="lazy" />
+          </div>
+        </div>
 
         <div class="grid sm:grid-cols-2 gap-6">
           {[
@@ -34,10 +41,17 @@ import CTA from '../components/CTA.astro';
 
       <!-- Edge -->
       <div class="mb-20">
-        <h2 class="text-3xl font-bold text-white mb-6">Edge Computing</h2>
-        <p class="text-gray-300 text-lg leading-relaxed mb-8">
-          Metify MOJO placed at the edge represents a significant advancement in automation, offering streamlined and efficient management of physical servers in decentralized environments.
-        </p>
+        <div class="flex flex-col lg:flex-row-reverse gap-8 items-start mb-8">
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold text-white mb-6">Edge Computing</h2>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              Metify MOJO placed at the edge represents a significant advancement in automation, offering streamlined and efficient management of physical servers in decentralized environments.
+            </p>
+          </div>
+          <div class="lg:w-80 shrink-0">
+            <img src="/images/solutions/Edge-Featured.jpg" alt="Edge Computing" class="w-full rounded-xl border border-white/10" loading="lazy" />
+          </div>
+        </div>
 
         <div class="grid sm:grid-cols-2 gap-6">
           {[
@@ -56,10 +70,17 @@ import CTA from '../components/CTA.astro';
 
       <!-- Cloud Providers -->
       <div class="mb-20">
-        <h2 class="text-3xl font-bold text-white mb-6">Cloud Providers</h2>
-        <p class="text-gray-300 text-lg leading-relaxed mb-8">
-          MOJO Platform plays a crucial role in cloud server automation by streamlining the process of deploying and managing physical servers in cloud environments.
-        </p>
+        <div class="flex flex-col lg:flex-row gap-8 items-start mb-8">
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold text-white mb-6">Cloud Providers</h2>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              MOJO Platform plays a crucial role in cloud server automation by streamlining the process of deploying and managing physical servers in cloud environments.
+            </p>
+          </div>
+          <div class="lg:w-80 shrink-0">
+            <img src="/images/solutions/Cloud-Providers.jpg" alt="Cloud Providers" class="w-full rounded-xl border border-white/10" loading="lazy" />
+          </div>
+        </div>
 
         <div class="grid sm:grid-cols-2 gap-6">
           {[
@@ -73,6 +94,21 @@ import CTA from '../components/CTA.astro';
               <p class="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      <!-- Healthcare -->
+      <div class="mb-20">
+        <div class="flex flex-col lg:flex-row-reverse gap-8 items-start mb-8">
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold text-white mb-6">Healthcare</h2>
+            <p class="text-gray-300 text-lg leading-relaxed">
+              MOJO Platform provides healthcare organizations with secure, compliant infrastructure automation that meets the demanding requirements of HIPAA and other regulatory frameworks.
+            </p>
+          </div>
+          <div class="lg:w-80 shrink-0">
+            <img src="/images/solutions/Healthcare-solutions.jpg" alt="Healthcare Solutions" class="w-full rounded-xl border border-white/10" loading="lazy" />
+          </div>
         </div>
       </div>
 
