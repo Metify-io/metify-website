@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Nulshock';
+  src: url('/fonts/nulshock-bold.woff2') format('woff2'),
+       url('/fonts/nulshock-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-brand-green: #a3cc3a;
   --color-brand-green-dark: #8ab52e;
