@@ -121,7 +121,7 @@ const partners = [
               <img
                 src={partner.logo}
                 alt={partner.name}
-                class="max-h-12 w-auto brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+                class="max-h-12 w-auto partner-logo opacity-60 hover:opacity-100 transition-opacity"
                 loading="lazy"
               />
             </div>
@@ -133,6 +133,10 @@ const partners = [
 </section>
 
 <style>
+  .partner-logo {
+    filter: grayscale(1) brightness(0) invert(1);
+  }
+
   .partner-carousel-track {
     animation: scroll-logos 30s linear infinite;
     width: max-content;
