@@ -23,7 +23,7 @@
           <a href="/trial" class="inline-flex items-center justify-center px-8 py-4 bg-brand-green text-brand-darker font-bold text-lg rounded-lg hover:bg-brand-green-dark transition-all hover:scale-105">
             Download Free Trial
           </a>
-          <button onclick="Calendly.initPopupWidget({url:'https://calendly.com/metify/mojo-platform-trial?background_color=1a1a1a&text_color=ffffff&primary_color=5fe72d'});return false;" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-green text-brand-green font-bold text-lg rounded-lg hover:bg-brand-green/10 transition-all cursor-pointer">
+          <button onclick="if(typeof Calendly!=='undefined'){Calendly.initPopupWidget({url:'https://calendly.com/metify/mojo-platform-trial?background_color=1a1a1a&text_color=ffffff&primary_color=5fe72d'})}else{window.open('https://calendly.com/metify/mojo-platform-trial','_blank')};return false;" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-green text-brand-green font-bold text-lg rounded-lg hover:bg-brand-green/10 transition-all cursor-pointer">
             Book a Demo
           </button>
         </div>
