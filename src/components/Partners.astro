@@ -1,53 +1,187 @@
 ---
+const testimonials = [
+  {
+    type: 'award',
+    quote: 'An Essential New Tool for Hybrid Cloud Deployments',
+    source: 'CIO Magazine',
+    image: '/images/testimonials/CIO-Magazine.jpg',
+  },
+  {
+    type: 'award',
+    quote: 'WINNER! "Best New Technology"',
+    source: 'Data Center World',
+    image: '/images/testimonials/Data-Center-World.jpg',
+    badge: '/images/testimonials/datacenterworld.svg',
+  },
+  {
+    type: 'award',
+    quote: 'MOJO was an integral part of our Kubernetes ballpark rollout. Using MOJO we were able to streamline and SIMPLIFY our server provisioning process, cutting our deployment times in half.',
+    source: 'Kevin Backman',
+    role: 'Google Cloud Fellow and MLB Systems Architect',
+    image: '/images/testimonials/MLB-Logo-BW.png',
+    badge: '/images/testimonials/Google-Cloud-Logo.png',
+  },
+];
+
 const partners = [
+  { name: 'Red Hat OpenShift', logo: '/images/partners/Red-Hat-OpenShift.svg' },
+  { name: 'The Linux Foundation', logo: '/images/screenshots/LinuxF.png' },
+  { name: 'Open Compute Project', logo: '/images/partners/Opencompute-TM-logo-2-600w-v1-1.png' },
+  { name: 'Supermicro', logo: '/images/partners/Super_Micro_Computer_Logo.png' },
   { name: 'Dell Technologies', logo: '/images/partners/Dell.png' },
   { name: 'Hewlett Packard Enterprise', logo: '/images/partners/Hewlett-Packard-Enterprise-logo.png' },
   { name: 'Major League Baseball', logo: '/images/partners/Major_League_Baseball_logo.png' },
-  { name: 'Open Compute Project', logo: '/images/partners/Opencompute-TM-logo-2-600w-v1-1.png' },
-  { name: 'CBTS', logo: '/images/partners/CBTS_trans.png' },
   { name: 'NASA JPL', logo: '/images/partners/JPL.png' },
-  { name: 'Supermicro', logo: '/images/partners/Super_Micro_Computer_Logo.png' },
+  { name: 'CBTS', logo: '/images/partners/CBTS_trans.png' },
 ];
-
-const testimonial = {
-  quote: 'An Essential New Tool for Hybrid Cloud Deployments',
-  source: 'CIO Magazine',
-
-};
 ---
 
 <section class="py-24 bg-brand-dark">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Testimonial -->
-    <div class="bg-gradient-to-r from-brand-darker to-brand-card border border-white/10 rounded-2xl p-12 lg:p-16 mb-20">
-      <div class="max-w-3xl mx-auto text-center">
-        <svg class="w-12 h-12 text-brand-green/40 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
-        </svg>
-        <blockquote class="text-2xl lg:text-4xl font-bold text-white italic leading-relaxed">
-          &ldquo;{testimonial.quote}&rdquo;
-        </blockquote>
-        <div class="mt-8">
-          <p class="text-brand-green font-bold text-xl">{testimonial.source}</p>
+    <!-- Testimonials Slider -->
+    <div class="relative mb-20">
+      <div id="testimonial-slider" class="overflow-hidden rounded-2xl border border-white/10">
+        <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
+          {testimonials.map((t, i) => (
+            <div class="min-w-full" data-slide={i}>
+              <div class="bg-gradient-to-r from-brand-darker to-brand-card p-8 lg:p-12">
+                <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                  <div class="flex-shrink-0 w-48 h-48 lg:w-64 lg:h-64 flex items-center justify-center">
+                    <img
+                      src={t.image}
+                      alt={t.source}
+                      class="max-w-full max-h-full object-contain rounded-lg"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                    />
+                  </div>
 
+                  <div class="flex-1 text-center lg:text-left">
+                    <svg class="w-10 h-10 text-brand-green/30 mx-auto lg:mx-0 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z" />
+                    </svg>
+                    <blockquote class="text-xl lg:text-3xl font-bold text-white italic leading-relaxed mb-6">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                    <p class="text-brand-green font-bold text-lg">{t.source}</p>
+                    {t.role && <p class="text-gray-400 text-sm uppercase tracking-wider mt-1">{t.role}</p>}
+                  </div>
+
+                  {t.badge && (
+                    <div class="flex-shrink-0 hidden lg:flex items-center justify-center w-40">
+                      <img src={t.badge} alt="" class="max-w-full max-h-20 object-contain" loading="lazy" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
+
+      <!-- Slider arrows -->
+      <button
+        id="prev-btn"
+        aria-label="Previous testimonial"
+        class="absolute left-2 lg:-left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-green text-brand-darker flex items-center justify-center hover:bg-brand-green-dark transition-colors z-10 cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button
+        id="next-btn"
+        aria-label="Next testimonial"
+        class="absolute right-2 lg:-right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-brand-green text-brand-darker flex items-center justify-center hover:bg-brand-green-dark transition-colors z-10 cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="flex justify-center gap-2 mt-4">
+        {testimonials.map((_, i) => (
+          <button
+            class:list={['w-2.5 h-2.5 rounded-full transition-colors testimonial-dot cursor-pointer', i === 0 ? 'bg-brand-green' : 'bg-white/30']}
+            data-dot={i}
+            aria-label={`Go to testimonial ${i + 1}`}
+          />
+        ))}
       </div>
     </div>
 
-    <!-- Partners -->
+    <!-- Partners Carousel -->
     <div class="text-center">
       <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
         Trusted <span class="text-brand-green">Technology Partners</span> and Customers
       </h2>
       <p class="text-gray-400 mb-12 max-w-2xl mx-auto">Industry leaders trust Metify's MOJO Platform to manage their data center infrastructure.</p>
-      
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-        {partners.map((partner) => (
-          <div class="bg-brand-card/50 border border-white/5 rounded-xl px-6 py-8 flex items-center justify-center hover:border-brand-green/30 hover:bg-brand-card/80 transition-all group">
-            <img src={partner.logo} alt={partner.name} class="max-h-12 w-auto brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity" loading="lazy" />
-          </div>
-        ))}
+
+      <div class="partner-carousel-wrapper overflow-hidden relative">
+        <div class="partner-carousel-track flex gap-12 items-center">
+          {/* Duplicate logos for seamless infinite scroll */}
+          {[...partners, ...partners].map((partner) => (
+            <div class="flex-shrink-0 flex items-center justify-center h-16 min-w-[160px]">
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                class="max-h-12 w-auto partner-logo opacity-60 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .partner-logo {
+    filter: grayscale(1) brightness(0) invert(1);
+  }
+
+  .partner-carousel-track {
+    animation: scroll-logos 30s linear infinite;
+    width: max-content;
+  }
+
+  .partner-carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-logos {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
+<script>
+  const track = document.getElementById('testimonial-track');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const total = dots.length;
+  let current = 0;
+  let autoTimer: ReturnType<typeof setInterval>;
+
+  function goTo(index: number) {
+    current = ((index % total) + total) % total;
+    if (track) track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => {
+      d.classList.toggle('bg-brand-green', i === current);
+      d.classList.toggle('bg-white/30', i !== current);
+    });
+  }
+
+  prevBtn?.addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  nextBtn?.addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+  dots.forEach((d) => {
+    d.addEventListener('click', () => {
+      goTo(Number((d as HTMLElement).dataset.dot));
+      resetAuto();
+    });
+  });
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 6000);
+  }
+  resetAuto();
+</script>
