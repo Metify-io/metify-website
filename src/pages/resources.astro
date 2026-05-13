@@ -1,18 +1,73 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
+
+const solutionBriefs = [
+  { title: 'Federal Whitepaper — MOJO', file: '/downloads/FEDERAL-WHITEPAPER-MOJO.pdf', category: 'Federal' },
+  { title: 'Financial Services — Solution Brief', file: '/downloads/FINANCIAL-SERVICES-Solution-Brief.pdf', category: 'Financial Services' },
+  { title: 'Healthcare One Pager — Metify', file: '/downloads/Healthcare-One-Pager-Metify.pdf', category: 'Healthcare' },
+  { title: 'Manufacturing — MOJO Solution Brief', file: '/downloads/Manufacturing-MOJO-Solution-Brief.pdf', category: 'Manufacturing' },
+  { title: 'Corporate Overview', file: '/downloads/CORP-OVERVIEW.pdf', category: 'Corporate' },
+  { title: 'Enterprise AI — MOJO', file: '/downloads/Enterprise-AI-MOJO.pdf', category: 'Enterprise AI' },
+];
 ---
 
-<Layout title="Resources — Metify" description="Whitepapers, FAQ, and resources for MOJO Platform.">
+<Layout title="Resources — Metify" description="Whitepapers, solution briefs, FAQ, and resources for MOJO Platform.">
   <section class="py-24 bg-brand-darker">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <h1 class="text-5xl font-bold text-white mb-16"><span class="text-brand-green">Resources</span></h1>
 
       <div id="whitepapers" class="mb-20">
         <h2 class="text-3xl font-bold text-white mb-8">Whitepapers</h2>
-        <div class="bg-brand-card border border-white/10 rounded-xl p-8 text-center">
-          <svg class="w-12 h-12 text-brand-green/40 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-          <p class="text-gray-400">Whitepapers coming soon. <a href="/contact" class="text-brand-green hover:underline">Contact us</a> to learn more.</p>
+        <div class="bg-brand-card border border-white/10 rounded-xl p-8">
+          <h3 class="text-xl font-bold text-white mb-4">What is Bare Metal Provisioning?</h3>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            Bare metal provisioning has evolved into a pivotal aspect of data center management, transforming the way physical servers are set up and configured. Unlike virtualization or cloud computing, bare metal provisioning provides a direct interface with the underlying hardware, empowering users with enhanced power, performance, and security.
+          </p>
+          <p class="text-gray-400 leading-relaxed mb-4">
+            The MOJO platform emerges as a transformative solution, streamlining bare metal provisioning and redefining the user experience. By automating mundane and complex tasks, MOJO eliminates the need for direct user intervention, accelerating the provisioning process and mitigating the risk of human errors.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6">
+            <div class="bg-brand-darker/50 border border-white/5 rounded-lg p-4">
+              <h4 class="text-white font-semibold text-sm mb-1">Remote Console Convenience</h4>
+              <p class="text-gray-500 text-sm">Centralized interface to manage the entire provisioning lifecycle seamlessly.</p>
+            </div>
+            <div class="bg-brand-darker/50 border border-white/5 rounded-lg p-4">
+              <h4 class="text-white font-semibold text-sm mb-1">Efficiency through Automation</h4>
+              <p class="text-gray-500 text-sm">Repetitive tasks are automated, significantly reducing provisioning times.</p>
+            </div>
+            <div class="bg-brand-darker/50 border border-white/5 rounded-lg p-4">
+              <h4 class="text-white font-semibold text-sm mb-1">Direct Hardware Interaction</h4>
+              <p class="text-gray-500 text-sm">Unparalleled control not achievable in traditional virtualized environments.</p>
+            </div>
+            <div class="bg-brand-darker/50 border border-white/5 rounded-lg p-4">
+              <h4 class="text-white font-semibold text-sm mb-1">Enhanced Security</h4>
+              <p class="text-gray-500 text-sm">Secure provisioning process aligned with data security best practices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="solution-briefs" class="mb-20">
+        <h2 class="text-3xl font-bold text-white mb-8">Solution Briefs</h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          {solutionBriefs.map((brief) => (
+            <a href={brief.file} target="_blank" class="group bg-brand-card border border-white/10 rounded-xl p-6 hover:border-brand-green/50 transition-all hover:-translate-y-1 block">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 bg-brand-green/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-brand-green/20 transition-colors">
+                  <svg class="w-6 h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                </div>
+                <div>
+                  <span class="text-xs text-brand-green font-semibold uppercase tracking-wide">{brief.category}</span>
+                  <h3 class="text-white font-semibold mt-1 group-hover:text-brand-green transition-colors">{brief.title}</h3>
+                  <span class="text-gray-500 text-sm mt-2 inline-flex items-center">
+                    Download PDF
+                    <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
 
@@ -24,6 +79,8 @@ import CTA from '../components/CTA.astro';
             { q: 'Which hardware vendors does MOJO support?', a: 'MOJO supports all major OEMs including Dell, HPE, Supermicro, ASRock Rack, and Open Compute OpenBMC platforms via Redfish, IPMI, Intel vPro, and AMD-PRO protocols.' },
             { q: 'What operating systems can MOJO provision?', a: 'MOJO provisions Ubuntu, Debian, Red Hat Enterprise Linux, Arch Linux, SUSE, FreeBSD, and Windows Server. You can also import custom OS images and kickstarts.' },
             { q: 'Can MOJO work in air-gapped environments?', a: 'Yes. MOJO is designed to work in fully air-gapped environments with offline installer artifacts and no external network dependencies.' },
+            { q: 'Can MOJO be installed inside of virtual environments in addition to bare metal?', a: 'Yes. MOJO is designed to accommodate installations in various environments, including virtual setups. This flexibility ensures that users can deploy and test MOJO across different infrastructure configurations to suit their specific needs.' },
+            { q: 'In addition to servers, does Metify support other datacenter devices such as PDUs, Network Switches, etc?', a: 'Yes. Metify is a full-fledged Data Center Infrastructure Management (DCIM) platform. It goes beyond server management to support other critical infrastructure components such as Power Distribution Units (PDUs), Network Switches, and more.' },
             { q: 'How do I get started?', a: 'Download a free trial from our website, or book a demo with our team. MOJO can be deployed in minutes.' },
           ].map((item) => (
             <details class="group bg-brand-card border border-white/10 rounded-lg overflow-hidden">
