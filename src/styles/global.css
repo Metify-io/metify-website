@@ -12,10 +12,10 @@
 @theme {
   --color-brand-green: #a3cc3a;
   --color-brand-green-dark: #8ab52e;
-  --color-brand-dark: #1a1a2e;
-  --color-brand-darker: #0f0f1a;
-  --color-brand-card: #1e1e32;
-  --color-brand-gray: #2a2a40;
+  --color-brand-dark: #000000;
+  --color-brand-darker: #000000;
+  --color-brand-card: #111111;
+  --color-brand-gray: #1a1a1a;
   --font-family-heading: 'Inter', system-ui, sans-serif;
   --font-family-body: 'Inter', system-ui, sans-serif;
 }
