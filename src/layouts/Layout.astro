@@ -32,22 +32,22 @@ const { title, description = 'Metify — The first AI-Native Data Center Automat
     <title>{title}</title>
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-E3F1K8T891"></script>
-    <script>
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-E3F1K8T891');
     </script>
     <!-- Apollo Website Visitor Tracking -->
-    <script>
+    <script is:inline>
       function initApollo(){var n=(new Date).getTime(),o=document.createElement("script");o.src="https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache="+n,o.async=!0,o.defer=!0,o.onload=function(){window.trackingFunctions.onLoad({appId:"661fe0a57bce1701c77de122"})},document.head.appendChild(o)}initApollo();
     </script>
     <!-- Leadfeeder / Dealfront -->
-    <script>
+    <script is:inline>
       (function(ss,ex){window.ldfdr=window.ldfdr||function(){(ldfdr._q=ldfdr._q||[]).push([].slice.call(arguments));};(function(d,s){fs=d.getElementsByTagName(s)[0];function ce(src){var cs=d.createElement(s);cs.src=src;cs.async=1;fs.parentNode.insertBefore(cs,fs);};ce('https://sc.lfeeder.com/lftracker_v1_'+ss+(ex?'_'+ex:'')+'.js');})(document,'script');})('p1e024BPMD68GB6d');
     </script>
     <!-- RB2B Person-Level Visitor Identification -->
-    <script>
+    <script is:inline>
       !function(key){if(window.reb2b)return;window.reb2b={loaded:true};var s=document.createElement("script");s.async=true;s.src="https://ddwl4m2hdecbv.cloudfront.net/b/"+key+"/"+key+".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s,document.getElementsByTagName("script")[0]);}("W6Z57HZ4V1OX");
     </script>
     <!-- Calendly popup widget -->
