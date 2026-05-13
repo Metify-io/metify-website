@@ -18,30 +18,34 @@ type TrialLead = {
 };
 
 const submitTrialLeadToHubSpot = async (lead: TrialLead) => {
-  const response = await fetch(
-    `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_TRIAL_FORM_ID}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: [
-          { name: 'firstname', value: lead.firstname },
-          { name: 'lastname', value: lead.lastname },
-          { name: 'email', value: lead.email },
-          { name: 'company', value: lead.company },
-          { name: 'jobtitle', value: lead.jobtitle },
-        ],
-        context: {
-          pageUri: lead.pageUri,
-          pageName: 'Download Free Trial',
-        },
-      }),
-    },
-  );
+  try {
+    const response = await fetch(
+      `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_TRIAL_FORM_ID}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields: [
+            { name: 'firstname', value: lead.firstname },
+            { name: 'lastname', value: lead.lastname },
+            { name: 'email', value: lead.email },
+            { name: 'company', value: lead.company },
+            { name: 'jobtitle', value: lead.jobtitle },
+          ],
+          context: {
+            pageUri: lead.pageUri,
+            pageName: 'Download Free Trial',
+          },
+        }),
+      },
+    );
 
-  if (!response.ok) {
-    const details = await response.text().catch(() => '');
-    console.error('HubSpot trial submission failed', response.status, details);
+    if (!response.ok) {
+      const details = await response.text().catch(() => '');
+      console.error('HubSpot trial submission failed', response.status, details);
+    }
+  } catch (error) {
+    console.error('HubSpot trial submission error', error);
   }
 };
 
