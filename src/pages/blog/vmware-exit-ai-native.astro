@@ -1,0 +1,341 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const content = `
+
+<div style="background-color:#eff6ff;border-left:6px solid #2563eb;padding:18px 22px;margin:28px 0;border-radius:6px;color:#1e40af;">
+<strong style="font-size:1.05em;">📌 EDITOR'S NOTE — A LIVING POST</strong><br><br>
+This piece was first published in April 2025, three months after the Broadcom acquisition started reshaping enterprise budgets in earnest. Because the VMware exodus is now the defining infrastructure story of the decade, we've kept this post live — and added a <strong>quarterly tracker</strong> below to log every major customer departure, court filing, and pricing shock. The post itself stays the same. The data underneath it keeps moving. Scroll to the <a href="#quarterly-tracker" style="color:#2563eb;">Quarterly Exodus Tracker</a> at the end for the running log.
+</div>
+
+<hr class="border-white/10 my-8" />
+
+<p class="text-gray-400 leading-relaxed mb-6">Broadcom's acquisition of VMware changed the economics of virtualization overnight. License costs doubled, tripled, and in some documented cases increased by more than a thousand percent. Perpetual licenses disappeared. Bundling strategies forced customers into all-or-nothing commitments they never asked for. For thousands of enterprises, the math stopped working.</p>
+
+<p class="text-gray-400 leading-relaxed mb-6">The result is the largest infrastructure re-evaluation in a decade. Gartner named the trend "devirtualization." ESG found that more than half of organizations have already repatriated virtualized workloads. The VMware exit is not a prediction. It is happening at scale, in public, in court filings, and on earnings calls.</p>
+
+<p class="text-gray-400 leading-relaxed mb-6">But here's what nobody is talking about loud enough: the real loss isn't the hypervisor. It's the operational intelligence. And the real opportunity isn't picking a different hypervisor — it's rethinking what the operational layer should look like in an era where AI agents can reason about infrastructure the way a senior operator does, only faster and without going home at five.</p>
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Exodus, by the Numbers</h2>
+
+<div style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">AT&T Proposed Increase</div>
+<div style="color:#7f1d1d;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">1,050%</div>
+<div style="color:#7f1d1d;font-size:0.85em;">One-year renewal hike for 75,000 VMs across 8,600 servers (court filings, 2024)</div>
+</div>
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">UK University</div>
+<div style="color:#7f1d1d;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">12.5×</div>
+<div style="color:#7f1d1d;font-size:0.85em;">Annual VMware support: £40,000 → £500,000 under new bundles</div>
+</div>
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Industry-Wide</div>
+<div style="color:#7f1d1d;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">150–1,200%</div>
+<div style="color:#7f1d1d;font-size:0.85em;">Reported price increase range across customer segments since acquisition</div>
+</div>
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);border:1px solid #6ee7b7;border-radius:8px;padding:18px;">
+<div style="color:#065f46;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Computershare</div>
+<div style="color:#064e3b;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">24,000</div>
+<div style="color:#064e3b;font-size:0.85em;">VMs migrated to Nutanix. CIO says payback in "single-digit months"</div>
+</div>
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);border:1px solid #6ee7b7;border-radius:8px;padding:18px;">
+<div style="color:#065f46;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Nutanix-Reported Migrations</div>
+<div style="color:#064e3b;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">~30,000</div>
+<div style="color:#064e3b;font-size:0.85em;">VMware customers moved to Nutanix as of April 2026 (Nutanix CEO, .NEXT 2026)</div>
+</div>
+
+<div style="flex:1 1 220px;background:linear-gradient(135deg,#ecfdf5 0%,#d1fae5 100%);border:1px solid #6ee7b7;border-radius:8px;padding:18px;">
+<div style="color:#065f46;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Pure Storage Survey</div>
+<div style="color:#064e3b;font-size:2.4em;font-weight:700;line-height:1;margin:8px 0 4px;">60%</div>
+<div style="color:#064e3b;font-size:0.85em;">Enterprises actively accelerating virtualization modernization through 2028</div>
+</div>
+
+</div>
+
+The most public proxy is AT&T. In court filings unsealed in late 2024, AT&T executive Susan Johnson disclosed in writing that Broadcom had proposed a 1,050% one-year price increase for the carrier's VMware estate — 75,000 VMs across roughly 8,600 servers. AT&T's filing also revealed it was budgeting $40 million to $50 million for a full migration off VMware, calculating that the project would deliver "a very quick payback and strong IRR." Translation: it is cheaper to rip-and-replace a decade of VMware investment than to renew at Broadcom's terms.
+
+AT&T is not alone. Computershare, which manages data for 40,000 companies and 75 million individual customers, announced it would migrate 24,000 VMs to Nutanix after receiving renewal terms representing a 10–15× price increase. Geico, Boyd Gaming, and John Deere have publicly committed to alternatives. Nutanix told investors it converted more than 2,700 VMware customers during its fiscal 2025 and another 640 in the first quarter of fiscal 2026 alone. By April 2026, Nutanix CEO Rajiv Ramaswami told the press the running total had hit roughly 30,000 customers.
+
+The vendor backlash extends beyond customers. Ingram Micro, one of the world's largest IT distributors, terminated its entire business relationship with Broadcom. The German IT user association VOICE filed a formal complaint with the European Commission alleging anti-competitive behavior. These are not the actions of a market that is settling down.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Operational Layer Problem</h2>
+
+VMware's real value was never virtualization itself. It was vCenter, vMotion, DRS — the management plane that let a small team run thousands of VMs without thinking about the physical hardware underneath. Strip away VMware and you don't just lose the hypervisor. You lose the operational brain.
+
+We see this firsthand with our customers. A financial services firm we work with spent three months evaluating VMware alternatives. They quickly found replacement hypervisors. What they couldn't find was a replacement for the operational layer — the intelligence that kept their fleet running without constant human intervention.
+
+A media and entertainment company managing broadcast infrastructure across multiple venues told us the same story: "We can move workloads off VMware. We can't move the Day 2 operations model off VMware."
+
+The market responded with two options, both inadequate on their own:
+
+<strong class="text-white">Option 1: Another hypervisor.</strong> Same architecture, different licensing. You've solved the cost problem but inherited the same dependency — a vendor-controlled operational layer that you don't own.
+
+<strong class="text-white">Option 2: A collection of CLI tools and scripts.</strong> Automation without intelligence. Your team writes Ansible playbooks and Terraform configs, builds a monitoring stack, and becomes the operational layer themselves. It works until someone leaves and takes the tribal knowledge with them.
+
+Neither option replaces what VMware actually provided: a platform that understood your infrastructure and could act on that understanding. The good news is that a third option has arrived — and it isn't a hypervisor at all.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">Kubernetes Is the New Operational Layer</h2>
+
+The most consequential shift happening underneath the VMware exit is that <strong class="text-white">the operational layer is moving from hypervisors to Kubernetes</strong> — even for workloads that still need to look and feel like VMs.
+
+The technology making this possible is KubeVirt, a CNCF project that lets virtual machines run as first-class Kubernetes workloads. Red Hat ships it commercially as OpenShift Virtualization. KubeVirt now has more than 40 documented production adopters including NVIDIA GeForce NOW (cloud gaming with GPU passthrough), Cloudflare, Intel, ByteDance, and SiriusXM. A Spectro Cloud survey found 26% of Kubernetes adopters already use KubeVirt. A Portworx survey found 58% of organizations are planning to migrate some VMs to Kubernetes management.
+
+This is the part of the story that gets buried in "VMware vs. Nutanix vs. Proxmox" comparisons. Those debates are framed as a like-for-like hypervisor swap. KubeVirt isn't a hypervisor swap. It's a reframing: VMs and containers become two shapes of the same underlying workload, scheduled by the same control plane, governed by the same RBAC, networked by the same CNI, and observable through the same pipeline.
+
+<div style="background-color:#eef2ff;border-left:6px solid #4f46e5;padding:18px 22px;margin:24px 0;border-radius:6px;color:#3730a3;">
+<strong>💡 WHAT KUBEVIRT ACTUALLY CHANGES</strong><br><br>
+With KubeVirt, a VM is a Kubernetes custom resource. You define it the same way you define a Deployment. You schedule it with the same scheduler. You back it with persistent volumes from the same CSI driver. You expose it through the same Ingress. You secure it through the same RBAC. <strong>The operational model for VMs collapses into the operational model for containers</strong> — which most of your team already runs.
+</div>
+
+For enterprises that are already on a Kubernetes path, this is the cleanest VMware exit available. Red Hat's Migration Toolkit for Virtualization (MTV, upstream Forklift) discovers vSphere environments, maps networks and storage, and orchestrates the cutover. SiriusXM has publicly documented migrating critical VMs to OpenShift Virtualization with no service interruption. A large financial services institution disclosed migrating thousands of VMs onto the same platform as part of a private-cloud modernization.
+
+The point isn't that every workload should be on KubeVirt tomorrow. The point is that <strong class="text-white">the operating system of the post-VMware data center is increasingly Kubernetes</strong>, with VMs as one workload shape among several. Hypervisors are becoming an implementation detail. The control plane is the product.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Anti-Pattern That's Costing the Industry Billions</h2>
+
+There's a related architectural mistake the VMware exit is forcing organizations to confront: running containers inside VMs that exist solely to host the container runtime.
+
+This pattern is everywhere. A container is provisioned on Kubernetes. Kubernetes is running on worker nodes. Those worker nodes are VMs. Those VMs are running on ESXi. ESXi is running on a physical server. The physical server is the only thing actually doing work. Every layer above it exists because somebody, at some point, decided that virtualization was the answer to a question nobody is asking anymore.
+
+<pre class="mermaid">graph TB
+    subgraph badArch [The Containers-in-VMs Anti-Pattern]
+        direction TB
+        A1[Container] --> A2[Container Runtime]
+        A2 --> A3[Guest OS]
+        A3 --> A4[Virtual Machine]
+        A4 --> A5[Hypervisor]
+        A5 --> A6[Host OS]
+        A6 --> A7[Bare-Metal Server]
+    end
+    subgraph goodArch [Kubernetes on Bare Metal]
+        direction TB
+        B1[Container] --> B2[Container Runtime]
+        B2 --> B3[Host OS]
+        B3 --> B4[Bare-Metal Server]
+    end
+    style badArch fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#000
+    style goodArch fill:#ecfdf5,stroke:#059669,stroke-width:2px
+    style A4 fill:#fecaca,stroke:#991b1b,color:#000
+    style A5 fill:#fecaca,stroke:#991b1b,color:#000
+    style A6 fill:#fecaca,stroke:#991b1b,color:#000
+</pre>
+
+The cost of this anti-pattern is staggering, and it compounds along several axes:
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
+<thead>
+<tr style="background-color:#1e293b;color:#f8fafc;">
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Hidden Cost</th>
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Magnitude</th>
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Source</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">Kubernetes on VMs vs. bare metal — total cost premium</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>up to 30% higher</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Ericsson estimate</td>
+</tr>
+<tr>
+<td style="padding:12px;border:1px solid #e2e8f0;">Bare-metal Kubernetes TCO reduction</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>~18%</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Ericsson, replicated by Hivelocity benchmarks</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">High-concurrency throughput penalty under virtualization</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>20–60% lower</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Multiple independent benchmarks</td>
+</tr>
+<tr>
+<td style="padding:12px;border:1px solid #e2e8f0;">Network latency penalty under virtualization</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>3× higher</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">CenturyLink (now Lumen) benchmark</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">Annual cloud infrastructure waste from overprovisioning</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>~$44.5 billion (2025 est.)</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Industry analyst projections cited by Hivelocity</td>
+</tr>
+<tr>
+<td style="padding:12px;border:1px solid #e2e8f0;">Share of cloud spend wasted on overprovisioned VMs</td>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>20–50%</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Multiple cloud-waste studies</td>
+</tr>
+</tbody>
+</table>
+
+<div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:24px 0;border-radius:6px;color:#92400e;">
+<strong>⚠️ THE COMPOUNDING TAX</strong><br><br>
+Take a 1,000-node Kubernetes fleet running on a VMware-based hypervisor layer. Conservatively assume 18% TCO inflation from the avoidable virtualization layer. On a $10M annual infrastructure spend, <strong>that's $1.8M per year being spent on an architectural abstraction that delivers no business value</strong> — separate from and on top of whatever Broadcom is now charging for the licensing. The container-in-VM tax is the line item nobody puts on the renewal slide.
+</div>
+
+To be fair: there are still legitimate reasons to run VMs underneath Kubernetes — multi-tenant isolation in regulated environments, mixed-OS workloads, gradual migration. But "we did it this way in 2018" is not one of those reasons. And the right tool for the workloads that <em>do</em> need a VM is increasingly KubeVirt running directly on bare metal — not nested layers of yesterday's abstractions.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">What "AI-Native" Actually Means</h2>
+
+When we say MOJO is the first AI-native infrastructure platform, we don't mean we added a chatbot to a dashboard. We mean the platform was architecturally designed with AI agents as the primary operational layer.
+
+MOJO has three layers:
+
+<ol class="space-y-2 mb-6 list-decimal list-inside text-gray-400">
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">A high-performance control plane</strong> — compiled to a single binary, deployable anywhere including fully air-gapped environments. This layer handles hardware communication via Redfish and IPMI, event processing, DHCP, DNS, PXE boot, and the inventory database. It is the source of truth for every physical asset in your fleet.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Specialist AI agents</strong> — agents that reason about infrastructure using the ReAct pattern (Reason + Act). Each agent is a specialist: health monitoring, provisioning orchestration, firmware compliance, capacity planning. They observe the system through the control plane, reason about what they see, and take action — subject to governance.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">A governance engine</strong> — every action an AI agent proposes flows through approval gates. Destructive operations require human sign-off. Every action is logged in an immutable audit trail. Kill switches on every agent. This isn't AI that runs unsupervised. It's AI that acts — but only with permission.</li>
+</ol>
+<pre class="mermaid">flowchart LR
+    subgraph mojo [MOJO Operational Layer]
+        direction TB
+        A[Natural-Language Intent] --> B[Orchestrator Agent]
+        B --> C{Specialist Agents}
+        C --> D[Health]
+        C --> E[Compliance]
+        C --> F[Provisioning]
+        C --> G[Capacity]
+        D & E & F & G --> H[Governance Engine]
+        H --> I[Hardware Control Plane]
+    end
+    I --> J[Bare Metal — Any Vendor]
+    I --> K[OpenShift Virtualization / KubeVirt]
+    I --> L[RHEL / Linux Workloads]
+    style A fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#000
+    style H fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
+    style J fill:#dcfce7,stroke:#16a34a,color:#000
+    style K fill:#dcfce7,stroke:#16a34a,color:#000
+    style L fill:#dcfce7,stroke:#16a34a,color:#000
+</pre>
+
+This architecture is what replaces VMware's operational layer for bare metal. Not a dashboard. Not a CLI. An intelligent system that monitors, reasons, and acts — continuously, across every vendor in your rack, with VMs and containers as workload shapes scheduled on top.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">What This Looks Like in Practice</h2>
+
+<strong class="text-white">A financial services customer</strong> managing over 10,000 servers across Dell, HPE, and Lenovo hardware used to run three separate vendor management tools, a custom monitoring stack, and manual firmware compliance processes. After deploying MOJO, they have one inventory, one compliance system, one health monitoring agent, and one audit log — across all vendors. Their firmware compliance process went from a quarterly manual project to a continuous automated evaluation with one-click remediation.
+
+<strong class="text-white">A retail customer</strong> with edge infrastructure across dozens of locations needed to maintain consistent firmware baselines and health monitoring at every site — without on-site IT staff. MOJO's Multi-Grid Controller federates their distributed sites into a single fleet view. The health agent monitors every server at every location. The compliance agent ensures firmware baselines are consistent coast to coast. When something needs attention at a site 500 miles away, the orchestrator agent handles it remotely.
+
+<strong class="text-white">A media and entertainment customer</strong> managing broadcast infrastructure for live events needed zero-downtime provisioning and rapid server turnaround between events. MOJO's orchestrator agent accepts natural-language instructions — "provision 20 servers with the broadcast baseline and event OS" — and decomposes them into multi-step execution plans with dependency tracking, parallel execution, and governance approval. What used to take a full day of operator time now takes one sentence and one approval click.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The VMware Replacement Test</h2>
+
+When evaluating VMware replacements, ask one question: <strong class="text-white">does this platform replace the operational intelligence I'm losing, or does it just replace the hypervisor?</strong>
+
+VMware's vCenter told you which VMs were unhealthy. MOJO's health agent tells you which <em>servers</em> are unhealthy — and why. It runs continuous anomaly detection, monitoring temperature, power, fan speed, ECC memory errors, BMC response times, and firmware failure rates. It uses Z-score analysis on learned baselines — meaning it knows what "normal" looks like for your specific environment and flags deviations before they become incidents.
+
+VMware's DRS automatically balanced workloads across hosts. MOJO's orchestrator agent accepts natural-language instructions and decomposes them into executable plans with dependency tracking and parallel execution. Discovery, IP allocation, DHCP reservation, DNS records, firmware compliance check, OS provisioning. All from one sentence.
+
+VMware locked you into per-socket licensing for a single vendor's stack. MOJO manages Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA hardware from a single platform. One inventory. One API. One audit log. No per-device licensing.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Post-VMware Architecture</h2>
+
+The organizations that navigate the VMware exit successfully won't be the ones that find the cheapest hypervisor alternative. They'll be the ones that build a modern operational layer for bare metal — one that's smarter than what VMware offered for VMs, and that treats Kubernetes (with KubeVirt for the workloads that still need to look like VMs) as the new universal scheduler.
+
+MOJO is that operational layer. Hardware-agnostic. AI-native. Governance-first. Deployable in a single \`docker compose up\` command with zero external dependencies — including in fully air-gapped environments where VMware's cloud-connected management plane was never an option anyway.
+
+VMware gave you a GUI to manage VMs. MOJO gives you AI agents that manage bare metal — autonomously, safely, and across every vendor in your rack, with OpenShift Virtualization, KubeVirt, RHEL, or whatever workload shape you need running on top.
+
+The VMware exit is real. The next platform isn't another hypervisor. It's AI-native. And it's here.
+
+<hr class="border-white/10 my-8" />
+
+<h2 id="quarterly-tracker">📊 Quarterly Exodus Tracker</h2>
+
+<em>A running log of the major VMware departures, court filings, pricing events, and migration milestones that have shaped the post-Broadcom landscape since this post was first published. New entries added at the end of each quarter.</em>
+
+<div style="background:linear-gradient(90deg,#1e293b 0%,#334155 100%);color:#f8fafc;padding:16px 22px;border-radius:8px 8px 0 0;margin-top:24px;">
+<strong style="font-size:1.15em;">Q2 2025 — The Floodgates Open</strong>
+<span style="float:right;color:#cbd5e1;font-size:0.9em;">Apr – Jun 2025</span>
+</div>
+<div style="border:1px solid #334155;border-top:none;padding:18px 22px;background:#f8fafc;border-radius:0 0 8px 8px;margin-bottom:18px;">
+<ul style="margin:0;padding-left:20px;line-height:1.7;">
+<li><strong>Computershare commits</strong> to migrating 24,000 VMs to Nutanix after disclosure of a 10–15× renewal increase. CIO publicly states payback in "single-digit months."</li>
+<li><strong>vSphere 7 end-of-support countdown</strong> begins (target: October 2025), forcing thousands of organizations into either renewal at Broadcom's terms or accelerated migration.</li>
+<li><strong>Forrester</strong> forecasts that up to 20% of VMware's enterprise customers will begin migration this year, accelerating into 2026.</li>
+<li><strong>Gartner</strong> projects that by 2026, 50% of enterprises will initiate POCs for alternative distributed hybrid infrastructure products.</li>
+</ul>
+</div>
+
+<div style="background:linear-gradient(90deg,#1e293b 0%,#334155 100%);color:#f8fafc;padding:16px 22px;border-radius:8px 8px 0 0;margin-top:24px;">
+<strong style="font-size:1.15em;">Q3 2025 — Lawsuits and Public Defections</strong>
+<span style="float:right;color:#cbd5e1;font-size:0.9em;">Jul – Sep 2025</span>
+</div>
+<div style="border:1px solid #334155;border-top:none;padding:18px 22px;background:#f8fafc;border-radius:0 0 8px 8px;margin-bottom:18px;">
+<ul style="margin:0;padding-left:20px;line-height:1.7;">
+<li><strong>AT&T's lawsuit against Broadcom</strong> continues through discovery, with court filings publicly confirming the proposed 1,050% one-year price increase on 75,000 VMs.</li>
+<li><strong>Geico, Boyd Gaming, and John Deere</strong> go public with plans to adopt VMware alternatives.</li>
+<li><strong>"Hidden cost" coverage proliferates</strong> in trade press as customers begin sharing renewal quotes — typical scenarios include €500,000 → €2,000,000 in year one with continued 10–20% annual escalation.</li>
+<li><strong>vSphere 7 reaches end of support</strong> at the end of the quarter, removing the "wait and see" option for a large segment of the installed base.</li>
+</ul>
+</div>
+
+<div style="background:linear-gradient(90deg,#1e293b 0%,#334155 100%);color:#f8fafc;padding:16px 22px;border-radius:8px 8px 0 0;margin-top:24px;">
+<strong style="font-size:1.15em;">Q4 2025 — The Numbers Get Public</strong>
+<span style="float:right;color:#cbd5e1;font-size:0.9em;">Oct – Dec 2025</span>
+</div>
+<div style="border:1px solid #334155;border-top:none;padding:18px 22px;background:#f8fafc;border-radius:0 0 8px 8px;margin-bottom:18px;">
+<ul style="margin:0;padding-left:20px;line-height:1.7;">
+<li><strong>Nutanix discloses 640 new VMware customer migrations in Q1 FY2026 alone</strong>, on top of 2,700+ in the prior fiscal year. The complexity of those migrations causes Nutanix to revise its own revenue guidance downward — and the stock to drop 17% — even as it adds clients.</li>
+<li><strong>VMware VCF licensing changes (November 2025)</strong> introduce a BYOL requirement for managed subscriptions, adding fresh complexity for partners already strained by the bundle consolidation.</li>
+<li><strong>Pure Storage research</strong>: 60% of enterprises are actively accelerating their virtualization modernization strategies through 2028.</li>
+<li><strong>Proxmox VE evaluation activity</strong> reported up 340% year-over-year by trade press, with XCP-ng growing 180%.</li>
+</ul>
+</div>
+
+<div style="background:linear-gradient(90deg,#1e293b 0%,#334155 100%);color:#f8fafc;padding:16px 22px;border-radius:8px 8px 0 0;margin-top:24px;">
+<strong style="font-size:1.15em;">Q1 2026 — The Partner Channel Breaks</strong>
+<span style="float:right;color:#cbd5e1;font-size:0.9em;">Jan – Mar 2026</span>
+</div>
+<div style="border:1px solid #334155;border-top:none;padding:18px 22px;background:#f8fafc;border-radius:0 0 8px 8px;margin-bottom:18px;">
+<ul style="margin:0;padding-left:20px;line-height:1.7;">
+<li><strong>Ingram Micro terminates its business relationship with Broadcom entirely</strong> — an extraordinary action for one of the world's largest IT distributors.</li>
+<li><strong>The German IT user association VOICE</strong> files a formal complaint with the European Commission alleging anti-competitive behavior and market-power abuse.</li>
+<li><strong>Broadcom partner program restructuring</strong> displaces additional channel and services roles, on top of ongoing engineering reductions inherited from the acquisition.</li>
+<li><strong>Broadcom's Q1 FY2026 results</strong> (reported March 2026) show VMware revenue up 13% and software ARR up 19% — the financial engineering is working in the short term, even as the customer base contracts.</li>
+</ul>
+</div>
+
+<div style="background:linear-gradient(90deg,#1e293b 0%,#334155 100%);color:#f8fafc;padding:16px 22px;border-radius:8px 8px 0 0;margin-top:24px;">
+<strong style="font-size:1.15em;">Q2 2026 — The 30,000 Milestone</strong>
+<span style="float:right;color:#cbd5e1;font-size:0.9em;">Apr – Jun 2026 (in progress)</span>
+</div>
+<div style="border:1px solid #334155;border-top:none;padding:18px 22px;background:#f8fafc;border-radius:0 0 8px 8px;margin-bottom:18px;">
+<ul style="margin:0;padding-left:20px;line-height:1.7;">
+<li><strong>April 2026 — Nutanix CEO Rajiv Ramaswami</strong> publicly states at the .NEXT conference that "about 30,000 customers" have migrated from VMware to Nutanix, citing sustained negative sentiment toward Broadcom.</li>
+<li><strong>KubeVirt adoption hits 26% of Kubernetes operators</strong> per Spectro Cloud survey, with Portworx survey finding 58% of organizations planning VM migration to Kubernetes.</li>
+<li><strong>OpenShift Virtualization customer disclosures expand</strong>: SiriusXM has migrated production VMs with no service interruption; a large unnamed financial institution has moved thousands of VMs to the platform.</li>
+<li><em>This section will continue to be updated monthly as new events emerge.</em></li>
+</ul>
+</div>
+
+<hr class="border-white/10 my-8" />
+
+<em>MOJO is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about how MOJO can replace your VMware operational layer — and run your KubeVirt or OpenShift Virtualization workloads on bare metal underneath it — visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</em>
+
+<em>Sources for this post and its quarterly tracker include court filings from AT&T v. Broadcom (NY State Supreme Court), Broadcom Q1 FY2026 earnings disclosures, Nutanix earnings calls and .NEXT 2026 press briefings, Red Hat OpenShift Virtualization customer disclosures, and research from Gartner, Forrester, ESG, Pure Storage, Portworx, Spectro Cloud, Ericsson, and Hivelocity. Specific customer figures (Computershare, AT&T, UK university support contracts) sourced from public reporting by The Register, Channel Futures, Ars Technica, TechTarget, CRN, SDxCentral, and Slashdot.</em>
+
+<div class="mt-12">
+  <a href="/trial" class="inline-flex items-center justify-center px-6 py-3 bg-brand-green text-brand-darker font-bold rounded-lg hover:bg-brand-green-dark transition-all">
+    Download Free Trial
+  </a>
+</div>`;
+---
+
+<Layout title="The VMware Exit Is Real — And the Next Platform Isn't Another Hypervisor — Metify" description="Broadcom's acquisition of VMware changed the economics of virtualization overnight. The real opportunity isn't picking a different hypervisor — it's rethinking the operational layer.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">The VMware Exit Is Real — And the Next Platform Isn't Another Hypervisor</h1>
+      <p class="text-gray-500 mb-8">April 22, 2025 · Updated May 19, 2026 &middot; By Mike Wagner, CEO</p>
+
+      <div class="prose prose-lg prose-invert max-w-none" set:html={content} />
+    </div>
+  </article>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</Layout>

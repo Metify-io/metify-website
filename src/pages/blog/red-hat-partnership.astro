@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const content = `
+
+<hr class="border-white/10 my-8" />
+
+<p class="text-gray-400 leading-relaxed mb-6">I spent eight years at Red Hat. That isn't a line on a bio. It's the lens through which I built Metify, and it's the reason MOJO and Red Hat fit together the way they do.</p>
+
+<p class="text-gray-400 leading-relaxed mb-6">During those eight years I helped build Red Hat's North America channel program from a regional motion into the multi-billion-dollar ARR engine it is today. I watched RHEL go from a Linux distribution that enterprises bought to a platform that enterprises <em>standardized</em> on. I watched OpenShift go from a developer curiosity to the default container platform for global banks, telcos, and federal agencies. And I watched the partner ecosystem learn — sometimes the hard way — that the companies who win in the Red Hat orbit are the ones whose products make Red Hat's products work better.</p>
+
+<p class="text-gray-400 leading-relaxed mb-6">That last lesson is the design principle for Metify. MOJO is not in competition with Red Hat. MOJO is the bare-metal operational layer that makes Red Hat's portfolio land cleanly on the hardware underneath.</p>
+
+<div style="background-color:#fef2f2;border-left:6px solid #dc2626;padding:18px 22px;margin:28px 0;border-radius:6px;color:#991b1b;">
+<strong style="font-size:1.05em;">🤝 THE METIFY–RED HAT RELATIONSHIP IN ONE LINE</strong><br><br>
+We are a Red Hat ISV partner. MOJO is built to be the hardware operations layer for RHEL, OpenShift, and OpenShift Virtualization deployments — handling discovery, provisioning, firmware compliance, predictive health, and Day 2 ops on the bare metal that the Red Hat stack runs on top of. We show up in customer engagements that involve OpenShift rollouts, fleet-wide RHEL deployments, and the complex Day 2 work that follows both.
+</div>
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">Why a Red Hat Partnership Matters Right Now</h2>
+
+The timing matters. The post-VMware reckoning has put thousands of organizations in front of a once-a-decade architectural decision, and the data is clear about where they're heading.
+
+Red Hat has invested heavily in being the safe landing place for the VMware exodus. OpenShift Virtualization, built on the CNCF KubeVirt project, lets enterprises run their existing VMs on Kubernetes — same shape, new operational model. The Migration Toolkit for Virtualization (MTV, upstream Forklift) handles discovery, mapping, and the actual cutover from vSphere. SiriusXM has publicly disclosed moving critical VMs onto the platform without service interruption. A large financial institution has moved thousands of VMs. Red Hat's own data shows the strongest adoption in three verticals: media/technology, financial services, and government.
+
+<div style="display:flex;flex-wrap:wrap;gap:14px;margin:28px 0;">
+
+<div style="flex:1 1 240px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">KubeVirt Adoption</div>
+<div style="color:#7f1d1d;font-size:2.2em;font-weight:700;line-height:1;margin:8px 0 4px;">26%</div>
+<div style="color:#7f1d1d;font-size:0.85em;">of Kubernetes adopters already use KubeVirt (Spectro Cloud survey)</div>
+</div>
+
+<div style="flex:1 1 240px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">VM Migration Plans</div>
+<div style="color:#7f1d1d;font-size:2.2em;font-weight:700;line-height:1;margin:8px 0 4px;">58%</div>
+<div style="color:#7f1d1d;font-size:0.85em;">of organizations planning to migrate some VMs to Kubernetes (Portworx)</div>
+</div>
+
+<div style="flex:1 1 240px;background:linear-gradient(135deg,#fef2f2 0%,#fee2e2 100%);border:1px solid #fecaca;border-radius:8px;padding:18px;">
+<div style="color:#991b1b;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;">Modernization Acceleration</div>
+<div style="color:#7f1d1d;font-size:2.2em;font-weight:700;line-height:1;margin:8px 0 4px;">60%</div>
+<div style="color:#7f1d1d;font-size:0.85em;">of enterprises actively accelerating virtualization modernization through 2028 (Pure Storage)</div>
+</div>
+
+</div>
+
+But the migration story has a quieter subplot that the architecture diagrams don't show: <strong class="text-white">OpenShift Virtualization runs best on bare metal, and most enterprises don't have a mature bare-metal operations practice anymore</strong>. They had one a decade ago. Then VMware abstracted it away, and the muscle atrophied. When the new platform needs hundreds or thousands of bare-metal nodes provisioned consistently, kept on firmware baselines, monitored for thermal and power anomalies, and reachable through out-of-band management for recovery — most organizations realize they're missing the operational layer that VMware used to hide for them.
+
+That gap is what Metify fills.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">How MOJO Fits Into a Red Hat Deployment</h2>
+
+Here is the architecture, in the order it happens during a real customer engagement:
+
+<pre class="mermaid">flowchart TB
+    subgraph layer4 [Workload Layer]
+        W1[Containerized apps] 
+        W2[VMs via KubeVirt / OpenShift Virtualization]
+        W3[RHEL workloads]
+    end
+    subgraph layer3 [Red Hat Stack]
+        R1[OpenShift Container Platform]
+        R2[Red Hat Enterprise Linux]
+        R3[Ansible Automation Platform]
+    end
+    subgraph layer2 [MOJO — Bare-Metal Operations Layer]
+        M1[Discovery & Inventory]
+        M2[Provisioning & PXE / DDI]
+        M3[Firmware Compliance]
+        M4[Predictive Health & Remediation]
+        M5[Out-of-Band Console & Recovery]
+        M6[AI Agents + Governance]
+    end
+    subgraph layer1 [Hardware]
+        H1[Dell · HPE · Lenovo · Supermicro · Cisco · NVIDIA]
+    end
+    layer4 --> layer3
+    layer3 --> layer2
+    layer2 --> layer1
+    style layer1 fill:#1e293b,color:#f8fafc,stroke:#0f172a
+    style layer2 fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#000
+    style layer3 fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#000
+    style layer4 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#000
+</pre>
+
+MOJO sits between the silicon and the Red Hat stack. It is the layer that:
+
+<ul class="space-y-2 mb-6 list-disc list-inside text-gray-400">
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Discovers</strong> every BMC in the rack — Dell iDRAC, HPE iLO, Lenovo XCC, Supermicro IPMI — and normalizes them through a single Redfish abstraction.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Provisions</strong> with native DDI (DHCP, DNS, IPAM) so a new node goes from un-racked to RHEL-or-OpenShift-ready without a human touching a spreadsheet or a separate DHCP server.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Maintains firmware baselines</strong> continuously, across vendors, so when a CVE drops you can prove compliance and stage remediation without a spreadsheet-and-prayer ritual.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Monitors hardware health</strong> with a predictive health agent that uses learned baselines and Z-score anomaly detection — flagging an ECC memory degradation trend or a thermal drift before it becomes the cluster outage that takes down your OpenShift control plane.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Provides out-of-band recovery</strong> through integrated KVM and console, so when something goes wrong at 2am at a remote site, you don't drive there. The orchestrator agent reaches the BMC over Redfish and brings the node back.</li>
+</ul>
+This is the operational layer Red Hat's product line <em>needs</em> but isn't trying to be. Red Hat builds the OS, the container platform, the virtualization layer, the automation platform. We build the layer that makes those products land cleanly on hardware and stay healthy there.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Three Engagements Where We Show Up Together</h2>
+
+In practice, Metify and Red Hat overlap in three repeatable customer scenarios.
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">1. OpenShift Rollouts on Bare Metal</h3>
+
+When an organization stands up OpenShift on bare metal — particularly the IPI (Installer Provisioned Infrastructure) or Assisted Installer paths — the success of the rollout is gated by the consistency of the underlying hardware. Mixed firmware versions across nodes? Cluster instability. Inconsistent BIOS settings? Performance variance the SRE team will spend months chasing. No way to manage power and boot order remotely? Every recovery is a truck roll.
+
+<div style="background-color:#eef2ff;border-left:6px solid #4f46e5;padding:18px 22px;margin:24px 0;border-radius:6px;color:#3730a3;">
+<strong>💡 WHAT MOJO ADDS TO AN OPENSHIFT ROLLOUT</strong><br><br>
+A pre-flight firmware baseline check across every node in the planned cluster. Vendor-normalized BIOS settings. Automated PXE handoff to the OpenShift Assisted Installer. Continuous health monitoring after the cluster is up. And when a node needs to be replaced, MOJO's orchestrator agent decomposes the work — "replace the failed node in production cluster east-2" — into discovery, IPAM allocation, firmware baseline check, OpenShift bootstrapping, and validation. Without the operator typing a single command after the intent.
+</div>
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">2. Enterprise-Wide RHEL Deployments</h3>
+
+A fleet-scale RHEL deployment looks deceptively simple from the Red Hat side — Image Builder, Satellite, Ansible — but the failure modes are almost always at the hardware boundary. Servers from three different OEMs with three different out-of-band management quirks. Firmware versions that drifted across two acquisition cycles. Inventory that exists in a Google Sheet a former employee maintained.
+
+MOJO is the layer that gives Red Hat's tooling a clean substrate. One inventory across vendors. One firmware compliance model. One out-of-band management interface. One audit trail. The Ansible playbooks Red Hat ships work better when the floor underneath them is consistent — and MOJO is what makes it consistent.
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">3. Day 2 Ops That Span the Stack</h3>
+
+Day 2 is where deployments go to die. Patches need to land. Firmware needs to update. Compliance posture needs to be evidenced for auditors. Hardware fails and needs to be replaced without taking the application down. Capacity needs to expand and the new nodes need to look exactly like the old ones.
+
+This is the work that Red Hat's automation platform and Metify's AI agents are jointly very good at. Ansible can patch a thousand RHEL hosts. MOJO can verify that the thousand hosts underneath those RHEL installs are on the right firmware baselines, with healthy DIMMs and stable BMCs, before the patches even run. When something doesn't fit, MOJO's compliance agent flags it, generates a remediation plan, and routes the plan through governance before any change happens.
+
+Day 2 ops is where the Metify + Red Hat story is most concrete and least theoretical. The Red Hat stack runs the applications. MOJO runs the substrate. Together they cover the full lifecycle without forcing a customer to assemble it from parts.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">What This Looks Like When It Goes Right</h2>
+
+Imagine a regional bank that's exiting VMware. Their target is OpenShift Virtualization on bare metal, with RHEL hosts running supporting services and Ansible Automation Platform handling the configuration management. Eighteen months ago this would have been three separate procurement conversations and a six-month integration project. Today the engagement looks like this:
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
+<thead>
+<tr style="background-color:#1e293b;color:#f8fafc;">
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Phase</th>
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Red Hat Provides</th>
+<th style="padding:12px;text-align:left;border:1px solid #334155;">MOJO Provides</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>Discovery & Planning</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">vSphere assessment via MTV; workload analysis; sizing</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Hardware inventory across vendors; firmware audit; readiness report</td>
+</tr>
+<tr>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>Provisioning</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">OpenShift Assisted Installer / IPI; RHEL Image Builder</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Bare-metal discovery; DDI; PXE handoff; firmware baseline enforcement</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>VM Migration</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Migration Toolkit for Virtualization (MTV / Forklift)</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Capacity validation on target hosts; predictive health monitoring during cutover</td>
+</tr>
+<tr>
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>Day 2 Operations</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Ansible playbooks; OpenShift cluster lifecycle</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Predictive health, firmware drift detection, AI-orchestrated remediation</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;"><strong>Audit & Compliance</strong></td>
+<td style="padding:12px;border:1px solid #e2e8f0;">OpenShift Compliance Operator; RHEL STIG profiles</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">Hardware-level compliance evidence; immutable audit trail across all AI agent actions</td>
+</tr>
+</tbody>
+</table>
+
+Two products. One coherent customer outcome. No integration tax.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Channel-Builder's Perspective</h2>
+
+I'll close where I started. The reason I built Metify the way I did — and the reason we lead with Red Hat partnership as a first-class story rather than a slide buried in deck six — is that I spent eight years watching what <em>worked</em> in the Red Hat ecosystem and what didn't.
+
+What worked: ISVs whose products genuinely needed Red Hat to exist, and made Red Hat's products materially better when they were present. What didn't: ISVs whose pitch was "we work <em>with</em> Red Hat" and whose architecture told a different story when you looked carefully.
+
+MOJO needs Red Hat in our customer base. The growing wave of enterprises landing on OpenShift Virtualization need a bare-metal operations layer that's serious about RHEL, serious about OpenShift, serious about Ansible — and serious about the hardware those products run on. We built one. We're a Red Hat ISV partner because that's the most honest description of how our products fit together.
+
+If you're planning a VMware exit and Red Hat is on your shortlist (and based on the customer conversations I've had in the last six months, it almost certainly is), let's talk about what the bare-metal layer underneath looks like. The Red Hat stack will handle your applications, your VMs, your automation. MOJO will handle the substrate. Together they cover the gap that VMware used to fill — and they do it without a per-socket license, without a vendor-controlled operational layer, and without the renewal letter that arrives once a year with a 1,050% number on it.
+
+<hr class="border-white/10 my-8" />
+
+<em>Metify is a Red Hat ISV partner. MOJO is the AI-native bare-metal infrastructure platform built to be the hardware operations layer for RHEL, OpenShift, and OpenShift Virtualization deployments. To learn more about how MOJO integrates with the Red Hat stack — or to discuss a joint Red Hat + Metify engagement — visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</em>
+
+<div class="mt-12">
+  <a href="/trial" class="inline-flex items-center justify-center px-6 py-3 bg-brand-green text-brand-darker font-bold rounded-lg hover:bg-brand-green-dark transition-all">
+    Download Free Trial
+  </a>
+</div>`;
+---
+
+<Layout title="Why Metify Is All-In on Red Hat — And What That Means for Your VMware Exit — Metify" description="Metify CEO Mike Wagner explains why MOJO and Red Hat fit together and what that means for enterprises exiting VMware.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">Why Metify Is All-In on Red Hat — And What That Means for Your VMware Exit</h1>
+      <p class="text-gray-500 mb-8">May 19, 2026 &middot; By Mike Wagner, CEO</p>
+
+      <div class="prose prose-lg prose-invert max-w-none" set:html={content} />
+    </div>
+  </article>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
+</Layout>
