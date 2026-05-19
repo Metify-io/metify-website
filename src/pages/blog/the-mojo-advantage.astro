@@ -36,7 +36,7 @@ The customers leaving aren't picking a single replacement. They're splitting acr
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">The Single-Vendor Tooling Assumption Is Breaking</h3>
 
-Enterprise hardware fleets were never single-vendor in reality, but vendor tooling pretended otherwise. Dell OpenManage Enterprise manages Dell. HPE OneView manages HPE. Lenovo XClarity manages Lenovo. Each tool produces its own inventory, its own audit log, its own compliance dashboard. Each one excellent in its lane, each one blind to the other vendors in the rack.
+Enterprise hardware fleets were never single-vendor in reality, but vendor tooling pretended otherwise. Each vendor ships its own management platform — one per manufacturer, each producing its own inventory, its own audit log, its own compliance dashboard. Each one excellent in its lane, each one blind to the other vendors in the rack.
 
 For organizations running 1,000 servers across three vendors, this means three monitoring stacks, three compliance models, three audit trails, and a custom integration layer holding them together. The integration layer is invariably understaffed, brittle, and the single biggest source of compliance gaps in the environment.
 
@@ -46,8 +46,8 @@ The third assumption is the quietest and the most consequential. Traditional inf
 
 Modern AI architectures — specifically the ReAct (Reason + Act) pattern, the Model Context Protocol (MCP) standard for AI tool-use, and reliable governance frameworks — make a different operational model possible. Not autonomous AI doing whatever it wants. AI agents that observe, reason, and propose action, with humans retaining final authority through approval gates and audit trails.
 
-<div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:28px 0;border-radius:6px;">
-<strong style="color:#92400e;">⚠️ THE INFLECTION POINT IN ONE SENTENCE</strong><br><br>
+<div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:28px 0;border-radius:6px;color:#92400e;">
+<strong>⚠️ THE INFLECTION POINT IN ONE SENTENCE</strong><br><br>
 The hypervisor stack you trusted is being repriced out of viability, the multi-vendor reality your hardware lives in has no unified operations story, and the AI capabilities required to close those gaps have finally become reliable enough to deploy in production. The window to act is now.
 </div>
 
@@ -71,7 +71,7 @@ MOJO was designed from a clean sheet for this moment. Three architectural layers
         G2[Audit Trail]
         G3[Kill Switches]
     end
-    subgraph L1 [Layer 1 — Rust Control Plane]
+    subgraph L1 [Layer 1 — Control Plane]
         direction LR
         C1[MCP Server]
         C2[Redfish / IPMI Drivers]
@@ -87,9 +87,9 @@ MOJO was designed from a clean sheet for this moment. Three architectural layers
     style L1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px
 </pre>
 
-<h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 1: The Rust Control Plane</h3>
+<h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 1: The Control Plane</h3>
 
-The foundation is a single Rust binary that compiles to one executable with no external runtime dependencies. This isn't a stylistic choice. Memory-safe, deterministic control of hardware operations matters when you're flashing firmware on 500 servers simultaneously and a garbage-collected pause at the wrong moment can mean a bricked node. The Rust control plane handles hardware communication (Redfish, IPMI, vPro), event ingestion, the inventory database, DHCP/DNS/IPAM via Kea and PowerDNS, PXE boot orchestration, and the MCP server that exposes hardware operations as tools to the agent layer above.
+The foundation is a purpose-built control plane that compiles to a single binary with no external runtime dependencies. This isn't a stylistic choice. Deterministic, memory-safe control of hardware operations matters when you're flashing firmware on thousands of servers simultaneously and a runtime pause at the wrong moment can mean a bricked node. The control plane handles hardware communication (Redfish, IPMI, vPro), event ingestion, the inventory database, DHCP/DNS/IPAM via Kea and PowerDNS, PXE boot orchestration, and the MCP server that exposes hardware operations as tools to the agent layer above.
 
 Single-binary deployment means \`docker compose up\` is the complete installation procedure — including in air-gapped environments where there is no internet for an installer to phone home to.
 
@@ -103,7 +103,7 @@ This layer exists because "AI for infrastructure" is only viable if the AI is op
 
 The agents are thin by design. They do not hold state. They reason about live data pulled from the control plane through MCP, propose actions, and rely on the governance engine to actually commit anything. There are five specialists:
 
-<table style="width:100%;border-collapse:collapse;margin:20px 0;">
+<table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
 <thead>
 <tr style="background-color:#1e293b;color:#f8fafc;">
 <th style="padding:12px;text-align:left;border:1px solid #334155;">Agent</th>
@@ -140,7 +140,7 @@ The agents are thin by design. They do not hold state. They reason about live da
 </tbody>
 </table>
 
-The reason the agents are thin and the Rust core is the source of truth is operational: if an agent goes off the rails, you can stop it, rebuild it, retrain it, replace it — without losing the underlying inventory or the audit history. The agents are an upgradeable layer over a stable foundation, not the foundation itself.
+The reason the agents are thin and the control plane is the source of truth is operational: if an agent goes off the rails, you can stop it, rebuild it, retrain it, replace it — without losing the underlying inventory or the audit history. The agents are an upgradeable layer over a stable foundation, not the foundation itself.
 
 <hr class="border-white/10 my-8" />
 
@@ -154,8 +154,8 @@ Traditional hardware monitoring fires alerts when sensor values cross fixed thre
 
 MOJO's health agent operates differently. It builds rolling baselines for every metric on every node using Exponentially Weighted Moving Averages (EWMA), then applies Z-score analysis to detect statistical deviations from those baselines. The system learns what "normal" looks like for your specific environment — your specific server-37-in-rack-12 — and flags deviations against that local norm rather than a universal threshold.
 
-<div style="background-color:#eff6ff;border-left:6px solid #2563eb;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#1e40af;">📈 WHAT LEARNED BASELINES CATCH THAT THRESHOLDS MISS</strong><br><br>
+<div style="background-color:#eff6ff;border-left:6px solid #2563eb;padding:18px 22px;margin:24px 0;border-radius:6px;color:#1e40af;">
+<strong>📈 WHAT LEARNED BASELINES CATCH THAT THRESHOLDS MISS</strong><br><br>
 A node that normally runs at 28°C inlet temperature begins trending toward 32°C over a week. No static threshold fires — 32°C is well below any alarm setting. But the Z-score against this node's learned baseline is 4σ, and the trend is monotonic. The health agent flags it before the workload-induced overheating event that would have followed.<br><br>
 The cause turned out to be a blocked airflow path from a cabling change three racks over. The fix took five minutes. Caught after the fact, it would have caused thermal throttling on the node and on the seven nodes downwind of it.
 </div>
@@ -184,7 +184,7 @@ For organizations running infrastructure across distributed sites — edge retai
 
 The compliance agent operates at the federation level: a firmware baseline policy can be evaluated across 50 sites, with site-specific remediation plans generated for each. The orchestrator agent can decompose "update firmware baseline across all West Coast sites" into 50 parallel site-level execution plans, each with its own governance flow.
 
-No competitor in the hardware management space — not Dell OME, not HPE OneView, not Lenovo XClarity, not MAAS — federates multi-site bare metal as a first-class architectural property.
+No vendor-specific tool or open-source provisioning engine federates multi-site bare metal as a first-class architectural property.
 
 <hr class="border-white/10 my-8" />
 
@@ -206,7 +206,7 @@ The second measure is breadth: how many of the customer's actual problems the pl
     style M fill:#fef2f2,stroke:#dc2626,stroke-width:3px
 </pre>
 
-MOJO presents one inventory, one API, one audit log across Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA hardware — including NVIDIA's Redfish extensions for AI servers. The Rust-based Redfish drivers normalize vendor dialects (every BMC vendor implements Redfish slightly differently; firmware revisions within a single vendor introduce additional drift). This normalization is the single most-asked-for capability in customer engagements and the one that competitors with single-vendor heritage cannot reasonably retrofit.
+MOJO presents one inventory, one API, one audit log across Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA hardware — including NVIDIA's Redfish extensions for AI servers. MOJO's Redfish drivers normalize vendor dialects (every BMC vendor implements Redfish slightly differently; firmware revisions within a single vendor introduce additional drift). This normalization is the single most-asked-for capability in customer engagements and the one that competitors with single-vendor heritage cannot reasonably retrofit.
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Operating System Coverage</h3>
 
@@ -218,7 +218,7 @@ The deployment story is deliberately flexible:
 
 <ul class="space-y-2 mb-6 list-disc list-inside text-gray-400">
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">On-premise</strong> — the default deployment, with the full platform running in a customer data center.</li>
-  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Air-gapped</strong> — single-binary Rust core, native DDI, self-hosted LLM support for Agent-M in fully disconnected environments. Defense, government, regulated finance, and critical-infrastructure deployments use this path.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Air-gapped</strong> — single-binary control plane, native DDI, self-hosted LLM support for Agent-M in fully disconnected environments. Defense, government, regulated finance, and critical-infrastructure deployments use this path.</li>
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Multi-site federated</strong> — Multi-Grid Controller with central policy and edge autonomy.</li>
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Cloud-adjacent</strong> — for organizations running hybrid models, MOJO can manage on-prem bare metal while integrating with cloud-hosted services through the API.</li>
 </ul>
@@ -242,7 +242,7 @@ Agent-M, the natural-language copilot interface, provides the same affordance fo
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Single-Binary Deployment</h3>
 
-The complete MOJO platform installs in a single command. \`docker compose up\` brings up the Rust core, the DDI services, the agent layer, the governance engine, and the management UI. There is no JVM to tune, no Kubernetes cluster required for the platform itself (though MOJO can manage Kubernetes clusters running on its bare-metal substrate), no cloud account to configure, no phone-home telemetry by default.
+The complete MOJO platform installs in a single command. \`docker compose up\` brings up the control plane, the DDI services, the agent layer, the governance engine, and the management UI. There is no heavyweight runtime to tune, no Kubernetes cluster required for the platform itself (though MOJO can manage Kubernetes clusters running on its bare-metal substrate), no cloud account to configure, no phone-home telemetry by default.
 
 This matters most in the deployments where it's least optional — air-gapped environments, FedRAMP-bounded environments, regulated finance environments — where every additional runtime dependency is a separate approval. One binary, one approval.
 
@@ -250,7 +250,7 @@ This matters most in the deployments where it's least optional — air-gapped en
 
 For a mixed-vendor fleet, the operational simplification is concrete. One inventory replaces three or four vendor-specific inventories. One API surface replaces three or four vendor APIs. One audit log replaces three or four audit logs. One compliance model replaces vendor-specific compliance dashboards.
 
-The HPE OneView case study famously cites 28 person-hours saved per week. That figure applies to HPE-only environments. For mixed-vendor shops, the equivalent figure is multiplied by the number of OEM tools collapsed into a single MOJO interface. Most of MOJO's customer engagements involve replacing three or more vendor tools.
+Vendor-specific management platforms commonly cite 28 person-hours saved per week. That figure typically applies to single-vendor environments. For mixed-vendor shops, the equivalent figure is multiplied by the number of OEM tools collapsed into a single MOJO interface. Most of MOJO's customer engagements involve replacing three or more vendor tools.
 
 <hr class="border-white/10 my-8" />
 
@@ -309,8 +309,8 @@ A financial services customer manages over 10,000 servers across Dell, HPE, and 
 
 After MOJO: one inventory across all three vendors. One firmware compliance model evaluated continuously against the defined baselines. One audit log with every action and approver recorded. The firmware compliance process moved from a quarterly manual exercise to a continuous automated evaluation with one-click remediation. The audit preparation time dropped from weeks to a single export from MOJO's governance engine.
 
-<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#065f46;">✓ MEASURED OUTCOMES — FINANCIAL SERVICES</strong>
+<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;color:#065f46;">
+<strong>✓ MEASURED OUTCOMES — FINANCIAL SERVICES</strong>
 <ul style="margin:8px 0 0 0;line-height:1.7;">
 <li>Firmware compliance cycle time: quarterly manual project → continuous automated evaluation</li>
 <li>Audit evidence preparation: weeks of operator time → single governance-engine export</li>
@@ -324,8 +324,8 @@ A retail customer operates edge infrastructure across dozens of locations — se
 
 After MOJO: the Multi-Grid Controller federates every site into a single fleet view. The health agent monitors every server at every location. The compliance agent ensures firmware baselines are consistent across the entire footprint. When something needs attention at a site 500 miles from the nearest operator, the orchestrator agent handles it remotely through out-of-band management — without a truck roll.
 
-<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#065f46;">✓ MEASURED OUTCOMES — DISTRIBUTED RETAIL</strong>
+<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;color:#065f46;">
+<strong>✓ MEASURED OUTCOMES — DISTRIBUTED RETAIL</strong>
 <ul style="margin:8px 0 0 0;line-height:1.7;">
 <li>Truck-roll-driven remediation events: substantial reduction</li>
 <li>Multi-site fleet view: per-site dashboards → single federated inventory</li>
@@ -341,8 +341,8 @@ Before MOJO: the provisioning process required a full day of operator time per r
 
 After MOJO: the orchestrator agent accepts natural-language instructions like "provision 20 servers with the broadcast baseline and event OS for the Tuesday production" and decomposes them into multi-step execution plans with dependency tracking, parallel execution, and governance approval. What used to take a full day of operator time now takes one sentence and one approval click.
 
-<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#065f46;">✓ MEASURED OUTCOMES — BROADCAST MEDIA</strong>
+<div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;color:#065f46;">
+<strong>✓ MEASURED OUTCOMES — BROADCAST MEDIA</strong>
 <ul style="margin:8px 0 0 0;line-height:1.7;">
 <li>Per-rack provisioning time: full day of operator work → single sentence + single approval</li>
 <li>Cross-team coordination: manual handoffs → orchestrator-managed parallel execution</li>

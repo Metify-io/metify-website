@@ -2,9 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 const content = `
 
-<div style="background-color:#eff6ff;border-left:6px solid #2563eb;padding:18px 22px;margin:28px 0;border-radius:6px;">
-<strong style="color:#1e40af;font-size:1.05em;">📌 EDITOR'S NOTE — A LIVING POST</strong><br><br>
-This piece was first published in April 2025, three months after the Broadcom acquisition started reshaping enterprise budgets in earnest. Because the VMware exodus is now the defining infrastructure story of the decade, we've kept this post live — and added a <strong>quarterly tracker</strong> below to log every major customer departure, court filing, and pricing shock. The post itself stays the same. The data underneath it keeps moving. Scroll to the <a href="#quarterly-tracker">Quarterly Exodus Tracker</a> at the end for the running log.
+<div style="background-color:#eff6ff;border-left:6px solid #2563eb;padding:18px 22px;margin:28px 0;border-radius:6px;color:#1e40af;">
+<strong style="font-size:1.05em;">📌 EDITOR'S NOTE — A LIVING POST</strong><br><br>
+This piece was first published in April 2025, three months after the Broadcom acquisition started reshaping enterprise budgets in earnest. Because the VMware exodus is now the defining infrastructure story of the decade, we've kept this post live — and added a <strong>quarterly tracker</strong> below to log every major customer departure, court filing, and pricing shock. The post itself stays the same. The data underneath it keeps moving. Scroll to the <a href="#quarterly-tracker" style="color:#2563eb;">Quarterly Exodus Tracker</a> at the end for the running log.
 </div>
 
 <hr class="border-white/10 my-8" />
@@ -87,8 +87,8 @@ The technology making this possible is KubeVirt, a CNCF project that lets virtua
 
 This is the part of the story that gets buried in "VMware vs. Nutanix vs. Proxmox" comparisons. Those debates are framed as a like-for-like hypervisor swap. KubeVirt isn't a hypervisor swap. It's a reframing: VMs and containers become two shapes of the same underlying workload, scheduled by the same control plane, governed by the same RBAC, networked by the same CNI, and observable through the same pipeline.
 
-<div style="background-color:#eef2ff;border-left:6px solid #4f46e5;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#3730a3;">💡 WHAT KUBEVIRT ACTUALLY CHANGES</strong><br><br>
+<div style="background-color:#eef2ff;border-left:6px solid #4f46e5;padding:18px 22px;margin:24px 0;border-radius:6px;color:#3730a3;">
+<strong>💡 WHAT KUBEVIRT ACTUALLY CHANGES</strong><br><br>
 With KubeVirt, a VM is a Kubernetes custom resource. You define it the same way you define a Deployment. You schedule it with the same scheduler. You back it with persistent volumes from the same CSI driver. You expose it through the same Ingress. You secure it through the same RBAC. <strong>The operational model for VMs collapses into the operational model for containers</strong> — which most of your team already runs.
 </div>
 
@@ -127,7 +127,7 @@ This pattern is everywhere. A container is provisioned on Kubernetes. Kubernetes
 
 The cost of this anti-pattern is staggering, and it compounds along several axes:
 
-<table style="width:100%;border-collapse:collapse;margin:20px 0;">
+<table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
 <thead>
 <tr style="background-color:#1e293b;color:#f8fafc;">
 <th style="padding:12px;text-align:left;border:1px solid #334155;">Hidden Cost</th>
@@ -169,8 +169,8 @@ The cost of this anti-pattern is staggering, and it compounds along several axes
 </tbody>
 </table>
 
-<div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:24px 0;border-radius:6px;">
-<strong style="color:#92400e;">⚠️ THE COMPOUNDING TAX</strong><br><br>
+<div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:24px 0;border-radius:6px;color:#92400e;">
+<strong>⚠️ THE COMPOUNDING TAX</strong><br><br>
 Take a 1,000-node Kubernetes fleet running on a VMware-based hypervisor layer. Conservatively assume 18% TCO inflation from the avoidable virtualization layer. On a $10M annual infrastructure spend, <strong>that's $1.8M per year being spent on an architectural abstraction that delivers no business value</strong> — separate from and on top of whatever Broadcom is now charging for the licensing. The container-in-VM tax is the line item nobody puts on the renewal slide.
 </div>
 
