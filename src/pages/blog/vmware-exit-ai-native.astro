@@ -118,11 +118,11 @@ This pattern is everywhere. A container is provisioned on Kubernetes. Kubernetes
         B2 --> B3[Host OS]
         B3 --> B4[Bare-Metal Server]
     end
-    style badArch fill:#fef2f2,stroke:#dc2626,stroke-width:2px
+    style badArch fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#000
     style goodArch fill:#ecfdf5,stroke:#059669,stroke-width:2px
-    style A4 fill:#fecaca,stroke:#991b1b
-    style A5 fill:#fecaca,stroke:#991b1b
-    style A6 fill:#fecaca,stroke:#991b1b
+    style A4 fill:#fecaca,stroke:#991b1b,color:#000
+    style A5 fill:#fecaca,stroke:#991b1b,color:#000
+    style A6 fill:#fecaca,stroke:#991b1b,color:#000
 </pre>
 
 The cost of this anti-pattern is staggering, and it compounds along several axes:
@@ -202,11 +202,11 @@ MOJO has three layers:
     I --> J[Bare Metal — Any Vendor]
     I --> K[OpenShift Virtualization / KubeVirt]
     I --> L[RHEL / Linux Workloads]
-    style A fill:#dbeafe,stroke:#2563eb,stroke-width:2px
-    style H fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    style J fill:#dcfce7,stroke:#16a34a
-    style K fill:#dcfce7,stroke:#16a34a
-    style L fill:#dcfce7,stroke:#16a34a
+    style A fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#000
+    style H fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
+    style J fill:#dcfce7,stroke:#16a34a,color:#000
+    style K fill:#dcfce7,stroke:#16a34a,color:#000
+    style L fill:#dcfce7,stroke:#16a34a,color:#000
 </pre>
 
 This architecture is what replaces VMware's operational layer for bare metal. Not a dashboard. Not a CLI. An intelligent system that monitors, reasons, and acts — continuously, across every vendor in your rack, with VMs and containers as workload shapes scheduled on top.

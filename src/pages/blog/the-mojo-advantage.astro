@@ -82,9 +82,9 @@ MOJO was designed from a clean sheet for this moment. Three architectural layers
     L3 -->|every action| L2
     L2 -->|MCP tool calls| L1
     L1 -->|operates on| HW[Bare-Metal Fleet]
-    style L3 fill:#ecfdf5,stroke:#059669,stroke-width:2px
-    style L2 fill:#fef3c7,stroke:#d97706,stroke-width:2px
-    style L1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px
+    style L3 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#000
+    style L2 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
+    style L1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#000
 </pre>
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 1: The Control Plane</h3>
@@ -203,7 +203,7 @@ The second measure is breadth: how many of the customer's actual problems the pl
     M --- C[Cisco UCS / CIMC]
     M --- I[Intel vPro / AMT]
     M --- N[NVIDIA Redfish]
-    style M fill:#fef2f2,stroke:#dc2626,stroke-width:3px
+    style M fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#000
 </pre>
 
 MOJO presents one inventory, one API, one audit log across Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA hardware — including NVIDIA's Redfish extensions for AI servers. MOJO's Redfish drivers normalize vendor dialects (every BMC vendor implements Redfish slightly differently; firmware revisions within a single vendor introduce additional drift). This normalization is the single most-asked-for capability in customer engagements and the one that competitors with single-vendor heritage cannot reasonably retrofit.
@@ -270,7 +270,7 @@ Every MOJO agent runs the same fundamental pattern, drawn from current AI resear
     A[Act<br/>MCP tool call<br/>to control plane]
     V[Validate<br/>Outcome check<br/>+ rollback ready]
     O --> R --> P --> G --> A --> V --> O
-    style G fill:#fef3c7,stroke:#d97706,stroke-width:2px
+    style G fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
 </pre>
 
 This loop is the operational pattern of every MOJO agent. The orchestrator runs it at the plan level. The health agent runs it on every detected anomaly. The compliance agent runs it on every drift detection. The provisioning agent runs it on every lifecycle transition.
