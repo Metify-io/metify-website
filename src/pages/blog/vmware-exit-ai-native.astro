@@ -184,11 +184,7 @@ MOJO has three layers:
 
 <ol class="space-y-2 mb-6 list-decimal list-inside text-gray-400">
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">A high-performance control plane</strong> — compiled to a single binary, deployable anywhere including fully air-gapped environments. This layer handles hardware communication via Redfish and IPMI, event processing, DHCP, DNS, PXE boot, and the inventory database. It is the source of truth for every physical asset in your fleet.</li>
-</ol>
-<ol class="space-y-2 mb-6 list-decimal list-inside text-gray-400">
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Specialist AI agents</strong> — agents that reason about infrastructure using the ReAct pattern (Reason + Act). Each agent is a specialist: health monitoring, provisioning orchestration, firmware compliance, capacity planning. They observe the system through the control plane, reason about what they see, and take action — subject to governance.</li>
-</ol>
-<ol class="space-y-2 mb-6 list-decimal list-inside text-gray-400">
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">A governance engine</strong> — every action an AI agent proposes flows through approval gates. Destructive operations require human sign-off. Every action is logged in an immutable audit trail. Kill switches on every agent. This isn't AI that runs unsupervised. It's AI that acts — but only with permission.</li>
 </ol>
 <pre class="mermaid">flowchart LR
@@ -340,6 +336,6 @@ The VMware exit is real. The next platform isn't another hypervisor. It's AI-nat
       <div class="prose prose-lg prose-invert max-w-none" set:html={content} />
     </div>
   </article>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </Layout>
