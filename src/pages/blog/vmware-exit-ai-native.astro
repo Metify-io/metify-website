@@ -187,27 +187,9 @@ MOJO has three layers:
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Specialist AI agents</strong> — agents that reason about infrastructure using the ReAct pattern (Reason + Act). Each agent is a specialist: health monitoring, provisioning orchestration, firmware compliance, capacity planning. They observe the system through the control plane, reason about what they see, and take action — subject to governance.</li>
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">A governance engine</strong> — every action an AI agent proposes flows through approval gates. Destructive operations require human sign-off. Every action is logged in an immutable audit trail. Kill switches on every agent. This isn't AI that runs unsupervised. It's AI that acts — but only with permission.</li>
 </ol>
-<pre class="mermaid">flowchart LR
-    subgraph mojo [MOJO Operational Layer]
-        direction TB
-        A[Natural-Language Intent] --> B[Orchestrator Agent]
-        B --> C{Specialist Agents}
-        C --> D[Health]
-        C --> E[Compliance]
-        C --> F[Provisioning]
-        C --> G[Capacity]
-        D & E & F & G --> H[Governance Engine]
-        H --> I[Hardware Control Plane]
-    end
-    I --> J[Bare Metal — Any Vendor]
-    I --> K[OpenShift Virtualization / KubeVirt]
-    I --> L[RHEL / Linux Workloads]
-    style A fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#000
-    style H fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
-    style J fill:#dcfce7,stroke:#16a34a,color:#000
-    style K fill:#dcfce7,stroke:#16a34a,color:#000
-    style L fill:#dcfce7,stroke:#16a34a,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/mojo-platform-ops-layer.png" alt="MOJO Platform Operational Layer — Specialist Agents flowing through Governance Engine and Hardware Control Plane to Bare Metal, OpenShift Virtualization, and RHEL workloads" class="w-full rounded-lg" />
+</div>
 
 This architecture is what replaces VMware's operational layer for bare metal. Not a dashboard. Not a CLI. An intelligent system that monitors, reasons, and acts — continuously, across every vendor in your rack, with VMs and containers as workload shapes scheduled on top.
 
