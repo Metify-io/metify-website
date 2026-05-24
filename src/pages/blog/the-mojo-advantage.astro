@@ -155,7 +155,7 @@ In the post-CrowdStrike data center conversation, this is the capability that le
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Multi-Site Federation</h3>
 
-For organizations running infrastructure across distributed sites — edge retail locations, regional broadcast facilities, hospital networks, government installations — MOJO's Multi-Grid Controller (MGC) federates multiple Edge Controllers into a single fleet view. Centralized policy, distributed execution, site autonomy when WAN links fail, automatic state reconciliation on reconnect.
+For organizations running infrastructure across distributed sites — edge retail locations, regional broadcast facilities, hospital networks, government installations — MOJO's Global Controller (MGC) federates multiple Edge Controllers into a single fleet view. Centralized policy, distributed execution, site autonomy when WAN links fail, automatic state reconciliation on reconnect.
 
 The compliance agent operates at the federation level: a firmware baseline policy can be evaluated across 50 sites, with site-specific remediation plans generated for each. The orchestrator agent can decompose "update firmware baseline across all West Coast sites" into 50 parallel site-level execution plans, each with its own governance flow.
 
@@ -186,7 +186,7 @@ The deployment story is deliberately flexible:
 <ul class="space-y-2 mb-6 list-disc list-inside text-gray-400">
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">On-premise</strong> — the default deployment, with the full platform running in a customer data center.</li>
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Air-gapped</strong> — single-binary control plane, native DDI, self-hosted LLM support for Agent-M in fully disconnected environments. Defense, government, regulated finance, and critical-infrastructure deployments use this path.</li>
-  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Multi-site federated</strong> — Multi-Grid Controller with central policy and edge autonomy.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Multi-site federated</strong> — MOJO Global Controller with central policy and edge autonomy.</li>
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">Cloud-adjacent</strong> — for organizations running hybrid models, MOJO can manage on-prem bare metal while integrating with cloud-hosted services through the API.</li>
 </ul>
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Coexistence with the Workload Layer</h3>
@@ -384,7 +384,7 @@ After MOJO: one inventory across all three vendors. One firmware compliance mode
 
 A retail customer operates edge infrastructure across dozens of locations — servers in regional distribution centers, in-store back-of-house systems, and standalone fulfillment sites. Before MOJO: each site managed semi-independently, with periodic operator visits to apply firmware updates and resolve hardware issues. Truck rolls were expensive, slow, and increasingly impractical given the geographic spread.
 
-After MOJO: the Multi-Grid Controller federates every site into a single fleet view. The health agent monitors every server at every location. The compliance agent ensures firmware baselines are consistent across the entire footprint. When something needs attention at a site 500 miles from the nearest operator, the orchestrator agent handles it remotely through out-of-band management — without a truck roll.
+After MOJO: the MOJO Global Controller federates every site into a single fleet view. The health agent monitors every server at every location. The compliance agent ensures firmware baselines are consistent across the entire footprint. When something needs attention at a site 500 miles from the nearest operator, the orchestrator agent handles it remotely through out-of-band management — without a truck roll.
 
 <div style="background-color:#ecfdf5;border-left:6px solid #059669;padding:18px 22px;margin:24px 0;border-radius:6px;color:#065f46;">
 <strong>✓ MEASURED OUTCOMES — DISTRIBUTED RETAIL</strong>
