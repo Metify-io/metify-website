@@ -51,36 +51,9 @@ That gap is what Metify fills.
 
 Here is the architecture, in the order it happens during a real customer engagement:
 
-<pre class="mermaid">flowchart TB
-    subgraph layer4 [Workload Layer]
-        W1[Containerized apps] 
-        W2[VMs via KubeVirt / OpenShift Virtualization]
-        W3[RHEL workloads]
-    end
-    subgraph layer3 [Red Hat Stack]
-        R1[OpenShift Container Platform]
-        R2[Red Hat Enterprise Linux]
-        R3[Ansible Automation Platform]
-    end
-    subgraph layer2 [MOJO — Bare-Metal Operations Layer]
-        M1[Discovery & Inventory]
-        M2[Provisioning & PXE / DDI]
-        M3[Firmware Compliance]
-        M4[Predictive Health & Remediation]
-        M5[Out-of-Band Console & Recovery]
-        M6[AI Agents + Governance]
-    end
-    subgraph layer1 [Hardware]
-        H1[Dell · HPE · Lenovo · Supermicro · Cisco · NVIDIA]
-    end
-    layer4 --> layer3
-    layer3 --> layer2
-    layer2 --> layer1
-    style layer1 fill:#1e293b,color:#f8fafc,stroke:#0f172a
-    style layer2 fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#000
-    style layer3 fill:#fff7ed,stroke:#ea580c,stroke-width:2px,color:#000
-    style layer4 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/diagram-redhat-mojo-stack.svg" alt="Where MOJO sits in a Red Hat deployment — hardware through workload layers" class="w-full rounded-lg" />
+</div>
 
 MOJO sits between the silicon and the Red Hat stack. It is the layer that:
 
@@ -163,6 +136,24 @@ Imagine a regional bank that's exiting VMware. Their target is OpenShift Virtual
 
 Two products. One coherent customer outcome. No integration tax.
 
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">The Hidden Benefit for Red Hat Customers: A System of Record</h2>
+
+There's one more benefit that doesn't show up on the architecture slide but matters more than most customers realize.
+
+When a Red Hat shop deploys MOJO underneath its RHEL fleet and OpenShift clusters, it doesn't just get a hardware operations layer — it gets a <strong class="text-white">system of record for what's actually running on the physical infrastructure</strong>. Across every site. Every vendor. Every firmware revision. Every change.
+
+For Red Hat customers in regulated industries, this is the property that closes audit gaps. Across our customer base, MOJO has become the canonical source of truth for the hardware running in:
+
+<ul class="space-y-2 mb-6 list-disc list-inside text-gray-400">
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Enterprise data centers</strong> — multi-OEM RHEL and OpenShift estates where Red Hat Satellite knows the OS layer but the hardware underneath used to live in three vendor consoles</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Retail stores</strong> — distributed OpenShift edge clusters at the store level, with MOJO as the unified inventory across hundreds of locations</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Hospitals and clinics</strong> — RHEL hosts and OpenShift clusters under HIPAA scope, where auditors need a defensible answer for hardware state at every point in time</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Banks and financial services</strong> — OpenShift platforms under PCI DSS and SOX scope, where the gap between "the OS is patched" and "the hardware underneath is on a known firmware baseline" is the gap that auditors actually scrutinize</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Cell-site shelters</strong> — telecom edge compute where OpenShift runs latency-sensitive workloads on a few servers at the base of every tower, and the central NOC needs canonical state for every shelter</li>
+</ul>
+
+This is the part of the joint Metify–Red Hat story that doesn't fit on a one-slide architecture diagram but reliably shows up in the third meeting with the customer's compliance team. Red Hat's tooling tracks the OS and the workload. MOJO tracks the physical truth underneath. Together they answer every question an auditor or a regulator can ask, in one export, from one platform.
+
 <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Channel-Builder's Perspective</h2>
 
 I'll close where I started. The reason I built Metify the way I did — and the reason we lead with Red Hat partnership as a first-class story rather than a slide buried in deck six — is that I spent eight years watching what <em>worked</em> in the Red Hat ecosystem and what didn't.
@@ -197,6 +188,4 @@ If you're planning a VMware exit and Red Hat is on your shortlist (and based on 
       <div class="prose prose-lg prose-invert max-w-none" style="color:#cbd5e1;" set:html={content} />
     </div>
   </article>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </Layout>
