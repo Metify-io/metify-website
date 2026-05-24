@@ -5,7 +5,8 @@ const posts = [
   {
     title: 'Security Isn\'t a Feature — It\'s the Architecture',
     excerpt: 'How MOJO protects your bare-metal fleet from the outside in — six layers of security from perimeter hardening to MGC federation, all enforced architecturally. LDAP, RBAC, immutable audit trails, mTLS, and NIST 800-53 alignment.',
-    date: 'May 24, 2026',
+    date: 'June 2, 2026',
+    author: 'Aaron Allred, VP of Technology',
     image: '/images/blog/security-six-layers.svg',
     slug: '/blog/security-deep-dive',
   },
@@ -19,21 +20,22 @@ const posts = [
   {
     title: 'Why Metify Is All-In on Red Hat',
     excerpt: 'Eight years at Red Hat taught me what works in the ecosystem: ISVs whose products make Red Hat\'s products materially better. MOJO is the bare-metal operations layer that makes the Red Hat stack land cleanly on hardware.',
-    date: 'May 19, 2026',
+    date: 'May 5, 2026',
     image: '/images/screenshots/Hero-Image.png',
     slug: '/blog/red-hat-partnership',
   },
   {
     title: 'The MOJO Advantage — Whitepaper',
     excerpt: 'How intelligent automation, hardware versatility, system of record, and operational simplicity are redefining enterprise bare metal. Five dimensions of advantage for the post-VMware era.',
-    date: 'May 2026',
+    date: 'June 16, 2026',
     image: '/images/screenshots/Hero-Image.png',
     slug: '/blog/the-mojo-advantage',
   },
   {
-    title: '50 Sites. One Orchestrator. How MOJO\'s Multi-Grid Controller Turns Distributed Bare Metal into a Single Fleet',
-    excerpt: 'The edge computing wave is pushing bare-metal infrastructure into retail stores, hospitals, bank branches, broadcast venues, and cell-site shelters. MOJO\'s Multi-Grid Controller federates them all into one fleet.',
+    title: '50 Sites. One Orchestrator. How the MOJO Global Controller Turns Distributed Bare Metal into a Single Fleet',
+    excerpt: 'The edge computing wave is pushing bare-metal infrastructure into retail stores, hospitals, bank branches, broadcast venues, and cell-site shelters. The MOJO Global Controller federates them all into one fleet.',
     date: 'May 19, 2026',
+    author: 'Aaron Allred, VP of Technology',
     image: '/images/screenshots/Hero-Image.png',
     slug: '/blog/50-sites-one-orchestrator-mgc',
   },
@@ -41,6 +43,7 @@ const posts = [
     title: 'Major League Baseball Trusts MOJO Platform!',
     excerpt: 'At the end of the 2019 baseball season, MLB began a hardware refresh across all major league ballparks, providing an opportunity to rebuild server infrastructure using a DevOps approach.',
     date: 'March 11, 2024',
+    author: 'Mike Wagner, CEO',
     image: '/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg',
     slug: '/blog/major-league-baseball-trusts-mojo-platform',
   },
@@ -48,27 +51,31 @@ const posts = [
     title: "Top 10 Pain-Points Cited by CIO's for Cloud Repatriation",
     excerpt: 'As more organizations consider moving workloads back on-premises, we explore the top challenges CIOs face during cloud repatriation.',
     date: 'February 18, 2025',
+    author: 'Mike Wagner, CEO',
     image: '/images/blog/Top-10-Paint-Points-Cited-CIOs-scaled.jpg',
     slug: '/blog/top-10-pain-points-cited-by-cios',
   },
   {
     title: 'Cloud Exit Saves 37 Signals $1Million per Year!',
     excerpt: "The eventual savings could climb all the way up to about $2M/year. That would be TEN MILLION DOLLARS over five years.",
-    date: 'March 28, 2024',
+    date: 'April 8, 2024',
+    author: 'Mike Wagner, CEO',
     image: '/images/blog/David-Heinemeier-Hansson-DHH.jpg',
     slug: '/blog/cloud-exit-saves-37-signals',
   },
   {
     title: 'Bare Metal Private Clouds Made Easy!',
     excerpt: 'Bare Metal Servers have quickly become the preferred architecture for high-performance and modern edge applications. MOJO Platform enables enterprises to take full advantage of their infrastructure investments.',
-    date: 'March 11, 2024',
+    date: 'March 25, 2024',
+    author: 'Aaron Allred, VP of Technology',
     image: '/images/blog/Cloud_Server.jpg',
     slug: '/blog/bare-metal-private-clouds',
   },
   {
     title: "Run Containers on Bare Metal or VM's with MOJO Platform",
     excerpt: 'According to a recent IDC survey, the enterprise market is roughly split 50/50 between running containers on-premises. MOJO makes deployment seamless.',
-    date: 'March 11, 2024',
+    date: 'April 22, 2024',
+    author: 'Aaron Allred, VP of Technology',
     image: '/images/blog/Bare-Metal.jpg',
     slug: '/blog/run-containers-on-bare-metal',
   },
@@ -76,6 +83,7 @@ const posts = [
     title: 'Metify and Taikun Announce Global Strategic Partnership',
     excerpt: 'Metify and Taikun have collaborated to build an industry-first solution for unifying operations for Infrastructure and DevOps teams.',
     date: 'December 10, 2024',
+    author: 'Mike Wagner, CEO',
     image: '/images/screenshots/Hero-Image.png',
     slug: '/blog/metify-taikun-partnership',
   },
@@ -97,7 +105,7 @@ const posts = [
                 <img src={post.image} alt={post.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
               </div>
               <div class="p-6">
-                <span class="text-xs text-gray-500 uppercase tracking-wide">{post.date}</span>
+                <span class="text-xs text-gray-500 uppercase tracking-wide">{post.date}{post.author ? ` · ${post.author}` : ''}</span>
                 <h2 class="mt-2 text-lg font-bold text-white group-hover:text-brand-green transition-colors leading-snug">{post.title}</h2>
                 <p class="mt-3 text-gray-400 text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
                 <span class="inline-flex items-center mt-4 text-brand-green text-sm font-semibold">
