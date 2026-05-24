@@ -102,28 +102,9 @@ There's a related architectural mistake the VMware exit is forcing organizations
 
 This pattern is everywhere. A container is provisioned on Kubernetes. Kubernetes is running on worker nodes. Those worker nodes are VMs. Those VMs are running on ESXi. ESXi is running on a physical server. The physical server is the only thing actually doing work. Every layer above it exists because somebody, at some point, decided that virtualization was the answer to a question nobody is asking anymore.
 
-<pre class="mermaid">graph TB
-    subgraph badArch [The Containers-in-VMs Anti-Pattern]
-        direction TB
-        A1[Container] --> A2[Container Runtime]
-        A2 --> A3[Guest OS]
-        A3 --> A4[Virtual Machine]
-        A4 --> A5[Hypervisor]
-        A5 --> A6[Host OS]
-        A6 --> A7[Bare-Metal Server]
-    end
-    subgraph goodArch [Kubernetes on Bare Metal]
-        direction TB
-        B1[Container] --> B2[Container Runtime]
-        B2 --> B3[Host OS]
-        B3 --> B4[Bare-Metal Server]
-    end
-    style badArch fill:#fef2f2,stroke:#dc2626,stroke-width:2px,color:#000
-    style goodArch fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#000
-    style A4 fill:#fecaca,stroke:#991b1b,color:#000
-    style A5 fill:#fecaca,stroke:#991b1b,color:#000
-    style A6 fill:#fecaca,stroke:#991b1b,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/diagram-containers-in-vms.svg" alt="Containers in VMs versus Kubernetes on bare metal — the stacked-abstraction tax" class="w-full rounded-lg" />
+</div>
 
 The cost of this anti-pattern is staggering, and it compounds along several axes:
 
@@ -188,7 +169,7 @@ MOJO has three layers:
   <li class="text-gray-400 leading-relaxed"><strong class="text-white">A governance engine</strong> — every action an AI agent proposes flows through approval gates. Destructive operations require human sign-off. Every action is logged in an immutable audit trail. Kill switches on every agent. This isn't AI that runs unsupervised. It's AI that acts — but only with permission.</li>
 </ol>
 <div class="my-8">
-  <img src="/images/blog/mojo-platform-ops-layer.png" alt="MOJO Platform Operational Layer — Specialist Agents flowing through Governance Engine and Hardware Control Plane to Bare Metal, OpenShift Virtualization, and RHEL workloads" class="w-full rounded-lg" />
+  <img src="/images/blog/diagram-mojo-layers.svg" alt="The MOJO operational layer that replaces VMware for bare metal — AI agents, governance engine, control plane" class="w-full rounded-lg" />
 </div>
 
 This architecture is what replaces VMware's operational layer for bare metal. Not a dashboard. Not a CLI. An intelligent system that monitors, reasons, and acts — continuously, across every vendor in your rack, with VMs and containers as workload shapes scheduled on top.
@@ -200,6 +181,28 @@ This architecture is what replaces VMware's operational layer for bare metal. No
 <strong class="text-white">A retail customer</strong> with edge infrastructure across dozens of locations needed to maintain consistent firmware baselines and health monitoring at every site — without on-site IT staff. MOJO's Multi-Grid Controller federates their distributed sites into a single fleet view. The health agent monitors every server at every location. The compliance agent ensures firmware baselines are consistent coast to coast. When something needs attention at a site 500 miles away, the orchestrator agent handles it remotely.
 
 <strong class="text-white">A media and entertainment customer</strong> managing broadcast infrastructure for live events needed zero-downtime provisioning and rapid server turnaround between events. MOJO's orchestrator agent accepts natural-language instructions — "provision 20 servers with the broadcast baseline and event OS" — and decomposes them into multi-step execution plans with dependency tracking, parallel execution, and governance approval. What used to take a full day of operator time now takes one sentence and one approval click.
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">MOJO Has Become the System of Record</h2>
+
+The pattern across these customers is more than tool consolidation. Over the last year, MOJO has crossed a threshold that very few infrastructure platforms reach: <strong class="text-white">it has become the system of record for what is actually running</strong> in our customers' environments.
+
+For an enterprise running 10,000 servers across three OEMs, the question "what hardware do we have and what state is it in?" used to have several answers — none of them complete and none of them current. Three vendor inventories. A CMDB that nobody updates. A spreadsheet a former employee maintained. A monitoring system that knows which IPs respond but nothing about firmware, BIOS, or BMC state.
+
+MOJO replaces that whole stack with a single canonical truth: every BMC discovered, every node inventoried, every firmware version tracked, every health metric baselined, every change logged in an immutable audit trail. When a regulator asks the bank what firmware was on a specific server on a specific date, the answer comes from MOJO. When a hospital's compliance team asks which servers are running unpatched BIOS revisions, the answer comes from MOJO. When the broadcast team asks which servers in the venue rack are healthy enough to run tonight's feed, the answer comes from MOJO.
+
+<div style="background-color:#eef2ff;border-left:6px solid #4f46e5;padding:18px 22px;margin:24px 0;border-radius:6px;color:#3730a3;">
+<strong>📋 WHERE MOJO IS THE SYSTEM OF RECORD TODAY</strong><br><br>
+Across our customer base, MOJO is the canonical inventory and operational state for the bare-metal infrastructure running in:
+<ul style="margin:10px 0 0 0;line-height:1.7;">
+<li><strong>Enterprise data centers</strong> — multi-OEM fleets at scale, replacing three or four vendor-specific consoles with one source of truth</li>
+<li><strong>Retail stores</strong> — distributed edge infrastructure where each location's POS, inventory, and IoT systems need to be visible to a central team</li>
+<li><strong>Healthcare facilities</strong> — clinical and back-office hardware where HIPAA evidence requires authoritative configuration and change records</li>
+<li><strong>Banks and financial services</strong> — regulated environments where PCI DSS and SOX audits demand a single, defensible answer to "what was running, when"</li>
+<li><strong>Cell-site shelters and base stations</strong> — telecom edge equipment where physical access is expensive and the central NOC needs canonical state for every site</li>
+</ul>
+</div>
+
+This is the deeper claim underneath "AI-native infrastructure." The agents are powerful, but the agents are valuable <em>because</em> they reason against ground truth that MOJO holds for the entire fleet. Without the system-of-record property, AI agents are guessing at infrastructure state. With it, they're operating on canonical data — which is why their decisions are good enough to put through governance and execute.
 
 <h2 class="text-2xl font-bold text-white mt-10 mb-4">The VMware Replacement Test</h2>
 
@@ -318,6 +321,4 @@ The VMware exit is real. The next platform isn't another hypervisor. It's AI-nat
       <div class="prose prose-lg prose-invert max-w-none" style="color:#cbd5e1;" set:html={content} />
     </div>
   </article>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </Layout>

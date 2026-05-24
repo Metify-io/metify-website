@@ -10,10 +10,11 @@ const content = `
 <div style="background-color:#1e293b;color:#f8fafc;padding:24px 28px;margin:24px 0;border-radius:8px;">
 <div style="color:#94a3b8;font-size:0.85em;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">Executive Summary</div>
 <p style="margin:0 0 14px 0;line-height:1.7;">The post-VMware era has put thousands of enterprises in front of a once-a-decade architectural decision. The wrong answer is to pick a different hypervisor and call it done. The right answer is to recognize that the operational layer for bare metal needs to be rebuilt for an era where AI agents can reason about infrastructure, Kubernetes is the new universal scheduler, and the hardware fleet itself is multi-vendor, multi-site, and increasingly air-gapped.</p>
-<p style="margin:0 0 14px 0;line-height:1.7;">MOJO is the platform built for that moment. This paper makes the case along four dimensions:</p>
+<p style="margin:0 0 14px 0;line-height:1.7;">MOJO is the platform built for that moment. This paper makes the case along five dimensions:</p>
 <ul style="margin:0;line-height:1.7;">
 <li><strong>Power</strong> — specialist AI agents that observe, reason, and act on bare metal, governed by approval gates and audit trails</li>
 <li><strong>Versatility</strong> — multi-vendor, multi-OS, multi-site, air-gap-first, with native DDI and Redfish normalization across Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA</li>
+<li><strong>System of Record</strong> — the canonical source of truth for what hardware exists, what state it's in, and who changed what, across data centers, retail stores, healthcare facilities, banks, and cell-site shelters</li>
 <li><strong>Ease of Use</strong> — natural-language operations, single-binary deployment, and a unified inventory that replaces five separate vendor tools</li>
 <li><strong>Intelligent Automation</strong> — orchestration that decomposes intent into multi-step execution plans, validated and committed only with governance</li>
 </ul>
@@ -44,7 +45,7 @@ For organizations running 1,000 servers across three vendors, this means three m
 
 The third assumption is the quietest and the most consequential. Traditional infrastructure operations assume that humans translate business intent into infrastructure actions: a senior operator reads a ticket, opens five tools, makes a series of changes, validates the result, and updates the audit log. The cognitive load of this work scales linearly with fleet size. The cost of staffing it scales faster. The mean-time-to-recovery when the senior operator is on vacation scales worst of all.
 
-Modern AI architectures — specifically the ReAct (Reason + Act) pattern, the Model Context Protocol (MCP) standard for AI tool-use, and reliable governance frameworks — make a different operational model possible. Not autonomous AI doing whatever it wants. AI agents that observe, reason, and propose action, with humans retaining final authority through approval gates and audit trails.
+Modern AI architectures — specifically the ReAct (Reason + Act) pattern for structured tool-use, together with reliable governance frameworks — make a different operational model possible. Not autonomous AI doing whatever it wants. AI agents that observe, reason, and propose action, with humans retaining final authority through approval gates and audit trails.
 
 <div style="background-color:#fffbeb;border-left:6px solid #d97706;padding:18px 22px;margin:28px 0;border-radius:6px;color:#92400e;">
 <strong>⚠️ THE INFLECTION POINT IN ONE SENTENCE</strong><br><br>
@@ -57,51 +58,25 @@ The hypervisor stack you trusted is being repriced out of viability, the multi-v
 
 MOJO was designed from a clean sheet for this moment. Three architectural layers, each chosen for a specific operational property.
 
-<pre class="mermaid">flowchart TB
-    subgraph L3 [Layer 3 — Specialist AI Agents]
-        direction LR
-        A1[Orchestrator]
-        A2[Health]
-        A3[Compliance]
-        A4[Provisioning]
-        A5[Capacity]
-    end
-    subgraph L2 [Layer 2 — Governance Engine]
-        G1[Approval Gates]
-        G2[Audit Trail]
-        G3[Kill Switches]
-    end
-    subgraph L1 [Layer 1 — Control Plane]
-        direction LR
-        C1[MCP Server]
-        C2[Redfish / IPMI Drivers]
-        C3[Inventory]
-        C4[Event Bus]
-        C5[PXE / DDI]
-    end
-    L3 -->|every action| L2
-    L2 -->|MCP tool calls| L1
-    L1 -->|operates on| HW[Bare-Metal Fleet]
-    style L3 fill:#ecfdf5,stroke:#059669,stroke-width:2px,color:#000
-    style L2 fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
-    style L1 fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/diagram-platform-layers.svg" alt="The MOJO platform architecture: three layers, one property" class="w-full rounded-lg" />
+</div>
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 1: The Control Plane</h3>
 
-The foundation is a purpose-built control plane that compiles to a single binary with no external runtime dependencies. This isn't a stylistic choice. Deterministic, memory-safe control of hardware operations matters when you're flashing firmware on thousands of servers simultaneously and a runtime pause at the wrong moment can mean a bricked node. The control plane handles hardware communication (Redfish, IPMI, vPro), event ingestion, the inventory database, DHCP/DNS/IPAM via Kea and PowerDNS, PXE boot orchestration, and the MCP server that exposes hardware operations as tools to the agent layer above.
+The foundation is a purpose-built control plane that compiles to a single binary with no external runtime dependencies. This isn't a stylistic choice. Deterministic, memory-safe control of hardware operations matters when you're flashing firmware on thousands of servers simultaneously and a runtime pause at the wrong moment can mean a bricked node. The control plane handles hardware communication (Redfish, IPMI, vPro), event ingestion, the inventory database, native DHCP/DNS/IPAM, PXE boot orchestration, and the governed interface through which the agent layer operates on hardware.
 
 Single-binary deployment means \`docker compose up\` is the complete installation procedure — including in air-gapped environments where there is no internet for an installer to phone home to.
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 2: The Governance Engine</h3>
 
-Every action that an AI agent proposes — every MCP tool call that would change hardware state — passes through the governance engine. The engine evaluates each action against three controls: an approval gate (some actions are auto-approved for read-only operations; others require human sign-off; the most destructive require multi-person approval), an immutable audit trail (every action and its approver are logged before execution), and a kill switch (every agent can be paused or stopped at the governance layer, not at the agent layer where a misbehaving agent might ignore it).
+Every action that an AI agent proposes — every operation that would change hardware state — passes through the governance engine. The engine evaluates each action against three controls: an approval gate (some actions are auto-approved for read-only operations; others require human sign-off; the most destructive require multi-person approval), an immutable audit trail (every action and its approver are logged before execution), and a kill switch (every agent can be paused or stopped at the governance layer, not at the agent layer where a misbehaving agent might ignore it).
 
 This layer exists because "AI for infrastructure" is only viable if the AI is operating under controls that an enterprise audit team will sign off on. MOJO's governance engine is designed to produce evidence — auditable, exportable, machine-readable evidence — that every infrastructure change was authorized by a named human, executed against a known policy, and logged before it happened.
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Layer 3: The Specialist Agent Layer</h3>
 
-The agents are thin by design. They do not hold state. They reason about live data pulled from the control plane through MCP, propose actions, and rely on the governance engine to actually commit anything. There are five specialists:
+The agents are thin by design. They do not hold state. They reason about live data pulled from the control plane, propose actions, and rely on the governance engine to actually commit anything. There are five specialists:
 
 <table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
 <thead>
@@ -194,17 +169,9 @@ The second measure is breadth: how many of the customer's actual problems the pl
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Vendor Coverage</h3>
 
-<pre class="mermaid">graph LR
-    M[MOJO Redfish Normalization Layer]
-    M --- D[Dell iDRAC]
-    M --- H[HPE iLO]
-    M --- L[Lenovo XCC]
-    M --- S[Supermicro IPMI]
-    M --- C[Cisco UCS / CIMC]
-    M --- I[Intel vPro / AMT]
-    M --- N[NVIDIA Redfish]
-    style M fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/diagram-vendor-coverage.svg" alt="MOJO normalizes every major hardware vendor through one layer" class="w-full rounded-lg" />
+</div>
 
 MOJO presents one inventory, one API, one audit log across Dell, HPE, Lenovo, Supermicro, Cisco, Intel, and NVIDIA hardware — including NVIDIA's Redfish extensions for AI servers. MOJO's Redfish drivers normalize vendor dialects (every BMC vendor implements Redfish slightly differently; firmware revisions within a single vendor introduce additional drift). This normalization is the single most-asked-for capability in customer engagements and the one that competitors with single-vendor heritage cannot reasonably retrofit.
 
@@ -230,9 +197,111 @@ This is the design property that distinguishes MOJO from platform-replacement to
 
 <hr class="border-white/10 my-8" />
 
-<h2 class="text-2xl font-bold text-white mt-10 mb-4">5. Ease of Use — The Operational Burden Comes Down</h2>
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">5. MOJO as the System of Record</h2>
 
-The third measure is operational. Power and versatility are worth less than they sound if they require a six-month onboarding project and a team of platform engineers to run.
+The cumulative effect of versatility is something larger than the sum of the deployment shapes. Over the last year, MOJO has crossed a threshold that very few infrastructure platforms ever reach: <strong class="text-white">for our customers, it has become the system of record for what is actually running on the physical infrastructure.</strong>
+
+This is not a marketing claim. It is a description of what the platform now does in production.
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">What "System of Record" Actually Means</h3>
+
+A system of record is the canonical, authoritative source for a class of data. For most enterprises, the answer to "what hardware do we have, where is it, what state is it in, and who changed it last?" used to live in several incomplete places: a CMDB that drifted from reality the moment it was published, three vendor consoles each blind to the other vendors in the rack, a monitoring stack that knew which IPs responded but nothing about firmware or BIOS, and a spreadsheet a former employee maintained.
+
+MOJO replaces that whole stack with a single canonical truth:
+
+<table style="width:100%;border-collapse:collapse;margin:20px 0;color:#1e293b;">
+<thead>
+<tr style="background-color:#1e293b;color:#f8fafc;">
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Question</th>
+<th style="padding:12px;text-align:left;border:1px solid #334155;">Where the Answer Lives Now</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">What hardware exists in our fleet?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO inventory — make, model, serial, BMC reachability, location</td>
+</tr>
+<tr style="background-color:#eef2ff;">
+<td style="padding:12px;border:1px solid #e2e8f0;">What firmware revisions are running?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO compliance agent — continuous evaluation against baselines</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">What state is each node in right now?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO health agent — predictive baselines, anomaly detection, live telemetry</td>
+</tr>
+<tr style="background-color:#eef2ff;">
+<td style="padding:12px;border:1px solid #e2e8f0;">Who changed what, when, and with whose approval?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO governance engine — immutable audit trail with named approvers</td>
+</tr>
+<tr style="background-color:#f8fafc;">
+<td style="padding:12px;border:1px solid #e2e8f0;">What was running on date X, before incident Y?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO history — point-in-time queries against the canonical record</td>
+</tr>
+<tr style="background-color:#eef2ff;">
+<td style="padding:12px;border:1px solid #e2e8f0;">How does our fleet compare to itself?</td>
+<td style="padding:12px;border:1px solid #e2e8f0;">MOJO drift analysis — baseline conformance, configuration variance, anomaly correlation</td>
+</tr>
+</tbody>
+</table>
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">Where MOJO Is the System of Record Today</h3>
+
+The footprint cuts across industries and across the topology of modern infrastructure — from a few central data centers to thousands of distributed sites:
+
+<div style="display:flex;flex-wrap:wrap;gap:14px;margin:24px 0;">
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">🏢 Enterprise Data Centers</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Multi-OEM fleets at scale — Dell, HPE, Lenovo, Supermicro — running RHEL, OpenShift, KubeVirt, and traditional VM workloads. MOJO replaces three or four vendor consoles with one source of truth.</div>
+</div>
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">🛒 Retail Stores</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Distributed bare metal at the store level for POS, inventory, and IoT aggregation. MGC federates hundreds or thousands of store sites into one canonical inventory and lifecycle history.</div>
+</div>
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">🏥 Healthcare Facilities</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Hospital and clinic hardware running clinical applications under HIPAA scope. MOJO provides the authoritative configuration and change records that HIPAA evidence requires.</div>
+</div>
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">🏦 Banks &amp; Financial Services</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Regulated environments under PCI DSS and SOX scope. MOJO gives auditors a single, defensible answer to "what was running, when, and with whose approval."</div>
+</div>
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">📡 Cell-Site Shelters</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Telecom edge compute at the base of every cell tower — BTS shelters where physical access is expensive and the central NOC needs canonical state for every site in the footprint.</div>
+</div>
+
+<div style="flex:1 1 240px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:8px;padding:18px;">
+<div style="color:#1e293b;font-weight:700;font-size:1.05em;margin-bottom:6px;">📺 Broadcast Venues</div>
+<div style="color:#475569;font-size:0.92em;line-height:1.5;">Event-driven infrastructure deployed at stadiums and production venues. MOJO tracks every server through every event, with venue-by-venue state visible from headquarters.</div>
+</div>
+
+</div>
+
+<h3 class="text-xl font-bold text-white mt-8 mb-4">Why This Matters More Than the Feature List</h3>
+
+Becoming the system of record is not a checkbox capability. It is an <em>emergent property</em> that arises when a platform reliably absorbs the workload that used to be distributed across CMDBs, vendor consoles, spreadsheets, monitoring tools, and tribal knowledge. The threshold isn't crossed when the feature ships. It's crossed when customers stop maintaining the parallel records and start treating MOJO as the answer.
+
+That threshold has consequences:
+
+<ul class="space-y-2 mb-6 list-disc list-inside text-gray-400">
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Auditors get a single answer.</strong> When the regulator asks the bank what BIOS was on a specific server on a specific date, the answer is one query against MOJO's history — not a multi-week reconciliation.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Integrations get a single feed.</strong> ITSM, GRC, SIEM, asset management — these systems can subscribe to MOJO as their ground truth for bare-metal state, instead of polling four vendor tools and reconciling the differences.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">Operators get a single mental model.</strong> The senior operator who used to be the human integration layer between three vendor consoles can now reason about the whole fleet through one interface.</li>
+  <li class="text-gray-400 leading-relaxed"><strong class="text-white">AI agents get a foundation they can trust.</strong> The orchestrator, health, compliance, and capacity agents reason against canonical data — which is <em>why</em> their proposed actions are good enough to put through governance and execute.</li>
+</ul>
+
+This last point is the connection back to the rest of the platform. The agents are valuable because they reason against ground truth. The ground truth exists because MOJO has become the system of record. The two properties reinforce each other, and neither would deliver the same value alone.
+
+<hr class="border-white/10 my-8" />
+
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">6. Ease of Use — The Operational Burden Comes Down</h2>
+
+The fourth measure is operational. Power, versatility, and being the system of record are worth less than they sound if they require a six-month onboarding project and a team of platform engineers to run.
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">Natural-Language Operations</h3>
 
@@ -254,24 +323,17 @@ Vendor-specific management platforms commonly cite 28 person-hours saved per wee
 
 <hr class="border-white/10 my-8" />
 
-<h2 class="text-2xl font-bold text-white mt-10 mb-4">6. Intelligent Automation — From Manual to Autonomous, Safely</h2>
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">7. Intelligent Automation — From Manual to Autonomous, Safely</h2>
 
-The fourth and most consequential measure is automation: not the brittle script-driven kind, but the reasoning kind that handles the cases the scripts don't anticipate.
+The fifth and most consequential measure is automation: not the brittle script-driven kind, but the reasoning kind that handles the cases the scripts don't anticipate.
 
 <h3 class="text-xl font-bold text-white mt-8 mb-4">The ReAct Loop in Production</h3>
 
 Every MOJO agent runs the same fundamental pattern, drawn from current AI research and adapted for infrastructure operations:
 
-<pre class="mermaid">flowchart LR
-    O[Observe<br/>Live data from<br/>control plane]
-    R[Reason<br/>LLM analysis +<br/>policy lookup]
-    P[Propose<br/>Specific action<br/>with rationale]
-    G[Governance<br/>Approval gate<br/>+ audit trail]
-    A[Act<br/>MCP tool call<br/>to control plane]
-    V[Validate<br/>Outcome check<br/>+ rollback ready]
-    O --> R --> P --> G --> A --> V --> O
-    style G fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#000
-</pre>
+<div class="my-8">
+  <img src="/images/blog/diagram-governed-agent.svg" alt="The governed agent loop — observe, reason, propose, govern, act, validate" class="w-full rounded-lg" />
+</div>
 
 This loop is the operational pattern of every MOJO agent. The orchestrator runs it at the plan level. The health agent runs it on every detected anomaly. The compliance agent runs it on every drift detection. The provisioning agent runs it on every lifecycle transition.
 
@@ -299,7 +361,7 @@ This is not a story about replacing operators with AI. It is a story about chang
 
 <hr class="border-white/10 my-8" />
 
-<h2 class="text-2xl font-bold text-white mt-10 mb-4">7. Customer Outcomes</h2>
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">8. Customer Outcomes</h2>
 
 The architecture and the capability claims would be theoretical without operational evidence. Three customer scenarios illustrate what MOJO actually delivers in production.
 
@@ -352,7 +414,7 @@ After MOJO: the orchestrator agent accepts natural-language instructions like "p
 
 <hr class="border-white/10 my-8" />
 
-<h2 class="text-2xl font-bold text-white mt-10 mb-4">8. Looking Forward</h2>
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">9. Looking Forward</h2>
 
 The platform's roadmap is anchored on three trajectories.
 
@@ -364,11 +426,11 @@ The platform's roadmap is anchored on three trajectories.
 
 <hr class="border-white/10 my-8" />
 
-<h2 class="text-2xl font-bold text-white mt-10 mb-4">9. Conclusion</h2>
+<h2 class="text-2xl font-bold text-white mt-10 mb-4">10. Conclusion</h2>
 
 The enterprises that navigate this inflection point successfully will not be the ones that pick the cheapest hypervisor alternative. They will be the ones that recognize the deeper shift — that the operational layer for bare metal needs to be rebuilt for an era of multi-vendor fleets, multi-site footprints, Kubernetes-as-scheduler, and AI agents that can reason about infrastructure under governance.
 
-MOJO is the platform built for that operational layer. Power, in the form of specialist AI agents with predictive health, cross-vendor compliance, and out-of-band recovery. Versatility, in the form of vendor-neutral hardware support, deployment flexibility from cloud-adjacent to fully air-gapped, and clean coexistence with the workload layer above. Ease of use, in the form of natural-language operations, single-binary deployment, and tool consolidation. Intelligent automation, in the form of a ReAct loop that is interruptible, auditable, and governed at every step.
+MOJO is the platform built for that operational layer. Power, in the form of specialist AI agents with predictive health, cross-vendor compliance, and out-of-band recovery. Versatility, in the form of vendor-neutral hardware support, deployment flexibility from cloud-adjacent to fully air-gapped, and clean coexistence with the workload layer above. A system of record that has become the canonical truth for what is running across data centers, retail stores, healthcare facilities, banks, and cell-site shelters. Ease of use, in the form of natural-language operations, single-binary deployment, and tool consolidation. Intelligent automation, in the form of a ReAct loop that is interruptible, auditable, and governed at every step.
 
 The VMware exit is the visible part of this inflection point. The rebuilding of the bare-metal operational layer underneath is the larger, quieter, and more consequential transition. MOJO is the platform for that transition.
 
@@ -401,6 +463,4 @@ Metify is the company behind MOJO, the first AI-native bare-metal infrastructure
       <div class="prose prose-lg prose-invert max-w-none" style="color:#cbd5e1;" set:html={content} />
     </div>
   </article>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
-  <script is:inline>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </Layout>
