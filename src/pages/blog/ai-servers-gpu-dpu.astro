@@ -2,89 +2,194 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
-<Layout title="AI Servers Are 10x More Complex Than Traditional Racks. MOJO Manages the Difference. — Metify" description="GPUs drawing 700W each, BlueField DPUs with their own BMCs, liquid cooling loops with critical failure modes. MOJO manages the full AI infrastructure lifecycle.">
+<Layout title="DIY AI Factories Made Easy with MOJO — Metify" description="You don't need a $500K branded AI factory. MOJO lets enterprises build AI infrastructure from any vendor's hardware — including refurbished servers that handle 99% of enterprise AI workloads at a fraction of the cost.">
   <article class="py-24 bg-brand-darker">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
         Back to Blog
       </a>
-      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">AI Servers Are 10x More Complex Than Traditional Racks. MOJO Manages the Difference.</h1>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">DIY AI Factories Made Easy with MOJO</h1>
       <p class="text-gray-500 mb-8">August 5, 2025 &middot; By Aaron Allred, VP of Technology</p>
-      <img src="/images/screenshots/Hero-Image.png" alt="AI Server GPU DPU Management" class="w-full rounded-xl mb-12" />
+      <img src="/images/screenshots/Hero-Image.png" alt="DIY AI Factory with MOJO" class="w-full rounded-xl mb-12" />
 
       <div class="prose prose-lg prose-invert max-w-none">
-        <p class="text-xl text-gray-300 leading-relaxed mb-8">A traditional 2U server has a BMC, CPUs, DIMMs, fans, and PSUs. An AI server cluster has eight NVIDIA H100s drawing 700W each, BlueField DPUs that are independent ARM-based compute systems, and liquid cooling with critical failure modes. The hardware bill for a single AI rack can approach $2 million — and most management tooling was designed for $15,000 pizza-box servers.</p>
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">There's a persistent myth in enterprise IT: to run AI on-premises, you need a $450K-$600K branded "AI Factory" from Dell or HPE, packed with the latest NVIDIA Blackwell GPUs. The reality? 99% of enterprise AI workloads — RAG pipelines, internal copilots, document processing, anomaly detection, code generation — run beautifully on hardware that costs a fraction of that. You just need a platform that manages it all.</p>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The DPU Problem</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">NVIDIA BlueField DPUs (BF2, BF3, BF4) are the most misunderstood component in modern AI infrastructure. They're marketed as "SmartNICs." They're not. They're independent compute systems:</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The AI Factory Price Problem</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Let's look at what the major OEMs are charging for their branded AI solutions:</p>
         <ul class="space-y-3 text-gray-400 mb-8">
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span>Own ARM-based SoC (processor) and memory</span>
+            <span><strong class="text-white">HPE ProLiant XD685</strong> — 8x NVIDIA B200 GPUs, liquid-cooled: $450K–$600K per server</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span>Own BMC (Baseboard Management Controller) with own Redfish endpoint</span>
+            <span><strong class="text-white">Dell PowerEdge XE9680</strong> — 8x H100/H200 GPUs, Dell AI Factory validated: $300K–$400K per server</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span>Own firmware stack (UEFI, ATF, NIC firmware) — managed independently from host</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span>Multiple operational modes: NIC Mode, DPU Mode, Separated Host Mode</span>
+            <span><strong class="text-white">Lead times</strong> — 10–40 weeks for new GPU servers from major OEMs</span>
           </li>
         </ul>
-        <p class="text-gray-400 leading-relaxed mb-6">Most infrastructure tools don't even see DPUs. They discover the host server's BMC and stop there. The DPU is invisible — an unmanaged compute system inside a server that's supposedly under management.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">These are fantastic machines. They're also massive overkill for most enterprise AI use cases — and the lead times mean your AI initiative waits months before it even starts.</p>
 
-        <h3 class="text-xl font-bold text-white mt-8 mb-4">How MOJO Manages DPUs</h3>
-        <p class="text-gray-400 leading-relaxed mb-6">MOJO discovers and manages DPUs as first-class citizens. Each DPU is registered as a separate managed entity linked to its parent host server:</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The "Good Enough" Reality</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Here's what enterprises actually need for the AI workloads that drive business value:</p>
+
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 mb-8">
+          <p class="text-white font-semibold mb-4">Enterprise AI Workloads vs. Hardware Requirements</p>
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">RAG & document intelligence</strong> — A100 40GB handles this comfortably</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">Internal copilots & code assistants</strong> — 70B parameter models run on 4x A100 80GB</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">Anomaly detection & predictive analytics</strong> — doesn't even need GPUs for most implementations</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">Fine-tuning on proprietary data</strong> — A100 or H100 handles enterprise-scale fine-tuning</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+              <span><strong class="text-white">Image/video analysis</strong> — previous-gen GPUs deliver real-time inference at enterprise scale</span>
+            </li>
+          </ul>
+          <p class="text-gray-500 text-sm mt-4 italic">What actually needs Blackwell/Grace? Protein folding simulations, large-scale foundation model pre-training, real-time multi-modal reasoning at millions of requests/second. These are not typical enterprise workloads.</p>
+        </div>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The DIY Alternative: 40–70% Less</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The refurbished and whitebox GPU server market has matured dramatically. IDC reports a 35% increase in enterprise refurbished server adoption in 2025 alone. The economics are compelling:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">8x A100 80GB server (refurbished)</strong> — ~$189K vs. $315K new (40% savings)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">8x H100 80GB server (preowned)</strong> — ~$218K vs. $325K new (33% savings)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Whitebox / Supermicro configurations</strong> — same silicon, no OEM brand premium, ships in days not months</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Previous-gen Dell/HPE servers</strong> — available immediately from the secondary market at deep discounts</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">The challenge? These servers don't come with the OEM's branded management software. Dell OpenManage won't manage a Supermicro whitebox. HPE OneView won't touch a refurbished Dell. And no OEM tool will manage a mixed fleet of new and used hardware from multiple vendors.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">That's exactly where MOJO comes in.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">MOJO: The AI Factory Operating System — For Any Hardware</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO doesn't care who made your server. Dell, HPE, Lenovo, Supermicro, whitebox — if it has a BMC and speaks Redfish, MOJO manages it. This is what makes the DIY AI factory possible:</p>
         <ul class="space-y-3 text-gray-400 mb-8">
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-            <span><strong class="text-white">Firmware updates</strong> — DPU firmware updated independently via its own Redfish UpdateService, with proper power sequencing</span>
+            <span><strong class="text-white">Zero-touch discovery</strong> — plug in any server, MOJO finds it, classifies the vendor, inventories GPUs and DPUs automatically</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-            <span><strong class="text-white">Power management</strong> — SoC powered off during critical firmware updates, then power-cycled to activate</span>
+            <span><strong class="text-white">Multi-vendor firmware management</strong> — BIOS, BMC, GPU, DPU firmware across mixed hardware, governed and audited</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-            <span><strong class="text-white">Mode tracking</strong> — operational mode (NIC/DPU/Separated Host) recorded and changes audited</span>
+            <span><strong class="text-white">OS provisioning to Kubernetes</strong> — from bare metal to running AI workloads in minutes, not days</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-            <span><strong class="text-white">Health monitoring</strong> — DPU sensors feed into the same anomaly detection as traditional server sensors</span>
+            <span><strong class="text-white">DPU lifecycle management</strong> — BlueField DPUs managed as first-class entities with firmware, mode tracking, and health monitoring</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Liquid cooling monitoring</strong> — coolant temperature, pressure, flow rate with AI-driven anomaly detection</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Procurement freedom</strong> — buy the best deal from any source, MOJO manages it all the same</span>
           </li>
         </ul>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Liquid Cooling Challenge</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">Air-cooled servers have a simple thermal model. Liquid-cooled AI servers are fundamentally different — coolant loops carry heat away from GPUs generating 700W each. MOJO monitors:</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The GPU/DPU Complexity Problem — Solved</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">AI servers are genuinely more complex than traditional racks. A single AI node might present:</p>
         <ul class="space-y-3 text-gray-400 mb-8">
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span><strong class="text-white">Coolant temperature</strong> — supply and return, with delta indicating heat load</span>
+            <span>Host BMC + separate DPU BMC(s) — each with independent firmware stacks</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span><strong class="text-white">Coolant pressure and flow rate</strong> — degradation here affects the entire cooling loop</span>
+            <span>8 GPUs drawing 700W each — thermal management is survival-critical</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            <span><strong class="text-white">Pump status</strong> — pump failure is catastrophic for liquid-cooled infrastructure</span>
+            <span>BlueField DPUs with own ARM SoC, own memory, multiple operational modes (NIC/DPU/Separated Host)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Liquid cooling loops where a single pump failure can take down an entire rack</span>
           </li>
         </ul>
-        <p class="text-gray-400 leading-relaxed mb-6">One liquid cooling failure doesn't just take down a server — it can take down a rack. MOJO's health agent applies the same EWMA baseline learning and Z-score anomaly detection to cooling metrics, catching degradation before it becomes a thermal emergency.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Most infrastructure tools don't even see DPUs. They discover the host BMC and stop there. MOJO discovers and manages DPUs as first-class citizens — firmware updates via their own Redfish endpoint, power sequencing for critical updates, operational mode auditing, and health sensor integration.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">This is what makes a DIY AI factory actually work in production. Without proper DPU management, liquid cooling monitoring, and multi-vendor firmware coordination, you're building infrastructure you can't operate at scale.</p>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Complexity Multiplier</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">Traditional server management surfaces: 1 BMC, 2 CPUs, a few firmware targets, air cooling. AI server management surfaces: host BMC + DPU BMC(s), 8 GPUs with firmware, DPU firmware stack, liquid cooling system, multiple power domains, multi-vendor firmware dependencies.</p>
-        <p class="text-gray-400 leading-relaxed mb-6">When operations that plan firmware updates on a host server need to also coordinate DPU firmware, consider GPU workload state, and verify cooling system health before and after — you need a platform that understands these relationships natively. Not a tool designed for pizza-box servers with a DPU plugin bolted on.</p>
-        <p class="text-gray-400 leading-relaxed mb-6">MOJO was built for this complexity. The parent-child relationship between hosts and DPUs, the liquid cooling monitoring, the multi-vendor firmware coordination — it's all first-class in the platform, not an afterthought.</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Math: DIY AI Factory with MOJO</h2>
+        <div class="bg-white/5 border border-white/10 rounded-xl p-6 mb-8">
+          <p class="text-white font-semibold mb-4">4-Node AI Cluster Comparison</p>
+          <div class="space-y-4 text-gray-400">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+              <span>Branded AI Factory (Dell/HPE, 4x new 8-GPU nodes)</span>
+              <span class="text-white font-mono">$1.2M – $2.4M</span>
+            </div>
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+              <span>DIY with refurbished H100 nodes + MOJO</span>
+              <span class="text-brand-green font-mono">~$875K</span>
+            </div>
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+              <span>DIY with A100 nodes (handles 99% of enterprise workloads) + MOJO</span>
+              <span class="text-brand-green font-mono">~$756K</span>
+            </div>
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-white font-semibold">Savings</span>
+              <span class="text-brand-green font-semibold">37–68% less capital outlay</span>
+            </div>
+          </div>
+        </div>
+        <p class="text-gray-400 leading-relaxed mb-6">And the best part — you're not locked into a single vendor's upgrade cycle. When next-gen GPUs become available on the secondary market at 40% off, you add them to your existing fleet. MOJO manages old and new hardware identically.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Your AI Factory, Your Way</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The enterprise AI future isn't about buying the most expensive hardware available. It's about deploying the right hardware for your workloads, from the vendor and generation that makes economic sense, managed by a platform that doesn't discriminate based on brand or age.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO turns any collection of GPU-equipped servers — new, used, whitebox, multi-vendor — into a unified, managed AI factory with:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Full lifecycle management from discovery to decommissioning</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>AI health agents that predict hardware failures before they impact workloads</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Immutable audit trail for compliance — who changed what, when, on which GPU node</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span>Air-gap capable — run your AI factory in classified or regulated environments</span>
+          </li>
+        </ul>
+
+        <p class="text-gray-400 leading-relaxed mb-6">Stop waiting 40 weeks for a branded AI factory that costs twice what you need to spend. Build your own. Manage it with MOJO.</p>
 
         <hr class="border-white/10 my-8" />
 
-        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about managing AI server infrastructure, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about building your own AI factory, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
       </div>
     </div>
   </article>
