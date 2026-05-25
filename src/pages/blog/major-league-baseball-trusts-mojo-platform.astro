@@ -2,57 +2,122 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
-<Layout title="Major League Baseball Trusts MOJO Platform! — Metify" description="MOJO Platform Orchestrates MLB's Bare Metal infrastructure across 30 major league ballparks.">
+<Layout title="How MLB Manages 60+ Major and Minor League Ballpark K8S Clusters from a Laptop in New Jersey — Metify" description="How Major League Baseball uses MOJO Platform to remotely provision and manage Kubernetes clusters across 60+ ballparks, powering Statcast and Hawk-Eye with 7.2 TB of data per game.">
   <article class="py-24 bg-brand-darker">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
       <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
         Back to Blog
       </a>
-      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">Major League Baseball Trusts MOJO Platform!</h1>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">How MLB Manages 60+ Major and Minor League Ballpark K8S Clusters from a Laptop in New Jersey</h1>
       <p class="text-gray-500 mb-8">March 11, 2024 &middot; By Mike Wagner, CEO</p>
-      <img src="/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg" alt="Major League Baseball Trusts MOJO Platform" class="w-full rounded-xl mb-12" />
+      <img src="/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg" alt="MLB Ballpark Kubernetes Infrastructure" class="w-full rounded-xl mb-12" />
 
       <div class="prose prose-lg prose-invert max-w-none">
-        <p class="text-xl text-gray-300 leading-relaxed mb-8">MOJO Platform Orchestrates MLB's Bare Metal.</p>
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">Every pitch tracked. Every swing measured. Every sprint timed to the hundredth of a second. The stats-heavy applications that millions of baseball fans consume in real time — Statcast, Hawk-Eye, broadcast overlays, and ballpark operations — all run on Kubernetes clusters sitting inside each of MLB's 60+ Major and Minor League ballparks. And every one of those clusters is provisioned, managed, and maintained remotely by a single team operating from New Jersey.</p>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Background</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">At the end of the 2019 baseball season, MLB began a hardware refresh across all our major league ballparks providing us with an opportunity to rebuild our server infrastructure using a DevOps approach.</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Scale of the Problem</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MLB generates <strong class="text-white">7.2 TB of data per game</strong> — tracking ball flight, player movement, bat speed, spin rate, and dozens of other metrics that power everything from the broadcast experience to front-office analytics. That data flows through on-premise Kubernetes clusters at each ballpark before being uploaded to GCP, Metify's technology partner for this solution.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Multiply that across 2,430 regular season Major League games plus thousands of Minor League contests, and the infrastructure requirements are staggering. Each ballpark needs a resilient, high-performance compute cluster capable of running latency-sensitive workloads — capture systems that cannot drop frames, tracking algorithms that must process in real time, and upload pipelines that move terabytes reliably over constrained ballpark networks.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">The challenge: there are no full-time IT staff at these ballparks. No on-site server admins. No local ops team. Every cluster across 60+ venues must be provisioned, patched, recovered, and scaled remotely.</p>
 
-        <h3 class="text-xl font-bold text-white mt-8 mb-4">Goals of the Refresh</h3>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">From VMware to Bare Metal Kubernetes — A Deliberate Evolution</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MLB's Advanced Media team (MLBAM) had been running a traditional VMware stack on physical servers at each ballpark. The infrastructure worked, but the team recognized a clear optimization opportunity: VMs were provisioned with 8 vCPUs and 32 GB of memory to run applications that only required a fraction of those resources (often as little as 500 millicores of CPU and 1 GB of memory). With only four servers per ballpark and limited data center space, every wasted resource mattered.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MLBAM knew they could do it better. Faster. Cheaper. More reliable. More secure. The plan had always been to run Kubernetes directly on bare metal — Anthos on bare metal was the target architecture from the start. By eliminating the virtualization layer, the team achieved:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Right-sized resources</strong> — Pod-level allocation (cpu: 500m, memory: 1Gi) instead of VM-level over-provisioning, maximizing the four-server footprint at each venue</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Simplified recovery</strong> — In the VMware era, if a server went down, all VMs on it went down. With Kubernetes on bare metal, a failed node is replaced and the cluster auto-heals — critical in ballpark environments that aren't climate-controlled data centers</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Eliminated the NAS</strong> — Rook Ceph running within the cluster replaced physical NAS hardware, further reducing the data center footprint and cost</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Massive time savings</strong> — What previously took six hours per park to build from scratch now takes forty minutes, and multiple parks can be provisioned simultaneously</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6"><strong class="text-white">The cost savings from removing VMware licensing alone more than paid for the entire Metify solution in year one.</strong> Every subsequent year is pure operational savings — a compounding return that grows as the league expands to more venues.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Remote Bare Metal Provisioning at Scale</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Here's what makes this remarkable: a single operator in New Jersey can provision a brand-new ballpark cluster from scratch — bare metal to production-ready Kubernetes — without anyone touching the servers on site.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO Platform handles the entire lifecycle remotely via out-of-band management:</p>
         <ul class="space-y-3 text-gray-400 mb-8">
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            Simplify infrastructure management into a single pane of glass across 30 MLB ballparks
+            <span><strong class="text-white">Discovery</strong> — MOJO discovers BMCs via Redfish across the ballpark network, fingerprints the hardware, and inventories every component</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            Streamline app deployments with CI/CD tools
+            <span><strong class="text-white">BIOS & Firmware</strong> — Configures BIOS settings, flashes firmware to baseline, ensures every server is identical before OS deployment</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            Reduce costs by removing virtualization and running everything on Anthos bare metal
+            <span><strong class="text-white">OS Deployment</strong> — PXE boots the servers and lays down the operating system via network — no USB drives, no site visits</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            Create a resilient ballpark cluster that could handle hardware failures
+            <span><strong class="text-white">K8S Bootstrap</strong> — Once the OS is live, the cluster bootstraps itself into a production Kubernetes environment ready for workload deployment</span>
           </li>
           <li class="flex items-start gap-3">
             <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-            Deliver the solution within a tight schedule for the start of the 2021 MLB season
+            <span><strong class="text-white">Ongoing Management</strong> — Firmware patches, security hotfixes, health monitoring, and recovery — all from the same single pane of glass</span>
           </li>
         </ul>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Our Ballpark Infrastructure</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">All of our MLB ballparks have limited data center space and for each, we have a condensed and optimized footprint of four servers. These four servers are responsible for running applications that are critical to the game of baseball including our Statcast and Hawk-Eye solutions.</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Apps That Run on These Clusters</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The Kubernetes clusters at each ballpark power the stats-heavy applications that define the modern baseball experience:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Statcast</strong> — Real-time tracking of every pitch, hit, and player movement. Exit velocity, launch angle, sprint speed — the numbers fans and analysts obsess over</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Hawk-Eye</strong> — Computer vision system that tracks ball flight for automated strike zones, replay reviews, and broadcast graphics</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Broadcast Integration</strong> — Real-time data overlays that power the statistics viewers see during live game broadcasts</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Data Pipeline</strong> — 7.2 TB per game captured, processed locally, and uploaded to GCP for league-wide analytics and historical archiving</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">These are not workloads that tolerate downtime. A dropped frame during a replay challenge or a missed pitch track during a broadcast is visible to millions of viewers in real time. The infrastructure must be bulletproof — and it must be managed without boots on the ground.</p>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Why GKE OnPrem?</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">We have limited space in the ballpark datacenters and Kubernetes provides us with the flexibility we need. In the past we were running a traditional VMware stack on physical machines, over-provisioning each VM with 8 vCPUs and 32G of memory to run applications that only required a fraction of these resources. GKE was an obvious choice, allowing us to allocate the appropriate CPU and Memory resources at the pod level.</p>
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Why This Matters</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">What MLB proved with MOJO is that remote bare metal provisioning isn't a compromise — it's a competitive advantage. By centralizing operations and eliminating the need for on-site IT staff at each venue, MLB achieved:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Consistency</strong> — Every ballpark runs an identical, reproducible cluster configuration</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Speed</strong> — New ballpark clusters go from racked hardware to production workloads without a site visit</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Resilience</strong> — Hardware failures are detected and remediated remotely before they impact game operations</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Cost Efficiency</strong> — VMware removal paid for the MOJO solution in year one. No on-site IT staff needed at any venue.</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">The lesson extends far beyond baseball. Any organization managing distributed bare metal infrastructure — retail chains, hospital networks, broadcast facilities, bank branches — faces the same fundamental challenge: how do you maintain consistency, security, and performance across dozens or hundreds of remote sites without putting a server admin at each one?</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MLB answered that question with MOJO. From a laptop in New Jersey, a small team manages the infrastructure that delivers America's pastime to millions of fans every night — and they've never had to board a plane to do it.</p>
 
-        <h2 class="text-2xl font-bold text-white mt-10 mb-4">How Did We Do It?</h2>
-        <p class="text-gray-400 leading-relaxed mb-6">Through automation and a lot of hard work. Deploying new technology to 30 data centers is no easy task without the use of automation tools.</p>
-        <p class="text-gray-400 leading-relaxed mb-6">This was achieved by setting up and using <strong class="text-white">MOJO</strong> — a hardware orchestration tool produced by Metify that utilizes Redfish to interact with the bare metal servers and PXE boot them. One MOJO instance can manage hundreds of bare metal servers, greatly reducing the level of effort required. MOJO also allows us to manage BIOS and firmware of the servers so we are able to keep pace with patches and security hotfixes.</p>
-        <p class="text-gray-400 leading-relaxed mb-6">By running Anthos on bare metal without VMware, we have a much cleaner and simpler environment to manage. The cost savings alone are enough to make the switch worthwhile.</p>
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about remote bare metal provisioning for distributed Kubernetes clusters, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
       </div>
     </div>
   </article>
