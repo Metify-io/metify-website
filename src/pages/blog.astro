@@ -262,6 +262,13 @@ const posts = [
   },
   ...cmsPostsMapped,
 ];
+
+// Sort all posts by date descending (newest first)
+posts.sort((a, b) => {
+  const dateA = a._sortDate ? a._sortDate : new Date(a.date);
+  const dateB = b._sortDate ? b._sortDate : new Date(b.date);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout title="Blog — Metify" description="Insights and news about bare metal and data center solutions.">
