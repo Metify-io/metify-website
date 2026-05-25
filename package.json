@@ -7,14 +7,21 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:cms": "tinacms dev -c \"astro dev\"",
     "build": "astro build",
+    "build:cms": "tinacms build && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/vercel": "^10.0.6",
+    "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^6.3.1",
     "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^2.3.1",
+    "tinacms": "^3.8.1"
   }
 }

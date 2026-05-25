@@ -1,5 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch CMS-managed posts from content/blog/
+const cmsPosts = await getCollection('blog');
+const cmsPostsMapped = cmsPosts.map((post) => ({
+  title: post.data.title,
+  excerpt: post.data.excerpt,
+  date: post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+  author: post.data.author,
+  image: post.data.image || '/images/screenshots/Hero-Image.png',
+  slug: `/blog/cms/${post.data.slug}`,
+  _sortDate: post.data.date,
+}));
 
 const posts = [
   {
@@ -247,6 +260,7 @@ const posts = [
     image: '/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg',
     slug: '/blog/major-league-baseball-trusts-mojo-platform',
   },
+  ...cmsPostsMapped,
 ];
 ---
 
