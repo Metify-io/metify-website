@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="AI Servers Are 10x More Complex Than Traditional Racks. MOJO Manages the Difference. — Metify" description="GPUs drawing 700W each, BlueField DPUs with their own BMCs, liquid cooling loops with critical failure modes. MOJO manages the full AI infrastructure lifecycle.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">AI Servers Are 10x More Complex Than Traditional Racks. MOJO Manages the Difference.</h1>
+      <p class="text-gray-500 mb-8">August 5, 2025 &middot; By Aaron Allred, VP of Technology</p>
+      <img src="/images/screenshots/Hero-Image.png" alt="AI Server GPU DPU Management" class="w-full rounded-xl mb-12" />
+
+      <div class="prose prose-lg prose-invert max-w-none">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">A traditional 2U server has a BMC, CPUs, DIMMs, fans, and PSUs. An AI server cluster has eight NVIDIA H100s drawing 700W each, BlueField DPUs that are independent ARM-based compute systems, and liquid cooling with critical failure modes. The hardware bill for a single AI rack can approach $2 million — and most management tooling was designed for $15,000 pizza-box servers.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The DPU Problem</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">NVIDIA BlueField DPUs (BF2, BF3, BF4) are the most misunderstood component in modern AI infrastructure. They're marketed as "SmartNICs." They're not. They're independent compute systems:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Own ARM-based SoC (processor) and memory</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Own BMC (Baseboard Management Controller) with own Redfish endpoint</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Own firmware stack (UEFI, ATF, NIC firmware) — managed independently from host</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Multiple operational modes: NIC Mode, DPU Mode, Separated Host Mode</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">Most infrastructure tools don't even see DPUs. They discover the host server's BMC and stop there. The DPU is invisible — an unmanaged compute system inside a server that's supposedly under management.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">How MOJO Manages DPUs</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO discovers and manages DPUs as first-class citizens. Each DPU is registered as a separate managed entity linked to its parent host server:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Firmware updates</strong> — DPU firmware updated independently via its own Redfish UpdateService, with proper power sequencing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Power management</strong> — SoC powered off during critical firmware updates, then power-cycled to activate</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Mode tracking</strong> — operational mode (NIC/DPU/Separated Host) recorded and changes audited</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Health monitoring</strong> — DPU sensors feed into the same anomaly detection as traditional server sensors</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Liquid Cooling Challenge</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Air-cooled servers have a simple thermal model. Liquid-cooled AI servers are fundamentally different — coolant loops carry heat away from GPUs generating 700W each. MOJO monitors:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Coolant temperature</strong> — supply and return, with delta indicating heat load</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Coolant pressure and flow rate</strong> — degradation here affects the entire cooling loop</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Pump status</strong> — pump failure is catastrophic for liquid-cooled infrastructure</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">One liquid cooling failure doesn't just take down a server — it can take down a rack. MOJO's health agent applies the same EWMA baseline learning and Z-score anomaly detection to cooling metrics, catching degradation before it becomes a thermal emergency.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Complexity Multiplier</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Traditional server management surfaces: 1 BMC, 2 CPUs, a few firmware targets, air cooling. AI server management surfaces: host BMC + DPU BMC(s), 8 GPUs with firmware, DPU firmware stack, liquid cooling system, multiple power domains, multi-vendor firmware dependencies.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">When operations that plan firmware updates on a host server need to also coordinate DPU firmware, consider GPU workload state, and verify cooling system health before and after — you need a platform that understands these relationships natively. Not a tool designed for pizza-box servers with a DPU plugin bolted on.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO was built for this complexity. The parent-child relationship between hosts and DPUs, the liquid cooling monitoring, the multi-vendor firmware coordination — it's all first-class in the platform, not an afterthought.</p>
+
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about managing AI server infrastructure, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+      </div>
+    </div>
+  </article>
+</Layout>

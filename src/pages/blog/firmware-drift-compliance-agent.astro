@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Firmware Drift Is Your Biggest Security Risk — And Only an AI Agent Can Fix It at Scale — Metify" description="CVE-2024-0762, Zenbleed, Conti ransomware — firmware vulnerabilities are actively exploited and invisible to traditional security tools. MOJO's compliance agent fixes drift continuously.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">Firmware Drift Is Your Biggest Security Risk — And Only an AI Agent Can Fix It at Scale</h1>
+      <p class="text-gray-500 mb-8">March 18, 2025 &middot; By Aaron Allred, VP of Technology</p>
+      <img src="/images/screenshots/Hero-Image.png" alt="Firmware Compliance at Scale" class="w-full rounded-xl mb-12" />
+
+      <div class="prose prose-lg prose-invert max-w-none">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">In 2024, CVE-2024-0762 — a buffer overflow in Phoenix SecureCore UEFI firmware — affected servers from Lenovo, Dell, HP, and others. In 2023, CVE-2023-20593 (Zenbleed) let attackers exfiltrate data through AMD CPU microcode. In 2022, the Conti ransomware group specifically targeted Intel Management Engine firmware as a persistence vector. If you don't know what firmware is running on every server in your fleet, you have a security gap that no amount of network segmentation will close.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Visibility Problem</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Firmware vulnerabilities persist across OS reinstalls and are invisible to traditional security tools. Your EDR doesn't scan BIOS. Your SIEM doesn't monitor BMC firmware versions. Your patch management system handles OS packages, not UEFI.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Most organizations use vendor-specific management tools — one for Dell, one for HPE, one for Lenovo. Each tool has its own baseline format, its own update procedure, its own compliance report. Cross-vendor compliance requires manual reconciliation: export from each tool, compare in a spreadsheet, identify gaps, plan remediation per vendor.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Even within a single vendor's tool, compliance is <em>visible</em> but not <em>actionable</em> at scale. Remediating firmware drift means:</p>
+        <ol class="space-y-2 text-gray-400 mb-8 list-decimal list-inside">
+          <li>Identifying non-compliant components per server (BIOS, BMC, storage controller, NIC)</li>
+          <li>Determining the correct target firmware version for each component on each model</li>
+          <li>Verifying firmware availability in your local repository</li>
+          <li>Scheduling maintenance windows</li>
+          <li>Executing updates in batches (limit the blast radius)</li>
+          <li>Handling failures (network timeouts, BMC errors, prerequisite mismatches)</li>
+          <li>Validating compliance post-update</li>
+          <li>Documenting everything for audit</li>
+        </ol>
+        <p class="text-gray-400 leading-relaxed mb-6">Each step is manual. Each requires expertise. For 47 servers, it's a multi-day project. For 1,000 mixed-vendor servers, it's a continuous, never-ending task that most teams defer. That deferred remediation is your security risk.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">How MOJO's Compliance Agent Works</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO's compliance agent treats firmware drift as a continuous, automated process — not a quarterly project.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Step 1: Define Baselines Once</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">A firmware baseline in MOJO defines the desired state: which BIOS version, which BMC version, which storage controller firmware, which NIC firmware. Baselines can be scoped per vendor, per model, per site, or per resource pool. One baseline definition covers all vendors.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Step 2: Continuous Evaluation</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">The compliance agent doesn't wait for someone to run a report. It continuously evaluates every server against its applicable baseline. When a server's firmware doesn't match — whether the baseline was updated, a server was newly discovered, or an update failed — the agent flags it. The evaluation works across vendors because MOJO's Redfish drivers normalize firmware inventory into a unified data model.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Step 3: Automated Remediation Planning</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">When drift is detected, the compliance agent generates a remediation plan:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Identify non-compliant components per server</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Determine target versions from baseline</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Check firmware availability in local repository</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Resolve dependencies (some updates require specific BIOS versions first)</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span>Generate a staged rollout — batch servers, schedule activation windows, include rollback triggers</span>
+          </li>
+        </ul>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Step 4: Governance Approval</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">Firmware updates are destructive operations. The governance engine ensures a designated approver reviews the plan, scope is clearly defined, rollback procedure is documented, and the audit trail captures who approved what, when, and why. One approval — not 47 individual change tickets.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Step 5: Orchestrated Execution</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">Once approved: staged batches update a subset first, validate, then proceed. Per-vendor procedures handle Dell's update process differently from HPE's. Failures are logged, classified, and either retried or escalated based on type. Post-update validation confirms compliance automatically.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Result: Continuous Compliance</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">With MOJO's compliance agent, firmware drift detection and remediation becomes a continuous, automated cycle. Not a quarterly fire drill. Not a multi-week project. A background process that keeps your fleet compliant while your team focuses on work that actually differentiates your business.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">When auditors ask "are all servers running approved firmware?" — the answer is in MOJO's compliance dashboard. Real-time. Cross-vendor. With a full audit trail of every evaluation, every remediation, every approval.</p>
+
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about continuous firmware compliance, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+      </div>
+    </div>
+  </article>
+</Layout>

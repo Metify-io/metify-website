@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Server Decommissioning Done Right: Chain of Custody from First Boot to Last Wipe — Metify" description="Most tools track servers from provisioning onward. MOJO tracks the complete lifecycle including decommissioning — secure wipe, compliance evidence, and immutable audit trail.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">Server Decommissioning Done Right: Chain of Custody from First Boot to Last Wipe</h1>
+      <p class="text-gray-500 mb-8">October 7, 2025 &middot; By Mike Wagner, CEO</p>
+      <img src="/images/screenshots/Hero-Image.png" alt="Server Decommissioning" class="w-full rounded-xl mb-12" />
+
+      <div class="prose prose-lg prose-invert max-w-none">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">Every server has an end of life. The question is whether you can prove — to auditors, regulators, and security teams — exactly what happened to it from first boot to last wipe. Most infrastructure tools track servers from provisioning forward. Decommissioning is an afterthought — a manual process with paper checklists and unverifiable claims about data destruction.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Why Decommissioning Matters More Than You Think</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">In regulated industries, decommissioning isn't just "turn it off and send it back to the vendor." It's a compliance event:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">PCI DSS</strong> requires verifiable data destruction for any system that processed cardholder data</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">HIPAA</strong> mandates documented media sanitization before hardware disposal</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">NIST 800-88</strong> defines media sanitization guidelines requiring documented, verifiable procedures</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">SOX</strong> requires chain of custody documentation for systems involved in financial reporting</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">When an auditor asks "prove this server's data was securely destroyed," the answer can't be "we have a spreadsheet and a verbal confirmation from the ops team." You need an immutable, timestamped record of every step in the decommissioning process.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">MOJO's System of Record — Birth to Death</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO tracks every server from the moment it's discovered to the moment it leaves your environment. The system of record captures:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Discovery</strong> — when was this server first seen, what was its initial state</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Every change</strong> — firmware updates, OS provisions, configuration changes, who approved them</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Credential lifecycle</strong> — what license keys or credentials were deployed, when they were rotated or revoked</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">Decommissioning</strong> — secure wipe execution, DNS cleanup, DHCP release, inventory removal, final state snapshot</span>
+          </li>
+        </ul>
+        <p class="text-gray-400 leading-relaxed mb-6">All of this is immutable. Timestamped. Tied to the operator who initiated or approved each action. When an auditor asks for the chain of custody on server SN-47829, you pull it from MOJO — complete, tamper-evident, and irrefutable.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Decommissioning Workflow</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO treats decommissioning as a first-class lifecycle event:</p>
+        <ol class="space-y-2 text-gray-400 mb-8 list-decimal list-inside">
+          <li><strong class="text-white">Initiate</strong> — mark server for decommissioning, capture final state snapshot</li>
+          <li><strong class="text-white">Credential revocation</strong> — revoke deployed licenses, rotate shared credentials</li>
+          <li><strong class="text-white">Secure wipe</strong> — execute data destruction per policy (NIST 800-88 Clear, Purge, or Destroy)</li>
+          <li><strong class="text-white">Network cleanup</strong> — release DHCP reservation, remove DNS records, reclaim IP address</li>
+          <li><strong class="text-white">Inventory update</strong> — move to decommissioned state, retain full history</li>
+          <li><strong class="text-white">Governance</strong> — designated approver confirms completion, audit trail sealed</li>
+        </ol>
+        <p class="text-gray-400 leading-relaxed mb-6">Every step is logged. Every step requires appropriate authorization. The server's complete history remains in the system of record — available for audit indefinitely — even after the physical hardware leaves your facility.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">What Other Tools Miss</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Most infrastructure management platforms stop at provisioning and monitoring. They don't track decommissioning because they don't maintain a true system of record — they maintain a current-state inventory. When a server is removed, its history disappears.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO's architecture is different. The system of record is append-only and immutable. Server history is never deleted — it's a permanent, auditable record of every action taken on every server in your fleet, from discovery to disposal.</p>
+
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about lifecycle management and compliance, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+      </div>
+    </div>
+  </article>
+</Layout>
