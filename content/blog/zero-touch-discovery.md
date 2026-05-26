@@ -1,8 +1,8 @@
 ---
-title: "Zero Touch Discovery: Why It's the Foundation of Modern Data Centers"
+title: "Automatic Discovery of Servers, Storage, Sensors and More — The Foundation of the Automated Data Center"
 date: "2025-02-04"
 author: "Aaron Allred, VP of Technology"
-excerpt: "Before you can manage a server, you have to know it exists. MOJO's zero-touch discovery eliminates manual BMC registration and builds real-time inventory automatically."
+excerpt: "Before you can manage a server, you have to know it exists. MOJO automatically discovers servers, storage, sensors and more — eliminating manual BMC registration and building real-time inventory automatically."
 image: "/images/screenshots/Hero-Image.png"
 slug: "zero-touch-discovery"
 ---
