@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metify Blog CMS</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #1a1a2e;
+        color: #e0e0e0;
+      }
+      .container {
+        text-align: center;
+        padding: 2rem;
+        max-width: 600px;
+      }
+      h1 { color: #a3cc3a; margin-bottom: 1rem; }
+      p { line-height: 1.6; margin-bottom: 1.5rem; }
+      code {
+        background: #0d0d1a;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+      }
+      .note {
+        background: #0d0d1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: left;
+      }
+      .note h3 { color: #a3cc3a; margin-top: 0; }
+      .note ol { padding-left: 1.5rem; }
+      .note li { margin-bottom: 0.5rem; }
+      a { color: #a3cc3a; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Metify Blog CMS</h1>
+      <p>This page becomes the TinaCMS visual editor once TinaCloud is connected.</p>
+      
+      <div class="note">
+        <h3>Setup Instructions</h3>
+        <ol>
+          <li>Go to <a href="https://app.tina.io" target="_blank">app.tina.io</a> and sign in with GitHub</li>
+          <li>Create a new project and connect the <code>Metify-io/metify-website</code> repo</li>
+          <li>Copy your <strong>Client ID</strong> and <strong>Token</strong></li>
+          <li>Add these as Vercel environment variables:
+            <br><code>NEXT_PUBLIC_TINA_CLIENT_ID</code>
+            <br><code>TINA_TOKEN</code>
+          </li>
+          <li>Update the build command to: <code>npm run build:cms</code></li>
+          <li>Redeploy — the CMS editor will appear here</li>
+        </ol>
+        <p style="margin-bottom: 0;"><strong>Local development:</strong> Run <code>npm run dev:cms</code> to edit content locally with the CMS.</p>
+      </div>
+    </div>
+  </body>
+</html>

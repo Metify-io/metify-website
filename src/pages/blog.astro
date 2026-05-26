@@ -1,7 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch CMS-managed posts from content/blog/
+const cmsPosts = await getCollection('blog');
+const cmsPostsMapped = cmsPosts.map((post) => ({
+  title: post.data.title,
+  excerpt: post.data.excerpt,
+  date: post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+  author: post.data.author,
+  image: post.data.image || '/images/screenshots/Hero-Image.png',
+  slug: `/blog/cms/${post.data.slug}`,
+  _sortDate: post.data.date,
+}));
 
 const posts = [
+  {
+    title: 'The MOJO Advantage — Whitepaper',
+    excerpt: 'How intelligent automation, hardware versatility, system of record, and operational simplicity are redefining enterprise bare metal. Five dimensions of advantage for the post-VMware era.',
+    date: 'June 16, 2026',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/the-mojo-advantage',
+  },
   {
     title: 'Security Isn\'t a Feature — It\'s the Architecture',
     excerpt: 'How MOJO protects your bare-metal fleet from the outside in — six layers of security from perimeter hardening to MGC federation, all enforced architecturally. LDAP, RBAC, immutable audit trails, mTLS, and NIST 800-53 alignment.',
@@ -9,27 +29,6 @@ const posts = [
     author: 'Aaron Allred, VP of Technology',
     image: '/images/blog/security-six-layers.svg',
     slug: '/blog/security-deep-dive',
-  },
-  {
-    title: 'The VMware Exit Is Real — And the Next Platform Isn\'t Another Hypervisor',
-    excerpt: 'Broadcom\'s acquisition of VMware changed the economics of virtualization overnight. The real opportunity isn\'t picking a different hypervisor — it\'s rethinking the operational layer with AI-native infrastructure.',
-    date: 'April 22, 2025',
-    image: '/images/blog/vmware-exit-hero.svg',
-    slug: '/blog/vmware-exit-ai-native',
-  },
-  {
-    title: 'Why Metify Is All-In on Red Hat',
-    excerpt: 'Eight years at Red Hat taught me what works in the ecosystem: ISVs whose products make Red Hat\'s products materially better. MOJO is the bare-metal operations layer that makes the Red Hat stack land cleanly on hardware.',
-    date: 'May 5, 2026',
-    image: '/images/screenshots/Hero-Image.png',
-    slug: '/blog/red-hat-partnership',
-  },
-  {
-    title: 'The MOJO Advantage — Whitepaper',
-    excerpt: 'How intelligent automation, hardware versatility, system of record, and operational simplicity are redefining enterprise bare metal. Five dimensions of advantage for the post-VMware era.',
-    date: 'June 16, 2026',
-    image: '/images/screenshots/Hero-Image.png',
-    slug: '/blog/the-mojo-advantage',
   },
   {
     title: '50 Sites. One Orchestrator. How MOJO\'s Global Controller Turns Distributed Bare Metal into a Single Fleet',
@@ -40,12 +39,170 @@ const posts = [
     slug: '/blog/50-sites-one-orchestrator-mgc',
   },
   {
-    title: 'How MLB Manages 60+ Major and Minor League Ballpark K8S Clusters from a Laptop in New Jersey',
-    excerpt: 'Statcast, Hawk-Eye, and 7.2 TB of data per game — all running on Kubernetes clusters provisioned remotely across 60+ ballparks. How MLB eliminated VMware and manages distributed bare metal infrastructure without on-site IT staff.',
-    date: 'March 11, 2024',
+    title: 'Why Metify Is All-In on Red Hat',
+    excerpt: 'Eight years at Red Hat taught me what works in the ecosystem: ISVs whose products make Red Hat\'s products materially better. MOJO is the bare-metal operations layer that makes the Red Hat stack land cleanly on hardware.',
+    date: 'May 5, 2026',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/red-hat-partnership',
+  },
+  {
+    title: '2025 in Review: The Year Bare Metal Got Smart',
+    excerpt: 'A look back at 2025 — the year AI agents went from roadmaps to production, VMware migrations accelerated, and bare-metal infrastructure became intelligent.',
+    date: 'December 16, 2025',
     author: 'Mike Wagner, CEO',
-    image: '/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg',
-    slug: '/blog/major-league-baseball-trusts-mojo-platform',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/2025-year-in-review',
+  },
+  {
+    title: 'Bare Metal Infrastructure Pipelines: From Discovery to Production in One Workflow',
+    excerpt: 'Software has CI/CD pipelines. Bare metal has manual procedures. MOJO changes that with automated, governed, end-to-end workflows from power-on to production.',
+    date: 'December 2, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/bare-metal-infrastructure-pipelines',
+  },
+  {
+    title: 'Scaling to 10,000 Servers: Lessons from Fortune 500 Bare Metal Fleet Management',
+    excerpt: 'What changes when your fleet hits 10,000 servers? Everything. Real lessons from Fortune 500 deployments on what breaks, what matters, and how AI agents change the equation.',
+    date: 'November 18, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/scaling-to-10000-servers',
+  },
+  {
+    title: 'Continuous Compliance Isn\'t a Policy Document — It\'s an Architecture',
+    excerpt: 'Most compliance is a quarterly audit. MOJO makes compliance a continuous, automated property of your infrastructure — baselines, agents, governance, and immutable audit trails.',
+    date: 'November 4, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/continuous-compliance-architecture',
+  },
+  {
+    title: 'Kubernetes on Bare Metal: What Nobody Tells You About Day 2',
+    excerpt: 'Everyone writes about deploying K8s on bare metal. Nobody writes about firmware updates under live clusters, node replacements, or distributed upgrades across 60 sites.',
+    date: 'October 21, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/kubernetes-bare-metal-day-2',
+  },
+  {
+    title: 'Server Decommissioning Done Right: Chain of Custody from First Boot to Last Wipe',
+    excerpt: 'Most tools track servers from provisioning onward. MOJO tracks the complete lifecycle — secure wipe, compliance evidence, and immutable audit trail from discovery to disposal.',
+    date: 'October 7, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/server-decommissioning-chain-of-custody',
+  },
+  {
+    title: 'Rack Scale Automation: Why Single-Server Thinking Is Holding Your Data Center Back',
+    excerpt: 'Stop managing servers one at a time. MOJO\'s resource pools, bulk operations, and fleet-level AI agents bring rack-scale thinking to bare-metal operations.',
+    date: 'September 16, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/rack-scale-automation',
+  },
+  {
+    title: 'You\'ve Decided to Leave the Cloud. MOJO Is the Operating System for What Comes Next.',
+    excerpt: 'Cloud repatriation fails when teams bring workloads home without the operations model. MOJO provides cloud-simple operations on bare metal — including native DDI.',
+    date: 'September 2, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/cloud-repatriation-ddi',
+  },
+  {
+    title: 'The Real Cost of Slow Provisioning — And What Happens When It Takes One Sentence Instead of One Day',
+    excerpt: 'Every day a server sits unprovisioned is revenue lost. MOJO\'s orchestrator turns natural-language instructions into parallel multi-step execution.',
+    date: 'August 19, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/real-cost-slow-provisioning',
+  },
+  {
+    title: 'DIY AI Factories Made Easy with MOJO',
+    excerpt: 'You don\'t need a $500K branded AI factory. MOJO lets enterprises build AI infrastructure from any vendor\'s hardware — including refurbished servers that handle 99% of enterprise AI workloads at a fraction of the cost.',
+    date: 'August 5, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/ai-servers-gpu-dpu',
+  },
+  {
+    title: 'Why Vendor Lock-In Is the Real Infrastructure Tax — And How Multi-Vendor Management Eliminates It',
+    excerpt: 'Every vendor wants you locked into their management platform. MOJO manages Dell, HPE, Lenovo, Supermicro, and NVIDIA natively — one platform, zero lock-in.',
+    date: 'July 15, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/vendor-lock-in-tax',
+  },
+  {
+    title: 'Every PC Gets Intel vPro. Why Doesn\'t Every Server Get an AI Agent?',
+    excerpt: 'A $1,200 laptop ships with AI-assisted remote management. A $30,000 server still gets managed manually. MOJO gives every server an autonomous AI caretaker.',
+    date: 'July 1, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/vpro-for-servers',
+  },
+  {
+    title: '28 Person-Hours Saved Per Week — Now Imagine an AI Agent That Never Clocks Out',
+    excerpt: 'Traditional automation saves time per task. MOJO\'s AI agents eliminate the tasks entirely — orchestrating multi-step operations from natural-language instructions.',
+    date: 'June 17, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/28-hours-ai-never-clocks-out',
+  },
+  {
+    title: 'Your Data Center Has 10,000 Sensors. MOJO\'s Health Agent Is the Only One Listening.',
+    excerpt: 'Traditional monitoring is expensive noise. MOJO\'s health agent uses AI to reason about fleet telemetry — learned baselines, Z-score anomaly detection, and autonomous action.',
+    date: 'June 3, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/10000-sensors-health-agent',
+  },
+  {
+    title: 'The CrowdStrike Moment for the Data Center',
+    excerpt: '8.5 million devices bricked by one bad update. Your data center\'s version is a bad firmware push at fleet scale. MOJO\'s health agent prevents the incident before it happens.',
+    date: 'May 20, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/crowdstrike-moment-health-agent',
+  },
+  {
+    title: 'Open Source Gave You Provisioning Primitives. MOJO Gives You an AI-Native Platform.',
+    excerpt: 'Open-source tools cover steps 1-4 of the bare-metal lifecycle. Steps 5 through 10 are where enterprises spend 80% of their operations time — and where MOJO delivers.',
+    date: 'May 6, 2025',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/open-source-vs-ai-platform',
+  },
+  {
+    title: 'The VMware Exit Is Real — And the Next Platform Isn\'t Another Hypervisor',
+    excerpt: 'Broadcom\'s acquisition of VMware changed the economics of virtualization overnight. The real opportunity isn\'t picking a different hypervisor — it\'s rethinking the operational layer with AI-native infrastructure.',
+    date: 'April 22, 2025',
+    image: '/images/blog/vmware-exit-hero.svg',
+    slug: '/blog/vmware-exit-ai-native',
+  },
+  {
+    title: 'Redfish Is the Universal Language of Hardware. MOJO\'s Agents Are the First to Actually Speak It.',
+    excerpt: 'Every vendor implements Redfish differently. MOJO\'s driver layer normalizes the chaos into a unified data model that AI agents can reason about across all vendors.',
+    date: 'April 8, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/redfish-ai-agents',
+  },
+  {
+    title: 'Firmware Drift Is Your Biggest Security Risk — And Only an AI Agent Can Fix It at Scale',
+    excerpt: 'CVE-2024-0762, Zenbleed, Conti ransomware — firmware vulnerabilities are actively exploited and invisible to traditional security tools. MOJO\'s compliance agent fixes drift continuously.',
+    date: 'March 18, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/firmware-drift-compliance-agent',
+  },
+  {
+    title: 'When "Cloud-Connected" Isn\'t an Option: How MOJO Manages Bare Metal in Air-Gapped Environments',
+    excerpt: 'MOJO was designed air-gap-first — single-binary deployment, native DDI, offline AI agents, and zero phone-home. Not air-gap-compatible. Air-gap-first.',
+    date: 'March 4, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/air-gap-first',
   },
   {
     title: "Top 10 Pain-Points Cited by CIO's for Cloud Repatriation",
@@ -54,6 +211,30 @@ const posts = [
     author: 'Mike Wagner, CEO',
     image: '/images/blog/Top-10-Paint-Points-Cited-CIOs-scaled.jpg',
     slug: '/blog/top-10-pain-points-cited-by-cios',
+  },
+  {
+    title: 'Zero Touch Discovery: Why It\'s the Foundation of Modern Data Centers',
+    excerpt: 'Before you can manage a server, you have to know it exists. MOJO\'s zero-touch discovery eliminates manual BMC registration and builds real-time inventory automatically.',
+    date: 'February 4, 2025',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/zero-touch-discovery',
+  },
+  {
+    title: 'Metify and Taikun Announce Global Strategic Partnership',
+    excerpt: 'Metify and Taikun have collaborated to build an industry-first solution for unifying operations for Infrastructure and DevOps teams.',
+    date: 'December 10, 2024',
+    author: 'Mike Wagner, CEO',
+    image: '/images/screenshots/Hero-Image.png',
+    slug: '/blog/metify-taikun-partnership',
+  },
+  {
+    title: "Run Containers on Bare Metal or VM's with MOJO Platform",
+    excerpt: 'According to a recent IDC survey, the enterprise market is roughly split 50/50 between running containers on-premises. MOJO makes deployment seamless.',
+    date: 'April 22, 2024',
+    author: 'Aaron Allred, VP of Technology',
+    image: '/images/blog/Bare-Metal.jpg',
+    slug: '/blog/run-containers-on-bare-metal',
   },
   {
     title: 'Cloud Exit Saves 37 Signals $1Million per Year!',
@@ -72,22 +253,22 @@ const posts = [
     slug: '/blog/bare-metal-private-clouds',
   },
   {
-    title: "Run Containers on Bare Metal or VM's with MOJO Platform",
-    excerpt: 'According to a recent IDC survey, the enterprise market is roughly split 50/50 between running containers on-premises. MOJO makes deployment seamless.',
-    date: 'April 22, 2024',
-    author: 'Aaron Allred, VP of Technology',
-    image: '/images/blog/Bare-Metal.jpg',
-    slug: '/blog/run-containers-on-bare-metal',
-  },
-  {
-    title: 'Metify and Taikun Announce Global Strategic Partnership',
-    excerpt: 'Metify and Taikun have collaborated to build an industry-first solution for unifying operations for Infrastructure and DevOps teams.',
-    date: 'December 10, 2024',
+    title: 'How MLB Manages 60+ Major and Minor League Ballpark K8S Clusters from a Laptop in New Jersey',
+    excerpt: 'Statcast, Hawk-Eye, and 7.2 TB of data per game — all running on Kubernetes clusters provisioned remotely across 60+ ballparks. How MLB eliminated VMware and manages distributed bare metal infrastructure without on-site IT staff.',
+    date: 'March 11, 2024',
     author: 'Mike Wagner, CEO',
-    image: '/images/screenshots/Hero-Image.png',
-    slug: '/blog/metify-taikun-partnership',
+    image: '/images/blog/Major-League-Baseball-Trusts-Mojo-Platform.jpg',
+    slug: '/blog/major-league-baseball-trusts-mojo-platform',
   },
+  ...cmsPostsMapped,
 ];
+
+// Sort all posts by date descending (newest first)
+posts.sort((a, b) => {
+  const dateA = a._sortDate ? a._sortDate : new Date(a.date);
+  const dateB = b._sortDate ? b._sortDate : new Date(b.date);
+  return dateB.getTime() - dateA.getTime();
+});
 ---
 
 <Layout title="Blog — Metify" description="Insights and news about bare metal and data center solutions.">

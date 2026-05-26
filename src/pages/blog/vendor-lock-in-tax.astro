@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Why Vendor Lock-In Is the Real Infrastructure Tax — And How Multi-Vendor Management Eliminates It — Metify" description="Every vendor wants you locked into their management platform. MOJO manages Dell, HPE, Lenovo, Supermicro, and NVIDIA natively — one platform, all vendors, zero lock-in.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">Why Vendor Lock-In Is the Real Infrastructure Tax — And How Multi-Vendor Management Eliminates It</h1>
+      <p class="text-gray-500 mb-8">July 15, 2025 &middot; By Mike Wagner, CEO</p>
+      <img src="/images/screenshots/Hero-Image.png" alt="Vendor Lock-In Freedom" class="w-full rounded-xl mb-12" />
+
+      <div class="prose prose-lg prose-invert max-w-none">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">Every server vendor sells a management platform alongside their hardware. Dell OpenManage Enterprise. HPE OneView. Lenovo XClarity. Each excellent at managing that vendor's hardware. Each useless for anything else. If you run hardware from multiple vendors — and every enterprise does — you're paying a hidden tax: multiple management tools, multiple skill sets, multiple compliance workflows, and zero cross-vendor intelligence.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Hidden Cost of Single-Vendor Tools</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The lock-in tax isn't just licensing fees. It's operational complexity:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Parallel compliance workflows</strong> — firmware baselines defined separately per vendor tool, evaluated separately, remediated separately</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Duplicated training</strong> — your team needs expertise in every vendor's management interface, API, and update procedures</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">No cross-vendor correlation</strong> — when a problem affects servers from multiple vendors, each tool sees only its portion</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Procurement constraints</strong> — when your management stack only works with one vendor, you lose negotiating leverage on hardware pricing</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Integration overhead</strong> — getting data out of three vendor tools into a unified view requires custom scripting and constant maintenance</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">One Platform, All Vendors</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO manages Dell, HPE, Lenovo, Supermicro, Intel (vPro), and NVIDIA (BlueField DPU) hardware natively. Not through adapters. Not through plugins. Through deep, vendor-specific Redfish drivers that normalize every vendor's implementation into a consistent data model.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">What this means in practice:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">One firmware baseline</strong> covers all vendors. The compliance agent evaluates and remediates across your entire fleet, not per-vendor.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">One health agent</strong> monitors all hardware. Cross-vendor correlation identifies patterns no single-vendor tool can see.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">One audit trail</strong> tracks all operations regardless of vendor — complete chain of custody across the fleet.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+            <span><strong class="text-white">One team, one skill set.</strong> Your ops team learns one platform, not three.</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Procurement Freedom</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">When your management layer is vendor-agnostic, you can buy hardware on merit — performance, price, availability, support quality. Add a new vendor to your environment and the operational overhead is zero. MOJO's driver layer handles the normalization. Your compliance baselines, health monitoring, and provisioning workflows work immediately with the new hardware.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">A customer who added Lenovo servers alongside their existing Dell and HPE fleet reported: "No new scripts. No new dashboards. The compliance agent saw them as servers with firmware, same as everything else." That's what freedom from vendor lock-in looks like operationally.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Tax You're Paying Today</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">If you're running hardware from more than one vendor — and you are — add up the real cost: multiple management licenses, multiple training programs, multiple compliance workflows, integration scripts maintained by your most expensive engineers, and the procurement leverage you've surrendered by being locked in.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">That's the vendor lock-in tax. MOJO eliminates it.</p>
+
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about multi-vendor fleet management, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+      </div>
+    </div>
+  </article>
+</Layout>

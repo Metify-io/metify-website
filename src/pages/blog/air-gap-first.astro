@@ -1,0 +1,82 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="When 'Cloud-Connected' Isn't an Option: How MOJO Manages Bare Metal in Air-Gapped Environments — Metify" description="MOJO was designed air-gap-first — single-binary deployment, native DDI, offline AI agents, and zero phone-home. Not air-gap-compatible. Air-gap-first.">
+  <article class="py-24 bg-brand-darker">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <a href="/blog" class="text-brand-green text-sm font-semibold hover:underline mb-8 inline-flex items-center">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+        Back to Blog
+      </a>
+      <h1 class="text-4xl lg:text-5xl font-bold text-white mt-4 mb-4">When "Cloud-Connected" Isn't an Option: How MOJO Manages Bare Metal in Air-Gapped Environments</h1>
+      <p class="text-gray-500 mb-8">March 4, 2025 &middot; By Aaron Allred, VP of Technology</p>
+      <img src="/images/screenshots/Hero-Image.png" alt="Air-Gapped Bare Metal Management" class="w-full rounded-xl mb-12" />
+
+      <div class="prose prose-lg prose-invert max-w-none">
+        <p class="text-xl text-gray-300 leading-relaxed mb-8">If your data center is air-gapped — and in defense, government, and regulated finance, it almost certainly is — most infrastructure management tools fail at the front door. MOJO was designed air-gap-first. Not air-gap-compatible. Not "works offline with reduced functionality." Air-gap-first.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">Air-Gap Is Not an Edge Case</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The market assumption that management tools can phone home is so deeply embedded in modern infrastructure software that vendors treat offline operation as an afterthought. SaaS control planes require internet connectivity. Telemetry streaming requires network paths out. Cloud management platforms need the cloud.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">For a significant portion of the enterprise market, air-gap isn't a nice-to-have. It's a legal requirement:</p>
+        <ul class="space-y-3 text-gray-400 mb-8">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Defense and intelligence</strong> — SIPR and JWICS networks are physically isolated. Any tool requiring cloud connectivity is automatically disqualified.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Government (FedRAMP High / IL5+)</strong> — Federal systems processing classified data must operate within defined security boundaries.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Regulated finance</strong> — PCI DSS and SOX compliance create strict network segmentation. Systems managing payment infrastructure cannot have outbound connections to vendor clouds.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-brand-green mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            <span><strong class="text-white">Critical infrastructure</strong> — NERC CIP protects the power grid. ICS/SCADA environments in energy, water, and manufacturing are isolated by design.</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">What "Air-Gap-First" Means Architecturally</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">Most tools that claim "offline support" are cloud-first tools with a degraded offline mode. Features stop working. Updates can't be applied. AI capabilities disappear because they depend on cloud-hosted models. MOJO inverts this. The offline experience <em>is</em> the real product.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Single-Binary Control Plane</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO's control plane compiles to a single binary with zero external runtime dependencies. No heavyweight runtime. No Kubernetes cluster required. No cloud connection for licensing validation. <code class="text-brand-green">docker compose up</code> gives you the complete platform: control plane, web UI, API, event bus, and native DDI services.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Native DDI: The Air-Gap Enabler</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">In a connected environment, DHCP and DNS are typically managed by external infrastructure. In an air-gapped environment, you can't assume those services exist. MOJO bundles Kea DHCP and PowerDNS directly into the platform. When you provision a server, IP allocation, DHCP reservation, and DNS record creation happen automatically. No external DHCP server. No separate DDI platform. No manual IP spreadsheets.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Offline OS and Firmware Bundles</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO supports offline bundle preparation. OS images (RHEL, Ubuntu, Windows) and firmware packages are prepared in a connected environment, packaged into transportable archives, and transferred to the air-gapped site via approved media — sneakernet, data diode, whatever your security protocol requires. Once on-site, bundles are loaded into MOJO and available for provisioning and firmware updates. No download-on-demand. No cloud image repositories. Everything is local.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">AI That Works Offline</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">This is where MOJO's architecture pays the biggest dividend. Most vendors' AI features depend on cloud-hosted language models. In an air-gapped environment, those features simply disappear.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">MOJO's AI agents operate with self-hosted LLMs — Ollama, vLLM, or any OpenAI-compatible inference endpoint running on local hardware. The copilot, health agent anomaly detection, compliance agent firmware drift analysis — all run locally against local data using local compute.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">The predictive health system doesn't need cloud connectivity at all — Z-score anomaly detection on learned baselines is a statistical computation running entirely within the platform. No API calls. No cloud inference. Your fleet health data never leaves your network.</p>
+
+        <h3 class="text-xl font-bold text-white mt-8 mb-4">Governance Without Cloud Dependencies</h3>
+        <p class="text-gray-400 leading-relaxed mb-6">The governance engine — approval gates, audit trails, kill switches on AI actions — operates entirely locally. In an air-gapped environment, you get the same governance guarantees as a cloud-connected deployment. AI agents still require approval for destructive actions. Every action is still logged. Kill switches still work. The security posture doesn't degrade in offline mode because it was never dependent on connectivity.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">How Our Customers Deploy Air-Gapped</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The air-gap workflow is straightforward:</p>
+        <ol class="space-y-3 text-gray-400 mb-8 list-decimal list-inside">
+          <li><strong class="text-white">Prepare bundles</strong> in a connected environment — OS images, firmware packages, platform updates</li>
+          <li><strong class="text-white">Transfer</strong> via approved media to the air-gapped site</li>
+          <li><strong class="text-white">Load</strong> bundles into MOJO</li>
+          <li><strong class="text-white">Operate</strong> — discovery, provisioning, firmware compliance, health monitoring, AI-assisted operations — all local, all self-contained</li>
+        </ol>
+        <p class="text-gray-400 leading-relaxed mb-6">No license server phone-home. No cloud dependency. No degraded feature set.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">A retail customer with edge sites in restricted network environments uses the same workflow for PCI compliance — their in-store infrastructure is behind strict network segmentation. A media and entertainment customer deploys MOJO at event venues where network resources are consumed by the event itself. During events, MOJO operates independently. Between events, it syncs updates when connectivity is available.</p>
+
+        <h2 class="text-2xl font-bold text-white mt-10 mb-4">The Intelligence Stays Local</h2>
+        <p class="text-gray-400 leading-relaxed mb-6">The fundamental promise of MOJO's air-gap-first design: the intelligence doesn't go away when the network does. Your health agent still monitors. Your compliance agent still evaluates baselines. Your orchestrator agent still decomposes complex operations into executable plans. Your governance engine still requires approval for destructive actions. Your audit trail still logs everything.</p>
+        <p class="text-gray-400 leading-relaxed mb-6">Other platforms need the cloud to be smart. MOJO's intelligence runs on your hardware, behind your firewall, with zero phone-home.</p>
+
+        <hr class="border-white/10 my-8" />
+
+        <p class="text-gray-400 leading-relaxed italic">MOJO is the first AI-native bare-metal infrastructure platform built for the enterprise — including enterprises where "enterprise" means a SCIF. To learn more about air-gapped deployments with MOJO, visit <a href="https://metify.io" class="text-brand-green hover:underline">metify.io</a>.</p>
+      </div>
+    </div>
+  </article>
+</Layout>
