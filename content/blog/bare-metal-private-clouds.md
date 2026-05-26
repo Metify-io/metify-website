@@ -1,10 +1,10 @@
 ---
-title: "Bare Metal Private Clouds Made Easy!"
-date: "2024-03-25"
-author: "Aaron Allred, VP of Technology"
-excerpt: "Bare Metal Servers have quickly become the preferred architecture for high-performance and modern edge applications. MOJO Platform enables enterprises to take full advantage of their infrastructure investments."
-image: "/images/blog/Cloud_Server.jpg"
-slug: "bare-metal-private-clouds"
+title: Bare Metal Private Clouds Made Easy
+date: 2024-03-25T00:00:00.000Z
+author: 'Aaron Allred, VP of Technology'
+excerpt: Bare Metal Servers have quickly become the preferred architecture for high-performance and modern edge applications. MOJO Platform enables enterprises to take full advantage of their infrastructure investments.
+image: /images/blog/Cloud_Server.jpg
+slug: bare-metal-private-clouds
 ---
 
 Bare Metal Servers have quickly become the preferred architecture for high-performance and modern edge applications.
