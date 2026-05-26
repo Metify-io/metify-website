@@ -26,5 +26,13 @@ pnpm-debug.log*
 
 node_modules
 
-# TinaCMS generated files
-tina/__generated__/
+# TinaCMS generated files (keep _graphql.json, _lookup.json, _schema.json for TinaCloud indexing)
+# Only ignore runtime JS/TS artifacts
+tina/__generated__/client.ts
+tina/__generated__/types.ts
+tina/__generated__/types.js
+tina/__generated__/config.prebuild.jsx
+tina/__generated__/frags.gql
+tina/__generated__/queries.gql
+tina/__generated__/schema.gql
+tina/__generated__/static-media.json
