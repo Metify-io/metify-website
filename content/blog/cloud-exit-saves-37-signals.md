@@ -1,10 +1,10 @@
 ---
-title: "Cloud Exit Saves 37 Signals $1Million per Year!"
-date: "2024-04-08"
-author: "Mike Wagner, CEO"
-excerpt: "The eventual savings could climb all the way up to about $2M/year. That would be TEN MILLION DOLLARS over five years."
-image: "/images/blog/David-Heinemeier-Hansson-DHH.jpg"
-slug: "cloud-exit-saves-37-signals"
+title: Cloud Exit Saves 37 Signals $1Million per Year
+date: 2024-04-08T00:00:00.000Z
+author: 'Mike Wagner, CEO'
+excerpt: The eventual savings could climb all the way up to about $2M/year. That would be TEN MILLION DOLLARS over five years.
+image: /images/blog/David-Heinemeier-Hansson-DHH.jpg
+slug: cloud-exit-saves-37-signals
 ---
 
 We are big fans of 37 Signals, founded by Jason Fried and David Heinemeier Hansson, here at Metify. It is a pleasure to share another great post from DHH on how they are already saving over $1Million/year by repatriating workloads from the public cloud.
