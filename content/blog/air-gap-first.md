@@ -3,7 +3,7 @@ title: "When \"Cloud-Connected\" Isn't an Option: How MOJO Manages Bare Metal in
 date: "2025-03-04"
 author: "Aaron Allred, VP of Technology"
 excerpt: "MOJO was designed air-gap-first — single-binary deployment, native DDI, offline AI agents, and zero phone-home. Not air-gap-compatible. Air-gap-first."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/security-padlock.jpg"
 slug: "air-gap-first"
 ---
 

@@ -3,7 +3,7 @@ title: "The Real Cost of Slow Provisioning — And What Happens When It Takes On
 date: "2025-08-19"
 author: "Mike Wagner, CEO"
 excerpt: "Every day a server sits unprovisioned is revenue lost. MOJO's orchestrator turns natural-language instructions into parallel multi-step execution."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/money-savings.jpg"
 slug: "real-cost-slow-provisioning"
 ---
 

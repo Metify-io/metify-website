@@ -3,7 +3,7 @@ title: "28 Person-Hours Saved Per Week — Now Imagine an AI Agent That Never Cl
 date: "2025-06-17"
 author: "Mike Wagner, CEO"
 excerpt: "Traditional automation saves time per task. MOJO's AI agents eliminate the tasks entirely — orchestrating multi-step operations from natural-language instructions."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/time-clock.jpg"
 slug: "28-hours-ai-never-clocks-out"
 ---
 

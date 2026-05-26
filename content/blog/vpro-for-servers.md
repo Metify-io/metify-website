@@ -3,7 +3,7 @@ title: "Every PC Gets Intel vPro. Why Doesn't Every Server Get an AI Agent?"
 date: "2025-07-01"
 author: "Aaron Allred, VP of Technology"
 excerpt: "A $1,200 laptop ships with AI-assisted remote management. A $30,000 server still gets managed manually. MOJO gives every server an autonomous AI caretaker."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/robot-automation.jpg"
 slug: "vpro-for-servers"
 ---
 

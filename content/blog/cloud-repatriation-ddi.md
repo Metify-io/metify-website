@@ -3,7 +3,7 @@ title: "You've Decided to Leave the Cloud. MOJO Is the Operating System for What
 date: "2025-09-02"
 author: "Mike Wagner, CEO"
 excerpt: "Cloud repatriation fails when teams bring workloads home without the operations model. MOJO provides cloud-simple operations on bare metal — including native DDI."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/cloud-infrastructure.jpg"
 slug: "cloud-repatriation-ddi"
 ---
 

@@ -3,7 +3,7 @@ title: "Bare Metal Infrastructure Pipelines: From Discovery to Production in One
 date: "2025-12-02"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Software has CI/CD pipelines. Bare metal has manual procedures. MOJO changes that with automated, governed, end-to-end workflows from power-on to production."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/server-rack-blue.jpg"
 slug: "bare-metal-infrastructure-pipelines"
 ---
 

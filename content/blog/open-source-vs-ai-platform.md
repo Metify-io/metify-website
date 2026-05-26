@@ -3,7 +3,7 @@ title: "Open Source Gave You Provisioning Primitives. MOJO Gives You an AI-Nativ
 date: "2025-05-06"
 author: "Mike Wagner, CEO"
 excerpt: "Open-source tools cover steps 1-4 of the bare-metal lifecycle. Steps 5 through 10 are where enterprises spend 80% of their operations time — and where MOJO delivers."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/ai-brain.jpg"
 slug: "open-source-vs-ai-platform"
 ---
 

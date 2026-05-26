@@ -3,7 +3,7 @@ title: "Metify and Taikun Announce Global Strategic Partnership"
 date: "2024-12-10"
 author: "Mike Wagner, CEO"
 excerpt: "Metify and Taikun have collaborated to build an industry-first solution for unifying operations for Infrastructure and DevOps teams."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/business-handshake.jpg"
 slug: "metify-taikun-partnership"
 ---
 

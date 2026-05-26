@@ -3,7 +3,7 @@ title: "Continuous Compliance Isn't a Policy Document — It's an Architecture"
 date: "2025-11-04"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Most compliance is a quarterly audit. MOJO makes compliance a continuous, automated property of your infrastructure — baselines, agents, governance, and immutable audit trails."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/code-security.jpg"
 slug: "continuous-compliance-architecture"
 ---
 
