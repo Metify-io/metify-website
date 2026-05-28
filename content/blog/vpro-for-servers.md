@@ -3,8 +3,8 @@ title: 'Redfish, VPRO, AMD-Pro, '
 date: 2025-07-01T00:00:00.000Z
 author: 'Aaron Allred, VP of Technology'
 excerpt: Every enterprise server ships with a BMC. Every high-end laptop ships with Intel vPro. Both provide out-of-band access — and both are useless without intelligent tooling. MOJO's AI agents are that tooling.
-image: /images/blog/heroes/robot-automation.jpg
-slug: vpro-for-servers
+image: ''
+slug: vpro-ai-for-servers
 ---
 
 Almost all enterprise servers ship with a Baseboard Management Controller (BMC). Many high-end laptops now ship with Intel vPro. Both provide the same fundamental capability: out-of-band access to hardware regardless of OS state. And both share the same fundamental limitation: without intelligent tooling on top, that access sits largely **unused**.
