@@ -3,7 +3,7 @@ title: "Rack Scale Automation: Why Single-Server Thinking Is Holding Your Data C
 date: "2025-09-16"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Stop managing servers one at a time. MOJO's resource pools, bulk operations, and fleet-level AI agents bring rack-scale thinking to bare-metal operations."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/server-rack-closeup.jpg"
 slug: "rack-scale-automation"
 ---
 

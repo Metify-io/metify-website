@@ -3,7 +3,7 @@ title: "Scaling to 10,000 Servers: Lessons from Fortune 500 Bare Metal Fleet Man
 date: "2025-11-18"
 author: "Mike Wagner, CEO"
 excerpt: "What changes when your fleet hits 10,000 servers? Everything. Real lessons from Fortune 500 deployments on what breaks, what matters, and how AI agents change the equation."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/data-center-aisle.jpg"
 slug: "scaling-to-10000-servers"
 ---
 

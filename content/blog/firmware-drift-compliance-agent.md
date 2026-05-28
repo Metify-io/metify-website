@@ -3,7 +3,7 @@ title: "Firmware Drift Is Your Biggest Security Risk — And Only an AI Agent Ca
 date: "2025-03-18"
 author: "Aaron Allred, VP of Technology"
 excerpt: "CVE-2024-0762, Zenbleed, Conti ransomware — firmware vulnerabilities are actively exploited and invisible to traditional security tools. MOJO's compliance agent fixes drift continuously."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/server-hardware-detail.jpg"
 slug: "firmware-drift-compliance-agent"
 ---
 

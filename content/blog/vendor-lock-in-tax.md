@@ -3,7 +3,7 @@ title: "Why Vendor Lock-In Is the Real Infrastructure Tax — And How Multi-Vend
 date: "2025-07-15"
 author: "Mike Wagner, CEO"
 excerpt: "Every vendor wants you locked into their management platform. MOJO manages Dell, HPE, Lenovo, Supermicro, and NVIDIA natively — one platform, zero lock-in."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/team-collaboration.jpg"
 slug: "vendor-lock-in-tax"
 ---
 

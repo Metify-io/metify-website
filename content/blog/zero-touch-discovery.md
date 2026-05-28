@@ -3,7 +3,7 @@ title: "Automatic Discovery of Servers, Storage, Sensors and More — The Founda
 date: "2025-02-04"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Before you can manage a server, you have to know it exists. MOJO automatically discovers servers, storage, sensors and more — eliminating manual BMC registration and building real-time inventory automatically."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/server-blue-lights.jpg"
 slug: "zero-touch-discovery"
 ---
 

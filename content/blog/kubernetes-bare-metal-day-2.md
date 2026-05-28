@@ -3,7 +3,7 @@ title: "Kubernetes on Bare Metal: What Nobody Tells You About Day 2"
 date: "2025-10-21"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Everyone writes about deploying K8s on bare metal. Nobody writes about firmware updates under live clusters, node replacements, or distributed upgrades across 60 sites."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/containers-ship.jpg"
 slug: "kubernetes-bare-metal-day-2"
 ---
 

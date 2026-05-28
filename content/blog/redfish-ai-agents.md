@@ -3,7 +3,7 @@ title: "Redfish Is the Universal Language of Hardware. MOJO's Agents Are the Fir
 date: "2025-04-08"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Every vendor implements Redfish differently. MOJO's driver layer normalizes the chaos into a unified data model that AI agents can reason about across all vendors."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/network-cables.jpg"
 slug: "redfish-ai-agents"
 ---
 

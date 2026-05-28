@@ -3,7 +3,7 @@ title: "The CrowdStrike Moment for the Data Center"
 date: "2025-05-20"
 author: "Aaron Allred, VP of Technology"
 excerpt: "8.5 million devices bricked by one bad update. Your data center's version is a bad firmware push at fleet scale. MOJO's health agent prevents the incident before it happens."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/security-keyboard.jpg"
 slug: "crowdstrike-moment-health-agent"
 ---
 

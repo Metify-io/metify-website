@@ -3,7 +3,7 @@ title: "Server Decommissioning Done Right: Chain of Custody from First Boot to L
 date: "2025-10-07"
 author: "Mike Wagner, CEO"
 excerpt: "Most tools track servers from provisioning onward. MOJO tracks the complete lifecycle — secure wipe, compliance evidence, and immutable audit trail from discovery to disposal."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/chains-broken.jpg"
 slug: "server-decommissioning-chain-of-custody"
 ---
 

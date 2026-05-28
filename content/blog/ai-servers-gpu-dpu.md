@@ -3,7 +3,7 @@ title: "DIY AI Factories Made Easy with MOJO"
 date: "2025-08-05"
 author: "Aaron Allred, VP of Technology"
 excerpt: "You don't need a $500K branded AI factory. MOJO lets enterprises build AI infrastructure from any vendor's hardware — including refurbished servers that handle 99% of enterprise AI workloads at a fraction of the cost."
-image: "/images/screenshots/Hero-Image.png"
+image: "/images/blog/heroes/gpu-circuit.jpg"
 slug: "ai-servers-gpu-dpu"
 ---
 
