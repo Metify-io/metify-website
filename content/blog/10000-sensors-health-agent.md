@@ -3,7 +3,7 @@ title: "Your Data Center Has 10,000 Sensors. MOJO's Health Agent Is the Only One
 date: "2025-06-03"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Traditional monitoring is expensive noise. MOJO's health agent uses AI to reason about fleet telemetry — learned baselines, Z-score anomaly detection, and autonomous action."
-image: "/images/blog/heroes/circuit-board.jpg"
+image: "/images/blog/heroes/10000-sensors-health-agent.webp"
 slug: "10000-sensors-health-agent"
 ---
 
