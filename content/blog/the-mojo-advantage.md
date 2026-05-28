@@ -3,7 +3,7 @@ title: "The MOJO Advantage — Whitepaper"
 date: "2026-06-16"
 author: "Metify"
 excerpt: "How intelligent automation, hardware versatility, system of record, and operational simplicity are redefining enterprise bare metal. Five dimensions of advantage for the post-VMware era."
-image: "/images/blog/heroes/ai-chip.jpg"
+image: "/images/blog/heroes/the-mojo-advantage.webp"
 slug: "the-mojo-advantage"
 ---
 
