@@ -1,5 +1,5 @@
 ---
-title: 'Redfish, VPRO, AMD-Pro, '
+title: Redfish AND Intel VPRO - MOJO Speaks both...AI Natively
 date: 2025-07-01T00:00:00.000Z
 author: 'Aaron Allred, VP of Technology'
 excerpt: Every enterprise server ships with a BMC. Every high-end laptop ships with Intel vPro. Both provide out-of-band access — and both are useless without intelligent tooling. MOJO's AI agents are that tooling.
