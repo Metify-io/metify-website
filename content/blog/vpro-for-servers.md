@@ -3,7 +3,7 @@ title: "From Out-of-Band Access to AI-Driven Operations: How MOJO Agents Turn BM
 date: "2025-07-01"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Every enterprise server ships with a BMC. Every high-end laptop ships with Intel vPro. Both provide out-of-band access — and both are useless without intelligent tooling. MOJO's AI agents are that tooling."
-image: "/images/blog/heroes/robot-automation.jpg"
+image: "/images/blog/heroes/vpro-for-servers.webp"
 slug: "vpro-for-servers"
 ---
 
