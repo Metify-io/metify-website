@@ -3,7 +3,7 @@ title: "2025 in Review: The Year Bare Metal Got Smart"
 date: "2025-12-16"
 author: "Mike Wagner, CEO"
 excerpt: "A look back at 2025 — the year AI agents went from roadmaps to production, VMware migrations accelerated, and bare-metal infrastructure became intelligent."
-image: "/images/blog/heroes/2025-year-in-review.png"
+image: "/images/blog/heroes/2025-year-in-review.webp"
 slug: "2025-year-in-review"
 ---
 
