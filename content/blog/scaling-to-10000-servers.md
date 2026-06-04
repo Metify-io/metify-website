@@ -1,10 +1,10 @@
 ---
-title: "Scaling to 10,000 Servers: Lessons from Fortune 500 Bare Metal Fleet Management"
-date: "2025-11-18"
-author: "Mike Wagner, CEO"
-excerpt: "What changes when your fleet hits 10,000 servers? Everything. Real lessons from Fortune 500 deployments on what breaks, what matters, and how AI agents change the equation."
-image: "/images/blog/heroes/data-center-aisle.jpg"
-slug: "scaling-to-10000-servers"
+title: 'Scaling to 20,000+ Servers: Lessons from Fortune 500 Bare Metal Fleet Management'
+date: 2025-11-18T00:00:00.000Z
+author: 'Mike Wagner, CEO'
+excerpt: 'What changes when your fleet hits 10,000 servers? Everything. Real lessons from Fortune 500 deployments on what breaks, what matters, and how AI agents change the equation.'
+image: /images/blog/heroes/data-center-aisle.jpg
+slug: scaling-to-10000-servers
 ---
 
 Managing 100 servers is a job. Managing 1,000 is a team. Managing 10,000 is a different problem entirely — one that exposes every weakness in your tooling, processes, and organizational structure. We manage fleets at this scale in production today. Here's what we've learned.
@@ -13,11 +13,11 @@ Managing 100 servers is a job. Managing 1,000 is a team. Managing 10,000 is a di
 
 At scale, problems that were manageable become systemic:
 
-- **Statistical certainty of failure** — at 10,000 servers, hardware failures aren't exceptions. They're daily events. A 0.5% monthly failure rate means 50 servers need attention every month.
-- **Alert volume overwhelms humans** — thousands of sensor readings generating hundreds of alerts daily. Signal gets buried in noise. Critical warnings get lost.
-- **Drift compounds silently** — firmware drift, configuration drift, baseline deviations accumulate across thousands of servers. Manual remediation can never keep pace.
-- **Multi-vendor complexity multiplies** — different vendors, different models, different firmware versions, different update procedures. At 10,000 servers with 4 vendors, you have 4x the operational complexity.
-- **Audit becomes impossible manually** — proving compliance across 10,000 servers with traditional tools means weeks of evidence compilation for every audit cycle.
+* **Statistical certainty of failure** — at 10,000 servers, hardware failures aren't exceptions. They're daily events. A 0.5% monthly failure rate means 50 servers need attention every month.
+* **Alert volume overwhelms humans** — thousands of sensor readings generating hundreds of alerts daily. Signal gets buried in noise. Critical warnings get lost.
+* **Drift compounds silently** — firmware drift, configuration drift, baseline deviations accumulate across thousands of servers. Manual remediation can never keep pace.
+* **Multi-vendor complexity multiplies** — different vendors, different models, different firmware versions, different update procedures. At 10,000 servers with 4 vendors, you have 4x the operational complexity.
+* **Audit becomes impossible manually** — proving compliance across 10,000 servers with traditional tools means weeks of evidence compilation for every audit cycle.
 
 ## Lessons from Production at Scale
 
@@ -47,6 +47,6 @@ Without AI-native tooling, a 10,000-server fleet requires a large operations tea
 
 That's not a theoretical promise. It's what our Fortune 500 customers do every day.
 
----
+***
 
 MOJO Platform is the first AI-native bare-metal infrastructure platform built for the enterprise. To learn more about fleet-scale management, visit [metify.io](https://metify.io).
