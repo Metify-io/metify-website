@@ -109,6 +109,8 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+  import { isFreeEmail, FREE_EMAIL_BLOCK_MESSAGE } from '../lib/free-email-domains';
+
   const PORTAL_ID = '7609233';
   const FORM_ID = 'ba3c459f-c582-4f1f-b761-9a82da34ba18';
   const form = document.getElementById('contact-form');
@@ -117,8 +119,19 @@ import Layout from '../layouts/Layout.astro';
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('contact-form-status');
-      const btn = form.querySelector('button[type="submit"]');
-      const formData = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const formData = new FormData(form as HTMLFormElement);
+
+      const email = (formData.get('email') as string) || '';
+
+      if (isFreeEmail(email)) {
+        if (status) {
+          status.className = 'text-center text-red-400 font-semibold mt-4';
+          status.textContent = FREE_EMAIL_BLOCK_MESSAGE;
+          status.classList.remove('hidden');
+        }
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = 'Sending...';

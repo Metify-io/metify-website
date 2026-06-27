@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
+import { isFreeEmail, FREE_EMAIL_BLOCK_MESSAGE } from '../../lib/free-email-domains';
 
 const LICENSE_SERVER_URL = 'https://licenses.metify.io/l/api/v1/webform/';
 const HUBSPOT_PORTAL_ID = '7609233';
@@ -74,6 +75,13 @@ export const POST: APIRoute = async ({ request }) => {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  if (isFreeEmail(email)) {
+    return new Response(
+      JSON.stringify({ error: FREE_EMAIL_BLOCK_MESSAGE, details: { email: [FREE_EMAIL_BLOCK_MESSAGE] } }),
+      { status: 422, headers: { 'Content-Type': 'application/json' } },
+    );
   }
 
   const name = [firstname, lastname].filter(Boolean).join(' ');
