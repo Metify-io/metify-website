@@ -57,14 +57,27 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+  import { isFreeEmail, FREE_EMAIL_BLOCK_MESSAGE } from '../lib/free-email-domains';
+
   const form = document.getElementById('trial-form');
 
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('trial-form-status');
-      const btn = form.querySelector('button[type="submit"]');
-      const formData = new FormData(form);
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const formData = new FormData(form as HTMLFormElement);
+
+      const email = (formData.get('email') as string) || '';
+
+      if (isFreeEmail(email)) {
+        if (status) {
+          status.className = 'text-center text-red-400 font-semibold mt-4';
+          status.textContent = FREE_EMAIL_BLOCK_MESSAGE;
+          status.classList.remove('hidden');
+        }
+        return;
+      }
 
       btn.disabled = true;
       btn.textContent = 'Submitting...';
@@ -72,7 +85,7 @@ import Layout from '../layouts/Layout.astro';
       const payload = {
         firstname: formData.get('firstname') || '',
         lastname: formData.get('lastname') || '',
-        email: formData.get('email') || '',
+        email,
         company: formData.get('company') || '',
         jobtitle: formData.get('jobtitle') || '',
       };
@@ -90,7 +103,7 @@ import Layout from '../layouts/Layout.astro';
             status.textContent = 'Thank you! Check your email for your trial license key.';
             status.classList.remove('hidden');
           }
-          form.reset();
+          (form as HTMLFormElement).reset();
           btn.textContent = 'Submitted!';
           setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 5000);
         } else {
@@ -104,7 +117,6 @@ import Layout from '../layouts/Layout.astro';
           setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
         }
       } catch {
-        const email = formData.get('email');
         const name = [formData.get('firstname'), formData.get('lastname')].filter(Boolean).join(' ');
         window.location.href = `mailto:hello@metify.ai?subject=Free Trial Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0APlease send me a free trial of MOJO Platform.`;
         setTimeout(() => { btn.disabled = false; btn.textContent = 'Request Free Trial'; }, 3000);
