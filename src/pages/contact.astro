@@ -111,8 +111,6 @@ import Layout from '../layouts/Layout.astro';
 <script>
   import { isFreeEmail, FREE_EMAIL_BLOCK_MESSAGE } from '../lib/free-email-domains';
 
-  const PORTAL_ID = '7609233';
-  const FORM_ID = 'ba3c459f-c582-4f1f-b761-9a82da34ba18';
   const form = document.getElementById('contact-form');
 
   if (form) {
@@ -137,22 +135,16 @@ import Layout from '../layouts/Layout.astro';
       btn.textContent = 'Sending...';
 
       try {
-        const response = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_ID}`, {
+        const response = await fetch('/api/contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            fields: [
-              { name: 'firstname', value: formData.get('firstname') || '' },
-              { name: 'lastname', value: formData.get('lastname') || '' },
-              { name: 'email', value: formData.get('email') || '' },
-              { name: 'phone', value: formData.get('phone') || '' },
-              { name: 'company', value: formData.get('company') || '' },
-              { name: 'message', value: formData.get('message') || '' },
-            ],
-            context: {
-              pageUri: window.location.href,
-              pageName: 'Contact Us',
-            },
+            firstname: formData.get('firstname') || '',
+            lastname: formData.get('lastname') || '',
+            email,
+            phone: formData.get('phone') || '',
+            company: formData.get('company') || '',
+            message: formData.get('message') || '',
           }),
         });
 
@@ -166,17 +158,24 @@ import Layout from '../layouts/Layout.astro';
           btn.textContent = 'Sent!';
           setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 5000);
         } else {
-          const name = [formData.get('firstname'), formData.get('lastname')].filter(Boolean).join(' ');
-          const email = formData.get('email');
-          const msg = formData.get('message');
-          window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+          const data = await response.json().catch(() => null);
+          if (response.status === 422 && data?.details?.email) {
+            if (status) {
+              status.className = 'text-center text-red-400 font-semibold mt-4';
+              status.textContent = data.details.email[0];
+              status.classList.remove('hidden');
+            }
+          } else {
+            const name = [formData.get('firstname'), formData.get('lastname')].filter(Boolean).join(' ');
+            const msg = formData.get('message');
+            window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name as string)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg as string)}`;
+          }
           setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 3000);
         }
       } catch {
         const name = [formData.get('firstname'), formData.get('lastname')].filter(Boolean).join(' ');
-        const email = formData.get('email');
         const msg = formData.get('message');
-        window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg)}`;
+        window.location.href = `mailto:hello@metify.ai?subject=Contact Request&body=Name: ${encodeURIComponent(name as string)}%0AEmail: ${encodeURIComponent(email)}%0A%0A${encodeURIComponent(msg as string)}`;
         setTimeout(() => { btn.disabled = false; btn.textContent = 'Send Message'; }, 3000);
       }
     });
