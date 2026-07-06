@@ -8,6 +8,9 @@ const HUBSPOT_CONTACT_FORM_ID = 'ba3c459f-c582-4f1f-b761-9a82da34ba18';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Safely coerce an unknown JSON value to a trimmed string. */
+const str = (value: unknown): string => (typeof value === 'string' ? value.trim() : '');
+
 type ContactLead = {
   firstname: string;
   lastname: string;
@@ -45,7 +48,7 @@ const submitContactLeadToHubSpot = async (lead: ContactLead) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  let body: Record<string, string>;
+  let body: unknown;
   try {
     body = await request.json();
   } catch {
@@ -55,15 +58,23 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const firstname = (body.firstname ?? '').trim();
-  const lastname = (body.lastname ?? '').trim();
-  const email = (body.email ?? '').trim();
-  const phone = (body.phone ?? '').trim();
-  const company = (body.company ?? '').trim();
-  const message = (body.message ?? '').trim();
+  if (typeof body !== 'object' || body === null) {
+    return new Response(JSON.stringify({ error: 'Invalid payload' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  const data = body as Record<string, unknown>;
+  const firstname = str(data.firstname);
+  const lastname = str(data.lastname);
+  const email = str(data.email);
+  const phone = str(data.phone);
+  const company = str(data.company);
+  const message = str(data.message);
 
   // Honeypot: bots fill hidden fields that humans never see.
-  if ((body.website ?? '').trim() !== '') {
+  if (str(data.website) !== '') {
     // Pretend success so bots get no signal.
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
