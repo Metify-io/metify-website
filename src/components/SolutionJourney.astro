@@ -37,7 +37,7 @@ const journeySteps = points.slice(1, -1).map((point, i) => ({
 
 <section
   id="solution-journey"
-  class="relative h-auto md:h-[400vh] bg-brand-darker"
+  class="relative h-auto md:h-[250vh] bg-brand-darker"
   aria-label="MOJO solution story"
 >
   <div class="journey-viewport relative md:h-screen md:overflow-hidden w-full flex flex-col md:block py-16 md:py-0">
@@ -152,11 +152,13 @@ const journeySteps = points.slice(1, -1).map((point, i) => ({
       steps.forEach((step) => {
         const y = Number(step.dataset.y);
         const p = findProgressForY(y);
+        const revealDuration = Math.min(0.08, p);
+        const start = p - revealDuration;
         tl.fromTo(
           step,
           { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' },
-          p
+          { opacity: 1, y: 0, duration: revealDuration, ease: 'power2.out' },
+          start
         );
       });
     }
