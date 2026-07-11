@@ -1,0 +1,164 @@
+---
+import { features } from '../data/features';
+import FeatureIcon from './FeatureIcon.astro';
+
+const viewBoxWidth = 1920;
+const viewBoxHeight = 1080;
+
+const points = [
+  { x: 960, y: 0 },
+  { x: 192, y: 154 },
+  { x: 1728, y: 308 },
+  { x: 192, y: 462 },
+  { x: 1728, y: 616 },
+  { x: 192, y: 770 },
+  { x: 960, y: 1080 },
+];
+
+function buildPath(pts: typeof points) {
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length; i++) {
+    const prev = pts[i - 1];
+    const curr = pts[i];
+    const midY = (prev.y + curr.y) / 2;
+    d += ` C ${prev.x} ${midY}, ${curr.x} ${midY}, ${curr.x} ${curr.y}`;
+  }
+  return d;
+}
+
+const pathD = buildPath(points);
+
+const journeySteps = points.slice(1, -1).map((point, i) => ({
+  point,
+  feature: features[i],
+  align: i % 2 === 0 ? 'left' : 'right' as const,
+}));
+---
+
+<section
+  id="solution-journey"
+  class="relative h-auto md:h-[400vh] bg-brand-darker"
+  aria-label="MOJO solution story"
+>
+  <div class="journey-viewport relative md:h-screen md:overflow-hidden w-full flex flex-col md:block py-16 md:py-0">
+    <h2 class="absolute top-6 left-0 right-0 z-20 text-center px-4">
+      <span class="text-sm md:text-base uppercase tracking-widest text-brand-green font-semibold">The Complete Solution Story</span>
+      <span class="block mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-white">From Discovery to Governance</span>
+    </h2>
+
+    <svg
+      class="journey-line hidden md:block absolute inset-0 w-full h-full z-0"
+      viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path
+        id="journey-path"
+        d={pathD}
+        fill="none"
+        stroke="#a3cc3a"
+        stroke-width="5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        style="filter: drop-shadow(0 0 8px rgba(163,204,58,0.5)); stroke-dasharray: 10000; stroke-dashoffset: 10000;"
+      />
+    </svg>
+
+    <div
+      id="journey-dot"
+      class="hidden md:block absolute z-10 w-4 h-4 bg-brand-green rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+      style="left: 50%; top: 0%; box-shadow: 0 0 20px rgba(163,204,58,0.8);"
+    />
+
+    {journeySteps.map(({ point, feature, align }) => {
+      const topPct = (point.y / viewBoxHeight) * 100;
+      const sideClass = align === 'left' ? 'left-[12%]' : 'right-[12%]';
+      return (
+        <div
+          class="journey-step relative md:absolute my-8 md:my-0 px-4 md:px-0 max-w-md md:opacity-0"
+          class:list={[sideClass, 'md:top-[var(--journey-top)]']}
+          data-y={point.y}
+          style={`--journey-top: ${topPct}%;`}
+        >
+          <div class="bg-brand-card/90 backdrop-blur border border-white/10 rounded-xl p-5 md:p-6 shadow-2xl">
+            <div class="w-12 h-12 bg-brand-green/10 rounded-lg flex items-center justify-center mb-4">
+              <FeatureIcon name={feature.icon} class="w-6 h-6 text-brand-green" />
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold text-white mb-2">{feature.title}</h3>
+            <p class="text-gray-300 text-sm md:text-base leading-relaxed">{feature.description}</p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    const path = document.querySelector<SVGPathElement>('#journey-path');
+    const dot = document.querySelector<HTMLElement>('#journey-dot');
+    const steps = document.querySelectorAll<HTMLElement>('.journey-step');
+
+    if (path && dot) {
+      const totalLength = path.getTotalLength();
+      const viewBoxWidth = 1920;
+      const viewBoxHeight = 1080;
+
+      function findProgressForY(targetY: number) {
+        let low = 0;
+        let high = totalLength;
+        for (let i = 0; i < 50; i++) {
+          const mid = (low + high) / 2;
+          const p = path.getPointAtLength(mid);
+          if (p.y < targetY) {
+            low = mid;
+          } else {
+            high = mid;
+          }
+          if (Math.abs(p.y - targetY) < 0.5) {
+            return mid / totalLength;
+          }
+        }
+        return ((low + high) / 2) / totalLength;
+      }
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#solution-journey',
+          start: 'top top',
+          end: 'bottom bottom',
+          pin: '.journey-viewport',
+          scrub: 0.5,
+        },
+        onUpdate: () => {
+          const progress = tl.progress();
+          const point = path.getPointAtLength(progress * totalLength);
+          dot.style.left = `${(point.x / viewBoxWidth) * 100}%`;
+          dot.style.top = `${(point.y / viewBoxHeight) * 100}%`;
+        },
+      });
+
+      tl.fromTo(
+        path,
+        { strokeDasharray: totalLength, strokeDashoffset: totalLength },
+        { strokeDashoffset: 0, duration: 1, ease: 'none' }
+      );
+
+      steps.forEach((step) => {
+        const y = Number(step.dataset.y);
+        const p = findProgressForY(y);
+        tl.fromTo(
+          step,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' },
+          p
+        );
+      });
+    }
+  }
+</script>
