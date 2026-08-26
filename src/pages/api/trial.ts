@@ -99,6 +99,9 @@ export const POST: APIRoute = async ({ request }) => {
         email,
         product: PRODUCT,
         product_version: PRODUCT_VERSION,
+        company: company ?? '',
+        job_title: jobtitle ?? '',
+        page_uri: pageUri,
       }),
     });
 
@@ -110,6 +113,8 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
+    const data = await resp.json().catch(() => null);
+
     await submitTrialLeadToHubSpot({
       firstname,
       lastname,
@@ -119,10 +124,14 @@ export const POST: APIRoute = async ({ request }) => {
       pageUri,
     });
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        // 202 means the request is queued for Metify approval, no license issued yet
+        pending: resp.status === 202 || data?.status === 'pending',
+      }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } },
+    );
   } catch {
     return new Response(JSON.stringify({ error: 'Failed to reach license server' }), {
       status: 502,

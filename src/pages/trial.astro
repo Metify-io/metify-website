@@ -98,9 +98,12 @@ import Layout from '../layouts/Layout.astro';
         });
 
         if (response.ok) {
+          const data = await response.json().catch(() => null);
           if (status) {
             status.className = 'text-center text-brand-green font-semibold mt-4';
-            status.textContent = 'Thank you! Check your email for your trial license key.';
+            status.textContent = data?.pending === false
+              ? 'Thank you! Check your email for your trial license key.'
+              : 'Thank you! Your trial request is with our team for review — we will email your license key once it is approved.';
             status.classList.remove('hidden');
           }
           (form as HTMLFormElement).reset();
