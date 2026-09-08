@@ -1,0 +1,42 @@
+---
+const stages = [
+  {
+    number: '01',
+    title: 'Wind & Solar',
+    description: 'Renewable energy generated at the farm.',
+  },
+];
+---
+
+<section
+  id="infrastructure-hero"
+  class="relative h-[85vh] min-h-[700px] w-full overflow-hidden bg-[#e6e7eb]"
+  aria-label="Infrastructure journey"
+>
+  <img
+    src="/images/infrastructure/wind-solar-farm.png"
+    alt="Isometric 3D wind and solar farm"
+    class="absolute inset-0 h-full w-full object-cover object-center"
+  />
+
+  <div class="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-between px-4 sm:px-6 lg:px-8">
+    <div class="pt-16 text-center md:pt-24">
+      <h2 class="text-3xl font-bold text-[#0b0f17] md:text-5xl">
+        From Generation to Global Fleet
+        <span class="block text-2xl font-semibold text-[#a3cc3a] md:text-3xl">The Power of MOJO</span>
+      </h2>
+    </div>
+
+    <div class="mb-8 self-start md:mb-12">
+      {
+        stages.map((stage) => (
+          <div class="max-w-xs border-l-4 border-[#a3cc3a] bg-white/90 p-4 shadow-lg backdrop-blur-sm md:max-w-sm md:p-5">
+            <span class="text-sm font-bold uppercase tracking-wider text-[#a3cc3a]">{stage.number}</span>
+            <h3 class="mt-1 text-2xl font-bold text-[#0b0f17] md:text-3xl">{stage.title}</h3>
+            <p class="mt-2 text-sm text-gray-600 md:text-base">{stage.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
