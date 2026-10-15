@@ -1,5 +1,5 @@
 ---
-title: "Your Data Center Has 10,000 Sensors. MOJO's Health Agent Is the Only One Listening."
+title: "Your Data Center has 1,000's of sensors. MOJO's Agents can Monitor & Manage them all."
 date: "2025-06-03"
 author: "Aaron Allred, VP of Technology"
 excerpt: "Traditional monitoring is expensive noise. MOJO's health agent uses AI to reason about fleet telemetry — learned baselines, Z-score anomaly detection, and autonomous action."
